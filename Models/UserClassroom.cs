@@ -12,7 +12,7 @@ namespace Waggle.Models
         public int UserId { get; set; }
         public int ClassroomId { get; set; }
         
-        // Standard Properties
+        // Regular Properties
         public string Role { get; set; } // consider enum?
         public string DisplayName { get; set; }
         // public x ProfilePicture { get; set; }
