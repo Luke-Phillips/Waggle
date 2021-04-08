@@ -17,5 +17,7 @@ namespace Waggle.Models
 
         // Navigation Properties
         public ICollection<UserClassroom> UserClassrooms { get; set; }
+        public ICollection<Achievement> Achievements { get; set; }
+        // public ICollection<Badge> Badges { get; set; }
     }
 }
