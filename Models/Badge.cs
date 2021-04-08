@@ -5,19 +5,17 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class User
+    public class Badge
     {
         // Key Properties
-        public int UserID { get; set; }
+        public int BadgeID { get; set; }
 
         // Regular Properties
-        public string Email { get; set; }
         public string Name { get; set; }
-        public string Password { get; set; }
+        public string Description { get; set; }
+        public int Points { get; set; }
 
         // Navigation Properties
-        public ICollection<UserClassroom> UserClassrooms { get; set; }
         public ICollection<Achievement> Achievements { get; set; }
-        public ICollection<Badge> Badges { get; set; }
     }
 }
