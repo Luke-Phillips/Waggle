@@ -7,6 +7,6 @@ namespace Waggle.Models
 {
     public class Question : Post
     {
-        
+        // branch test
     }
 }
