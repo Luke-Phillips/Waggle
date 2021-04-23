@@ -14,6 +14,6 @@ namespace Waggle.Data
         {
         }
 
-        public DbSet<Waggle.Models.User> User { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
