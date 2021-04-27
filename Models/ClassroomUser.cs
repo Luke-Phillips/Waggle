@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class UserClassroom
+    public class ClassroomUser
     {
         // Key Properties
-        public int UserClassroomID { get; set; }
-        public int UserId { get; set; }
-        public int ClassroomId { get; set; }
+        public int UserID { get; set; }
+        public int ClassroomID { get; set; }
         
         // Regular Properties
-        public string Role { get; set; } // consider enum?
+        public string Role { get; set; }
         public string DisplayName { get; set; }
         // public x ProfilePicture { get; set; }
         

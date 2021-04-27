@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Waggle.Models;
 
 namespace Waggle.Data
@@ -15,5 +11,13 @@ namespace Waggle.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<ClassroomUser> ClassroomUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ClassroomUser>()
+                .HasKey(c => new { c.ClassroomID, c.UserID });
+        }
     }
 }

@@ -29,8 +29,9 @@ namespace Waggle
                 try
                 {
                     var context = services.GetRequiredService<WaggleContext>();
-                    context.Database.EnsureCreated();
-                    // DbInitializer.Initialize(context);
+                    //context.Database.EnsureCreated();
+                    Console.WriteLine("----------about to Initialize DB----------");
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
