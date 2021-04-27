@@ -10,17 +10,13 @@ namespace Waggle.Data
     {
         public static void Initialize(WaggleContext context)
         {
-            Console.WriteLine("----------Initializing DB----------");
             //context.Database.EnsureCreated();
 
             // Look for any existing users in the database
             if (context.Users.Any())
             {
-                Console.WriteLine("----------DB already seeded----------");
                 return; // DB has been seeded
             }
-
-            Console.WriteLine("----------Adding data----------");
 
             var users = new User[]
             {
