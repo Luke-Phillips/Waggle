@@ -31,15 +31,28 @@ namespace Waggle.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-         public async Task<ActionResult<List<User>>> GetUser(int id)
+         public async Task<ActionResult<List<UserDto>>> GetUser(int id)
          {
-             var user = await _context.Users.Include(u => u.ClassroomUsers)
+            var user = await _context.Users.Include(u => u.ClassroomUsers)
                 .ThenInclude(cu => cu.Classroom)
+                .Select(u =>
+                new UserDto()
+                {
+                    UserID = u.UserID,
+                    Email = u.Email,
+                    Name = u.Name,                  
+                    ClassroomUsers = u.ClassroomUsers,
+                })
+                
                 .ToListAsync();
-            
+
+            /*var user = await _context.Users.Include(u => u.ClassroomUsers)
+               .ThenInclude(cu => cu.Classroom)
+               .ToListAsync();*/
+
             //var user = await _context.Users.FindAsync(id);
 
-             if (user == null)
+            if (user == null)
              {
                  return NotFound();
              }

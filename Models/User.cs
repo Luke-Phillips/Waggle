@@ -20,4 +20,17 @@ namespace Waggle.Models
         //public ICollection<Achievement> Achievements { get; set; } // commented out for testing
         //public ICollection<Badge> Badges { get; set; }             // commented out for testing
     }
+
+    public class UserDto
+    {
+        // Key Properties
+        public int UserID { get; set; }
+
+        // Regular Properties
+        public string Email { get; set; }
+        public string Name { get; set; }
+
+        // Navigation Properties
+        public ICollection<ClassroomUser> ClassroomUsers { get; set; }
+    }
 }
