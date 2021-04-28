@@ -30,11 +30,14 @@ namespace Waggle.Controllers
         }
 
         // GET: api/Users/5
-        /* [HttpGet("{id}")]
+        [HttpGet("{id}")]
          public async Task<ActionResult<List<User>>> GetUser(int id)
          {
-             var user = await _context.Users.Include(u => u.ClassroomUsers).ToListAsync();//.SingleOrDefaultAsync(u => u.UserID == id);
-             //var user = await _context.Users.FindAsync(id);
+             var user = await _context.Users.Include(u => u.ClassroomUsers)
+                .ThenInclude(cu => cu.Classroom)
+                .ToListAsync();
+            
+            //var user = await _context.Users.FindAsync(id);
 
              if (user == null)
              {
@@ -42,21 +45,7 @@ namespace Waggle.Controllers
              }
 
              return user;
-         }*/
-
-        [HttpGet("{id}")]
-        public ActionResult<List<User>> GetUser(int id)
-        {
-            var user = _context.Users.Include(u => u.ClassroomUsers).ToList();//.SingleOrDefaultAsync(u => u.UserID == id);
-                                                                              //var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
+         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
