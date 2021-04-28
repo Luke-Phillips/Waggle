@@ -22,6 +22,12 @@ namespace Waggle.Controllers
             _context = context;
         }
 
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate()
+        {
+            return Ok();
+        }
+
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -33,7 +39,7 @@ namespace Waggle.Controllers
         [HttpGet("{id}")]
          public async Task<ActionResult<List<UserDto>>> GetUser(int id)
          {
-            var user = await _context.Users.Where(u => u.UserID == id)
+            var user = await _context.Users.Where(u => u.UserID == id) // obviously this where will change. passwords and sessions instead
                 .Include(u => u.ClassroomUsers)
                 .ThenInclude(cu => cu.Classroom)
                 .Select(u =>
@@ -47,12 +53,6 @@ namespace Waggle.Controllers
                 
                 .ToListAsync();
 
-            /*var user = await _context.Users.Include(u => u.ClassroomUsers)
-               .ThenInclude(cu => cu.Classroom)
-               .ToListAsync();*/
-
-            //var user = await _context.Users.FindAsync(id);
-
             if (user == null)
              {
                  return NotFound();
@@ -61,7 +61,7 @@ namespace Waggle.Controllers
              return user;
          }
 
-        // PUT: api/Users/5
+        /*// PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
@@ -122,6 +122,6 @@ namespace Waggle.Controllers
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserID == id);
-        }
+        }*/
     }
 }
