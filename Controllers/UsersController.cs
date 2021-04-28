@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Waggle.Models;
+using Newtonsoft.Json;
 
 namespace Waggle.Controllers
 {
@@ -29,10 +30,25 @@ namespace Waggle.Controllers
         }
 
         // GET: api/Users/5
+        /* [HttpGet("{id}")]
+         public async Task<ActionResult<List<User>>> GetUser(int id)
+         {
+             var user = await _context.Users.Include(u => u.ClassroomUsers).ToListAsync();//.SingleOrDefaultAsync(u => u.UserID == id);
+             //var user = await _context.Users.FindAsync(id);
+
+             if (user == null)
+             {
+                 return NotFound();
+             }
+
+             return user;
+         }*/
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public ActionResult<List<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = _context.Users.Include(u => u.ClassroomUsers).ToList();//.SingleOrDefaultAsync(u => u.UserID == id);
+                                                                              //var user = await _context.Users.FindAsync(id);
 
             if (user == null)
             {
