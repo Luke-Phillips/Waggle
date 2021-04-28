@@ -21,7 +21,8 @@ namespace Waggle.Models
         //public ICollection<Badge> Badges { get; set; }             // commented out for testing
     }
 
-    // UserDto allows us to return a user without the password field. Should we consider projection instead?
+    // UserDto allows us to return a user without the password field.
+    // Consider looking into projection (interfaces alternative)
     public class UserDto 
     {
         // Key Properties
