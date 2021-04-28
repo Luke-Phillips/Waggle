@@ -28,12 +28,12 @@ namespace Waggle.Controllers
             return Ok();
         }
 
-        // GET: api/Users
+/*        // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             return await _context.Users.ToListAsync();
-        }
+        }*/
 
         // GET: api/Users/5
         [HttpGet("{id}")]
@@ -49,8 +49,7 @@ namespace Waggle.Controllers
                     Email = u.Email,
                     Name = u.Name,                  
                     ClassroomUsers = u.ClassroomUsers,
-                })
-                
+                })            
                 .ToListAsync();
 
             if (user == null)
@@ -61,7 +60,7 @@ namespace Waggle.Controllers
              return user;
          }
 
-        /*// PUT: api/Users/5
+/*      // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
