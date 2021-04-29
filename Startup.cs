@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,15 @@ namespace Waggle
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            // For sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -58,9 +68,11 @@ namespace Waggle
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-            
-            app.UseAuthentication();
+
+            // authentication added while working on JWTs, may not need now
+            /*app.UseAuthentication();*/
             app.UseAuthorization();
+            app.UseSession():
 
             app.UseEndpoints(endpoints =>
             {
