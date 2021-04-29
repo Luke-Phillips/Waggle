@@ -34,5 +34,6 @@ namespace Waggle.Models
 
         // Navigation Properties
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }
+        public ICollection<Achievement> Achievements { get; set; }
     }
 }

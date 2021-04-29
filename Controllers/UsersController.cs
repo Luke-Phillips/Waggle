@@ -21,32 +21,38 @@ namespace Waggle.Controllers
         {
             _context = context;
         }
+
+        // For Debugging Porpoises *mmmrrwwaahhh*
         // GET: api/Users
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<List<User>>> GetUsers(int id)
         {
+            Console.WriteLine("----------------------test------------------------");
             var user = await _context.Users
+                .AsNoTracking()
                 .Include(u => u.Achievements)
- /*               .Include(u => u.ClassroomUsers)
-                    .ThenInclude(cu => cu.Classroom)*/
+                .Include(u => u.ClassroomUsers)
+                    .ThenInclude(cu => cu.Classroom)
                 .ToListAsync();
-
             return user;
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<UserDto>>> GetUser(int id)
+        public async Task<ActionResult<UserDto>> GetUser(int id)
         {
-            var user = await _context.Users.Where(u => u.UserID == id) // obviously this will change. passwords and sessions instead
-                .Select(u =>
-                    new UserDto()
-                    {
-                        UserID = u.UserID,
-                        Email = u.Email,
-                        Name = u.Name
-                    })
-                .ToListAsync();
+            var user = await _context.Users.Where(u => u.UserID == id) // replace later with sesh cookies or the like                                    
+                .Include(u => u.Achievements)                          
+                .Include(u => u.ClassroomUsers)
+                    .ThenInclude(cu => cu.Classroom)
+                .Select(u => new UserDto
+                {
+                    Email = u.Email,
+                    Name = u.Name,
+                    Achievements = u.Achievements,
+                    ClassroomUsers = u.ClassroomUsers,
+                })
+                .SingleOrDefaultAsync();               
 
             if (user == null)
             {
