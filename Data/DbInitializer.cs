@@ -15,8 +15,11 @@ namespace Waggle.Data
             // Look for any existing users in the database
             if (context.Users.Any())
             {
+                Console.WriteLine("DB has been seeded--------------------------------------");
                 return; // DB has been seeded
             }
+
+            Console.WriteLine("DB has NOT been seeded, seeding now-------------------------");
 
             var achA = new Achievement { Name = "AchievementA", Description = "Dummy Achievement A", Points = 10 };
             var achB = new Achievement { Name = "AchievementB", Description = "Dummy Achievement B", Points = 20 };

@@ -23,22 +23,13 @@ namespace Waggle.Controllers
         }
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<List<UserDto>>> GetUsers(int id)
+        public async Task<ActionResult<List<User>>> GetUsers(int id)
         {
-            var user = await _context.Users.Where(u => u.UserID == id) // obviously this will change. passwords and sessions instead
-                .Select(u =>
-                    new UserDto()
-                    {
-                        UserID = u.UserID,
-                        Email = u.Email,
-                        Name = u.Name
-                    })
+            var user = await _context.Users
+                .Include(u => u.Achievements)
+ /*               .Include(u => u.ClassroomUsers)
+                    .ThenInclude(cu => cu.Classroom)*/
                 .ToListAsync();
-
-            if (user == null)
-            {
-                return NotFound();
-            }
 
             return user;
         }

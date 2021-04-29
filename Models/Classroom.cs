@@ -23,4 +23,18 @@ namespace Waggle.Models
         //[ForeignKey("OwnerID")]
         //public User Owner { get; set; }
     }
+
+    // Return a classroom without the classroomUsers
+    public class ClassroomDto
+    {
+        // Key Properties
+        public int ClassroomID { get; set; }
+        //public int OwnerID { get; set; }
+
+        // Regular Properties
+        public string Name { get; set; }
+        // Image to represent classroom
+        // public x Icon { get; set; }        
+        public string InviteCode { get; set; }
+    }
 }
