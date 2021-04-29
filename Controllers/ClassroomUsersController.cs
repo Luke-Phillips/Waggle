@@ -21,17 +21,6 @@ namespace Waggle.Controllers
             _context = context;
         }
 
-        // GET: api/UserClassrooms/5
-        [HttpGet("userclassrooms/{userID}")]
-        public async Task<ActionResult<List<ClassroomUser>>> GetUserClassrooms(int userID)
-        {
-            var classroomUser = await _context.ClassroomUsers
-                .Where(cu => cu.UserID == userID)
-                .ToListAsync();
-
-            return classroomUser;
-        }
-
         // GET: api/ClassroomUsers/5
         [HttpGet("classroomusers/{classroomID}")]
         public async Task<ActionResult<List<ClassroomUser>>> GetClassroomUsers(int classroomID)
@@ -42,6 +31,19 @@ namespace Waggle.Controllers
 
             return classroomUser;
         }
+
+        // GET: api/UserClassrooms/5
+        [HttpGet("userclassrooms/{userID}")]
+        public async Task<ActionResult<List<ClassroomUser>>> GetUserClassrooms(int userID)
+        {
+            var classroomUser = await _context.ClassroomUsers
+                .Where(cu => cu.UserID == userID)
+                .Include(cu => cu.Classroom)
+                .ToListAsync();
+
+            return classroomUser;
+        }
+
 /*
         // PUT: api/ClassroomUsers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

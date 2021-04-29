@@ -19,5 +19,7 @@ namespace Waggle.Data
             modelBuilder.Entity<ClassroomUser>()
                 .HasKey(c => new { c.ClassroomID, c.UserID });
         }
+
+        public DbSet<Waggle.Models.Module> Module { get; set; }
     }
 }
