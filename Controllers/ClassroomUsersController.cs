@@ -10,7 +10,7 @@ using Waggle.Models;
 
 namespace Waggle.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class ClassroomUsersController : ControllerBase
     {
@@ -21,8 +21,19 @@ namespace Waggle.Controllers
             _context = context;
         }
 
+        // GET: api/UserClassrooms/5
+        [HttpGet("userclassrooms/{userID}")]
+        public async Task<ActionResult<List<ClassroomUser>>> GetUserClassrooms(int userID)
+        {
+            var classroomUser = await _context.ClassroomUsers
+                .Where(cu => cu.UserID == userID)
+                .ToListAsync();
+
+            return classroomUser;
+        }
+
         // GET: api/ClassroomUsers/5
-        [HttpGet("{classroomID}")]
+        [HttpGet("classroomusers/{classroomID}")]
         public async Task<ActionResult<List<ClassroomUser>>> GetClassroomUsers(int classroomID)
         {
             var classroomUser = await _context.ClassroomUsers
