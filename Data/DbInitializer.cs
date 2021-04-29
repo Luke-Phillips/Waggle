@@ -18,21 +18,31 @@ namespace Waggle.Data
                 return; // DB has been seeded
             }
 
+            var achA = new Achievement { Name = "AchievementA", Description = "Dummy Achievement A", Points = 10 };
+            var achB = new Achievement { Name = "AchievementB", Description = "Dummy Achievement B", Points = 20 };
+            var achC = new Achievement { Name = "AchievementB", Description = "Dummy Achievement C", Points = 30 };
+           
             var users = new User[]
             {
-                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT"},
-                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA"},
-                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH" },
-                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG" },
-                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG" },
-                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP" },
+                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT",
+                    Achievements= new List<Achievement>() },
+                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA",
+                    Achievements= new List<Achievement> { achA } },
+                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH",
+                    Achievements= new List<Achievement>() },
+                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG",
+                    Achievements= new List<Achievement> { achA, achB, achC } },
+                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG",
+                    Achievements= new List<Achievement> { achA, achB } },
+                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP",
+                    Achievements= new List<Achievement> { achA } },
             };
 
             foreach (User u in users)
             {
                 context.Users.Add(u);
             }
-            context.SaveChanges();
+            context.SaveChanges();        
 
             var classrooms = new Classroom[]
             {

@@ -9,6 +9,7 @@ namespace Waggle.Models
     {
         // Key Properties
         public int AchievementID { get; set; }
+        public int UserAchievementID { get; set; }
 
         // Regular Properties
         public string Name { get; set; }
@@ -16,6 +17,6 @@ namespace Waggle.Models
         public int Points { get; set; }
 
         // Navigation Properties
-        // possibly a collection of users who've achieved it
+        public ICollection<User> Users { get; set; }
     }
 }

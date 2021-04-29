@@ -22,9 +22,5 @@ namespace Waggle.Models
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }
         //[ForeignKey("OwnerID")]
         //public User Owner { get; set; }
-        // public ICollection<Module> Modules
-
-
-
     }
 }

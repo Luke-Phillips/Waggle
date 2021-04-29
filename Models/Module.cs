@@ -9,6 +9,7 @@ namespace Waggle.Models
     {
         // Key Properties
         public int ModuleID { get; set; }
+        //public int ClassID { get; set; }
 
         // Regular Properties
         public string Name { get; set; }

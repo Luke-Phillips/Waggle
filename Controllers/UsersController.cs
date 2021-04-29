@@ -21,24 +21,10 @@ namespace Waggle.Controllers
         {
             _context = context;
         }
-
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate()
-        {
-            return Ok();
-        }
-
-/*        // GET: api/Users
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<List<UserDto>>> GetUsers(int id)
         {
-            return await _context.Users.ToListAsync();
-        }*/
-
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-         public async Task<ActionResult<List<UserDto>>> GetUser(int id)
-         {
             var user = await _context.Users.Where(u => u.UserID == id) // obviously this will change. passwords and sessions instead
                 .Select(u =>
                     new UserDto()
@@ -46,16 +32,53 @@ namespace Waggle.Controllers
                         UserID = u.UserID,
                         Email = u.Email,
                         Name = u.Name
-                    })            
+                    })
                 .ToListAsync();
 
             if (user == null)
-             {
-                 return NotFound();
-             }
+            {
+                return NotFound();
+            }
 
-             return user;
-         }
+            return user;
+        }
+
+        // GET: api/Users/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<UserDto>>> GetUser(int id)
+        {
+            var user = await _context.Users.Where(u => u.UserID == id) // obviously this will change. passwords and sessions instead
+                .Select(u =>
+                    new UserDto()
+                    {
+                        UserID = u.UserID,
+                        Email = u.Email,
+                        Name = u.Name
+                    })
+                .ToListAsync();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        /*        [HttpPost("authenticate")]
+                public IActionResult Authenticate()
+                {
+                    return Ok();
+                }
+
+                // GET: api/Users
+                [HttpGet]
+                public async Task<ActionResult<IEnumerable<User>>> GetUser()
+                {
+                    return await _context.Users.ToListAsync();
+                }*/
+
+
 
         /*      // PUT: api/Users/5
                 // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

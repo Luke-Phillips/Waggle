@@ -17,8 +17,8 @@ namespace Waggle.Models
 
         // Navigation Properties
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }
-        //public ICollection<Achievement> Achievements { get; set; } // commented out for testing
-        //public ICollection<Badge> Badges { get; set; }             // commented out for testing
+        public ICollection<Achievement> Achievements { get; set; }
+        //public ICollection<Badge> Badges { get; set; }             
     }
 
     // UserDto allows us to return a user without the password field.

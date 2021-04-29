@@ -22,30 +22,32 @@ namespace Waggle.Controllers
         }
 
         // GET: api/Modules/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Module>> GetModule(int id)
+       /* [HttpGet("{classID}")]
+        public async Task<ActionResult<List<Module>>> GetModules(int classID)
         {
-            var @module = await _context.Module.FindAsync(id);
+            var mod = await _context.Module
+                .Where(m => m.ClassID == classID)
+                .ToListAsync();
 
-            if (@module == null)
+            if (mod == null)
             {
                 return NotFound();
             }
 
-            return @module;
-        }
+            return mod;
+        }*/
 
 /*        // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutModule(int id, Module @module)
+        public async Task<IActionResult> PutModule(int id, Module mod)
         {
-            if (id != @module.ModuleID)
+            if (id != mod.ModuleID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@module).State = EntityState.Modified;
+            _context.Entry(mod).State = EntityState.Modified;
 
             try
             {
@@ -69,25 +71,25 @@ namespace Waggle.Controllers
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Module>> PostModule(Module @module)
+        public async Task<ActionResult<Module>> PostModule(Module mod)
         {
-            _context.Module.Add(@module);
+            _context.Module.Add(mod);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetModule", new { id = @module.ModuleID }, @module);
+            return CreatedAtAction("GetModule", new { id = mod.ModuleID }, mod);
         }
 
         // DELETE: api/Modules/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModule(int id)
         {
-            var @module = await _context.Module.FindAsync(id);
-            if (@module == null)
+            var mod = await _context.Module.FindAsync(id);
+            if (mod == null)
             {
                 return NotFound();
             }
 
-            _context.Module.Remove(@module);
+            _context.Module.Remove(mod);
             await _context.SaveChangesAsync();
 
             return NoContent();
