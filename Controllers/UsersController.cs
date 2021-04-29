@@ -39,7 +39,7 @@ namespace Waggle.Controllers
         [HttpGet("{id}")]
          public async Task<ActionResult<List<UserDto>>> GetUser(int id)
          {
-            var user = await _context.Users.Where(u => u.UserID == id) // obviously this where will change. passwords and sessions instead
+            var user = await _context.Users.Where(u => u.UserID == id) // obviously this will change. passwords and sessions instead
                 .Include(u => u.ClassroomUsers)
                 .ThenInclude(cu => cu.Classroom)
                 .Select(u =>
