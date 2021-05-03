@@ -31,6 +31,7 @@ namespace Waggle.Models
         // Regular Properties
         public string Email { get; set; }
         public string Name { get; set; }
+        // public in tpoints
 
         // Navigation Properties
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }

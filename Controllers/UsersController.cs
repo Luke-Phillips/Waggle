@@ -27,7 +27,6 @@ namespace Waggle.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<User>>> GetUsers(int id)
         {
-            Console.WriteLine("----------------------test------------------------");
             var user = await _context.Users
                 .AsNoTracking()
                 .Include(u => u.Achievements)
