@@ -5,10 +5,11 @@ import './class-nav.styles.scss';
 const ClassNav = props => {
   const classrooms = fetch(`/api/userclassrooms/${props.userId}`)
     .then(res => res.json());
-
   return (
     <div className="class-nav">
-      <ClassNavIcon />
+      {props.classrooms.map(classroom => (
+        <ClassNavIcon key={classroom.id} classroom={classroom} />
+      ))}
     </div>
   );
 };
