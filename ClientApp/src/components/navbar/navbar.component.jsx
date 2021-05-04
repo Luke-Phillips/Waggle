@@ -1,7 +1,7 @@
-import React from 'react'
-import './navbar.styles.scss'
-import { Link } from 'react-router-dom'
-import { ReactComponent as Logo } from '../../assets/beehive-logo.svg'
+import React from 'react';
+import './navbar.styles.scss';
+import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/beehive-logo.svg';
 
 const Navbar = () => (
     <div className='navbar'>
@@ -14,6 +14,6 @@ const Navbar = () => (
             <Link className='option' to='/signin'> SIGN IN </Link>
         </div>
     </div>
-)
+);
 
 export default Navbar; 

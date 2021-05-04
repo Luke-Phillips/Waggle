@@ -1,9 +1,9 @@
-import React from "react";
-import { ReactComponent as Icon } from "../../assets/honey-jar.svg";
-import "./class-nav-icon.styles.scss";
+import React from 'react';
+import { ReactComponent as Icon } from '../../assets/honey-jar.svg';
+import './class-nav-icon.styles.scss';
 
-const ClassNavIcon = (props) => (
-  console.log("test: ", props.classes.classroom.name),
+const ClassNavIcon = props => (
+  console.log('test: ', props.classes.classroom.name),
   (
     <div className="class-nav-icon">
       <Icon className="icon" />
