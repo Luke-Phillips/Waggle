@@ -8,7 +8,7 @@ using Waggle.Data;
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    [Migration("20210504042611_MySqlInitialCreate")]
+    [Migration("20210504044007_MySqlInitialCreate")]
     partial class MySqlInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
