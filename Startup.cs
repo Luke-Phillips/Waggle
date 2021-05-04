@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace Waggle
 {
@@ -43,8 +44,9 @@ namespace Waggle
                 configuration.RootPath = "ClientApp/build";
             });
 
+            string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WaggleContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("WaggleContext")));
+                    options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
             services.AddDatabaseDeveloperPageExceptionFilter();                          
         }
