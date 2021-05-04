@@ -1,3 +1,11 @@
-.icon {
-    border: solid 2px black;
+.class-nav-icon {
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    p {
+        font-size: small;
+        padding-right: 3ch;
+    }
 }

@@ -7,13 +7,14 @@ import './discussion-page.styles.scss'
 
 const DiscussionPage = () => (
 
-
     <div className='discussion-page'>
-        <div>
+        <div className='nav'>
             <ClassNav userId='6'/>
         </div>
-        <h1> Get ready to share </h1>
-        <Question />
+        <div className='discussion-board'>
+            <h1> Get ready to share </h1>
+            <Question />
+        </div>
     </div>
 );
 

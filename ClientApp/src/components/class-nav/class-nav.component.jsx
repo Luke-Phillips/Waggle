@@ -30,7 +30,7 @@ const ClassNav = (props) => {
   return (
     <div className="class-nav">
       {classrooms.map((classroom) => (
-        <ClassNavIcon key={classroom.classroomID} classes={classroom} />
+        <ClassNavIcon className='icon' key={classroom.classroomID} classes={classroom} />
       ))}
     </div>
   );
