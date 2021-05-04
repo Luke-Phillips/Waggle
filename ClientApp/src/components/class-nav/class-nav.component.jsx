@@ -3,7 +3,20 @@ import ClassNavIcon from "../class-nav-icon/class-nav-icon.component";
 import "./class-nav.styles.scss";
 
 const ClassNav = (props) => {
-  const[classrooms, setClassrooms] = useState([]);
+  const[classrooms, setClassrooms] = useState([{
+    "userID": 6,
+    "classroomID": 1,
+    "role": "Student",
+    "displayName": "Luke",
+    "user": null,
+    "classroom": {
+        "classroomID": 1,
+        "name": "Senior Project B",
+        "inviteCode": "ZYXW9876",
+        "classroomUsers": []
+    }
+    
+}]);
 
   useEffect(() => {
     fetch(`/api/userclassrooms/${props.userId}`).then((res) =>
@@ -13,10 +26,11 @@ const ClassNav = (props) => {
 //     res.json());
 
   console.log(classrooms)
+  console.log('Hello world')
   return (
     <div className="class-nav">
       {classrooms.map((classroom) => (
-        <ClassNavIcon key={classroom.classroomID} classroom={classroom} />
+        <ClassNavIcon key={classroom.classroomID} classes={classroom} />
       ))}
     </div>
   );
