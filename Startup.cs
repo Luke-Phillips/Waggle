@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace Waggle
 {

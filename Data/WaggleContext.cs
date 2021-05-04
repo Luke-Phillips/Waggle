@@ -15,10 +15,10 @@ namespace Waggle.Data
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<ClassroomUser> ClassroomUsers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+/*        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=waggle;user=root;password=password");
-        }
+            optionsBuilder.UseMySQL("server=localhost;database=waggle;user=root;password=qMwnbbasdfvv12#toor");
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
