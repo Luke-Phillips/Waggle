@@ -11,7 +11,7 @@ const ClassNav = props => {
       .then(response => {
         setClassrooms(response);
       });
-  }, []);
+  }, [props.userId]);
   //   const classrooms = fetch(`/api/userclassrooms/${props.userId}`).then((res) =>
   //     res.json());
 
@@ -20,6 +20,7 @@ const ClassNav = props => {
   console.log('Hello world');
   return (
     <div className="class-nav">
+    <p>just here for testing</p>
       {classrooms.map(classroom => (
         <ClassNavIcon
           className="icon"
