@@ -9,8 +9,8 @@ const Navbar = () => (
             <Logo className='logo' />
         </Link>
         <div className='options'>
-            <Link className='option' to='/'> PROFILE </Link>
-            <Link className='option' to='/discussion'> DISCUSSION </Link>
+            <Link className='option' to='/hive/profile'> PROFILE </Link>
+            <Link className='option' to='/hive/discussion'> DISCUSSION </Link>
             <Link className='option' to='/signin'> SIGN IN </Link>
         </div>
     </div>
