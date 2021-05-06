@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-// import { Layout } from './components/Layout.component';
-// import { Home } from './components/Home.component';
-// import { FetchData } from './components/FetchData.component';
-// import { Counter } from './components/Counter.component';
 import Navbar from './components/navbar/navbar.component';
 import SignInAndSignUpPage from './pages/signin-and-signup/signin-and-signup.component';
 import HomePage from './pages/homepage/homepage.component';
