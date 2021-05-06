@@ -23,7 +23,7 @@ export default class App extends Component {
         <Route path='/hive'>
           <ClassNav userId={6} />
         </Route>
-        <Route exact path='/hive/discussion' component={DiscussionPage} />
+        <Route path='/hive/discussion' component={DiscussionPage} />
         <Route path='/hive/profile' component={ProfilePage} />
 
         {/* <Navbar />
