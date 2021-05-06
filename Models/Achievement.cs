@@ -14,8 +14,8 @@ namespace Waggle.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Points { get; set; }
-        public string UnachievedUrl { get; set; }
-        public string AchievedUrl { get; set; }
+        public string UnachievedFilePath { get; set; }
+        public string AchievedFilePath { get; set; }
 
         // Navigation Properties
         public ICollection<User> Users { get; set; }
