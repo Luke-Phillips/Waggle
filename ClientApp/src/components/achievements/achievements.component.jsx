@@ -2,11 +2,9 @@ import React from 'react';
 import './achievements.styles.scss';
 
 const Achievements = props => {
-  const achievements = props.achievements.map(achievement => (
-    <li>achievement</li>
-  ));
+  const achievements = props.achs.map(achievement => <li>achievement</li>);
 
-  return achievements;
+  return <div>{achievements}</div>;
 };
 
 export default Achievements;

@@ -4,7 +4,7 @@ import './badges.styles.scss';
 const Badges = props => {
   const badges = props.badges.map(badge => <li>badge</li>);
 
-  return badges;
+  return <div>{badges}</div>;
 };
 
 export default Badges;
