@@ -20,7 +20,6 @@ const ClassNav = props => {
   console.log('Hello world');
   return (
     <div className="class-nav">
-    <p>just here for testing</p>
       {classrooms.map(classroom => (
         <ClassNavIcon
           className="icon"
