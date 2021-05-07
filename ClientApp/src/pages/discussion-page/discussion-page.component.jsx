@@ -9,8 +9,6 @@ import CreatePost from '../../components/create-post/create-post.component';
 import './discussion-page.styles.scss';
 
 const DiscussionPage = () => (
-  // We are going to have to add state or something dealing with the login
-  // so we can get the proper userId...
   <div className='discussion-page'>
     {/* <div className='nav'>
       <ClassNav userId={6} />
