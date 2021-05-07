@@ -1,0 +1,16 @@
+.create-post {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 30%;
+  border: solid 1px black;
+  border-radius: 15px;
+
+  h3 {
+    width: 100%;
+  }
+
+  .button {
+    // custom styles for create post buttons
+  }
+}
