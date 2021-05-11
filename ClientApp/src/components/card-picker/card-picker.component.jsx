@@ -6,9 +6,8 @@ const CardPicker = props => (
       <option value='' selected>--Choose Card--</option>
       <option value='profile'>Profile</option>
       <option value='progress'>Progress</option>
-      {/*<option value='stats-personal'>Personal Stats</option>
-    <option value='stats-hive'>Hive Stats</option>
-    <option value='hive-manager'>Hive Manager</option>*/}
+      <option value='stats'>Stats</option>
+    {/*<option value='hiveManager'>Hive Manager</option>*/}
     </select>
   );
 

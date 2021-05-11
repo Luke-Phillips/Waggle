@@ -6,7 +6,7 @@ const ProfilePage = () => (
   <div className='profile-board'>
     <CardSlot defaultCard='profile'/>
     <CardSlot defaultCard='progress'/>
-    <CardSlot defaultCard='progress'/>
+    <CardSlot defaultCard='stats'/>
     {/* <CardContainer>
       <ProgressCard />
     </CardContainer>

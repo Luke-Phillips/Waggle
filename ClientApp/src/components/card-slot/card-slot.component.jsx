@@ -3,15 +3,15 @@ import CardPicker from '../card-picker/card-picker.component';
 import CardContainer from '../card-container/card-container.component';
 import ProgressCard from '../../components/progress-card/progress-card.component';
 import ProfileCard from '../../components/profile-card/profile-card.component';
+import StatsCard from '../../components/stats-card/stats-card.component';
 import './card-slot.styles.scss';
 
 const CardSlot = props => {
   const pickCard = cardName => {
     if (cardName == 'profile') return <ProfileCard />;
     if (cardName == 'progress') return <ProgressCard />;
-    /*if (cardName == 'personal-stats') return <PersonalStatsCard />;
-    if (cardName == 'hive-stats') return <HiveStatsCard />;
-    if (cardName == 'hive-manager') return <HiveManagerCard />;*/
+    if (cardName == 'stats') return <StatsCard />;
+    /*if (cardName == 'hive-manager') return <HiveManagerCard />;*/
   };
 
   const [card, setCard] = useState(pickCard(props.defaultCard));
