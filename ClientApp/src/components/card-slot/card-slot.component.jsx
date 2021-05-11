@@ -12,7 +12,7 @@ const CardSlot = props => {
     if (cardName == 'profile') return <ProfileCard />;
     if (cardName == 'progress') return <ProgressCard />;
     if (cardName == 'stats') return <StatsCard />;
-    if (cardName == 'hive-manager') return <HiveManagerCard />;
+    if (cardName == 'hiveManager') return <HiveManagerCard />;
   };
 
   const [card, setCard] = useState(pickCard(props.defaultCard));
