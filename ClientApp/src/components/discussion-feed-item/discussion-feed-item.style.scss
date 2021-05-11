@@ -1,0 +1,36 @@
+.discussion-feed-item {
+  width: 60%;
+  margin: auto;
+  border: solid 2px black;
+  border-radius: 15px;
+
+  .content {
+    margin: auto;
+    border: dashed 1px purple;
+    height: auto;
+    max-height: 15ch;
+    padding: 1ch;
+    overflow: auto;
+  }
+
+  .footer {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: solid 1px black;
+
+    .upload {
+      padding: 1ch 0 1ch 2ch;
+      border-radius: 10px;
+    }
+
+    .feed-item-btn {
+      width: 15%;
+      align-self: flex-end;
+      margin: auto;
+      border-radius: 10px;
+      background-color: hotpink;
+    }
+  }
+}
