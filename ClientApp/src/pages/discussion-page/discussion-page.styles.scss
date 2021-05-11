@@ -1,11 +1,28 @@
 .discussion-page {
-  display: flex;
-  flex-direction: row;
+  width: 84vw;
+  border: solid 1px black;
+  margin: auto;
+  .post-feed {
+    width: 60vw;
+    
+  }
+
+  .options{
+    width: 20vw;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }
 
 .discussion-board {
+  display: flex;
+  flex-direction: row;
   width: 80vw;
   margin: auto;
+  
+  
 }
 
 // .nav {
