@@ -1,17 +1,18 @@
 import React from 'react';
-import CardContainer from '../../components/card-container/card-container.component';
-import ProgressCard from '../../components/progress-card/progress-card.component';
-import ProfileCard from '../../components/profile-card/profile-card.component';
+import CardSlot from '../../components/card-slot/card-slot.component';
 import './profile-page.styles.scss';
 
 const ProfilePage = () => (
   <div className='profile-board'>
-    <CardContainer>
+    <CardSlot defaultCard='profile'/>
+    <CardSlot defaultCard='progress'/>
+    <CardSlot defaultCard='progress'/>
+    {/* <CardContainer>
       <ProgressCard />
     </CardContainer>
     <CardContainer>
       <ProfileCard />
-    </CardContainer>
+    </CardContainer> */}
   </div>
 );
 
