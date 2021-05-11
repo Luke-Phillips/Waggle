@@ -1,11 +1,12 @@
-import React from 'react';
-import { isPropertySignature } from 'typescript';
-import Achievements from './achievements.component';
-import Badges from './badges.component';
+import React, { useState } from 'react';
+import Achievements from '../achievements/achievements.component';
+import Badges from '../badges/badges.component';
 import './unlockables.styles.scss';
 
 const Unlockables = props => {
-  [unlockablesSelected, setUnlockablesSelected] = useState('achievements');
+  const [unlockablesSelected, setUnlockablesSelected] = useState(
+    'achievements'
+  );
 
   const handleClick = e => {
     if (e.target.value != unlockablesSelected) {
@@ -14,7 +15,7 @@ const Unlockables = props => {
   };
 
   const unlockablesToDisplay =
-    achsAreSelected == 'achievements' ? (
+    unlockablesSelected == 'achievements' ? (
       <Achievements achs={props.achs} />
     ) : (
       <Badges badges={props.badges} />

@@ -1,5 +1,4 @@
 import React from 'react'
-import Unlockables from '../../components/badges/badges.component';
 import './homepage.styles.scss'
 
 const HomePage = () => (

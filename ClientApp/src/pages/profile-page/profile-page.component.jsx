@@ -1,10 +1,13 @@
 import React from 'react';
-import Unlockables from '../../components/badges/badges.component';
+import CardContainer from '../../components/card-container/card-container.component';
+import ProgressCard from '../../components/progress-card/progress-card.component';
 import './profile-page.styles.scss';
 
 const ProfilePage = () => (
   <div className='profile-board'>
-    <Unlockables achs={[1, 2, 3]} badges={[4, 5, 6]} />
+  <CardContainer>
+    <ProgressCard />
+  </CardContainer>
   </div>
 );
 

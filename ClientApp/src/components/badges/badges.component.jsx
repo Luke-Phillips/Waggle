@@ -2,7 +2,10 @@ import React from 'react';
 import './badges.styles.scss';
 
 const Badges = props => {
-  const badges = props.badges.map(badge => <li>badge</li>);
+  // ! use better key later
+  const badges = props.badges.map((badge, index) => (
+    <li key={index}>badge {index}</li>
+  ));
 
   return <ul>{badges}</ul>;
 };
