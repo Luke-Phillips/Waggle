@@ -20,7 +20,7 @@ const CardSlot = props => {
   const cardPickHandler = e => setCard(pickCard(e.target.value));
 
   return (
-    <div>
+    <div className='cardSlot'>
       <CardPicker pickHandler={cardPickHandler} />
       <CardContainer>{card}</CardContainer>
     </div>
