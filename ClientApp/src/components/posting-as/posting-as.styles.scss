@@ -1,0 +1,13 @@
+.posting-as {
+  width: 100%;
+  border-bottom: solid 1px black;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 1ch 0 0 1ch;
+  justify-content: center;
+
+  .posting-as-button{
+    justify-self: end;
+  }
+}
