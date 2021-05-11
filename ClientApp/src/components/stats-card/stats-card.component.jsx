@@ -1,16 +1,12 @@
 import React from 'react';
-// import ProfileImage from '../profile-image/profile-image.component';
-// import ProfileInfo from '../profile-info/profile-info.component';
+import PersonalStats from '../personal-stats/personal-stats.component';
+import HiveStats from '../hive-stats/hive-stats.component';
 import './stats-card.styles.scss';
 
-const StatsCard = props => {
-  // not sure if fetch call will be done in the card or if user info will be passed as props yet
+const StatsCard = () => (
+  // not sure if fetch call will be done here or be passed as props
   // for now, it's hardcoded
-  //const stats; // roleConditional ? <personal-stats /> : <hive-stats />
-
-  //return stats;
-
-    return <p>this will be the stats card</p>
-};
+  /*props.user.role*/ 'student' == 'student' ? <PersonalStats /> : <HiveStats />
+);
 
 export default StatsCard;
