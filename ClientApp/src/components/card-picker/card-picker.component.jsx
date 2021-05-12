@@ -2,10 +2,7 @@ import React from 'react';
 import './card-picker.styles.scss';
 
 const CardPicker = props => (
-  <select onChange={props.pickHandler} defaultValue='default'>
-    <option id='default' value=''>
-      --Choose Card--
-    </option>
+  <select onChange={props.pickHandler} defaultValue={props.defaultCard}>
     <option value='profile'>Profile</option>
     <option value='progress'>Progress</option>
     <option value='stats'>Stats</option>
