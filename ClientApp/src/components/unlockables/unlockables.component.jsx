@@ -9,13 +9,13 @@ const Unlockables = props => {
   );
 
   const handleClick = e => {
-    if (e.target.value != unlockablesSelected) {
+    if (e.target.value !== unlockablesSelected) {
       setUnlockablesSelected(e.target.value);
     }
   };
 
   const unlockablesToDisplay =
-    unlockablesSelected == 'achievements' ? (
+    unlockablesSelected === 'achievements' ? (
       <Achievements achs={props.achs} />
     ) : (
       <Badges badges={props.badges} />

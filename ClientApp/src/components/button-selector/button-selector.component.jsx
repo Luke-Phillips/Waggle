@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 
 import './button-selector.styles.scss';

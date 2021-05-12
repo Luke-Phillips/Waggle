@@ -9,10 +9,10 @@ import './card-slot.styles.scss';
 
 const CardSlot = props => {
   const pickCard = cardName => {
-    if (cardName == 'profile') return <ProfileCard />;
-    if (cardName == 'progress') return <ProgressCard />;
-    if (cardName == 'stats') return <StatsCard />;
-    if (cardName == 'hiveManager') return <HiveManagerCard />;
+    if (cardName === 'profile') return <ProfileCard />;
+    if (cardName === 'progress') return <ProgressCard />;
+    if (cardName === 'stats') return <StatsCard />;
+    if (cardName === 'hiveManager') return <HiveManagerCard />;
   };
 
   const [card, setCard] = useState(pickCard(props.defaultCard));

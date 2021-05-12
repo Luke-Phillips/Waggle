@@ -7,12 +7,6 @@ const ProfilePage = () => (
     <CardSlot defaultCard='profile'/>
     <CardSlot defaultCard='progress'/>
     <CardSlot defaultCard='stats'/>
-    {/* <CardContainer>
-      <ProgressCard />
-    </CardContainer>
-    <CardContainer>
-      <ProfileCard />
-    </CardContainer> */}
   </div>
 );
 
