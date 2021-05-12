@@ -19,10 +19,10 @@ const ClassNav = props => {
   console.log(props.userId);
   console.log('Hello world');
   return (
-    <div className="class-nav">
+    <div className='class-nav'>
       {classrooms.map(classroom => (
         <ClassNavIcon
-          className="icon"
+          className='icon'
           key={classroom.classroomID}
           classes={classroom}
         />
