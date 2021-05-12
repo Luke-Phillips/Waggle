@@ -16,7 +16,7 @@ const StudentTable = props => {
     setNameSortFirst(true);
   };
 
-  const nameComparer = isAscending => {
+  const nameCompareFn = isAscending => {
     return (student1, student2) => {
       if (student1.name > student2.name) return isAscending;
       if (student1.name < student2.name) return -+isAscending;
@@ -24,7 +24,7 @@ const StudentTable = props => {
     };
   };
 
-  const roleComparer = isAscending => {
+  const roleCompareFn = isAscending => {
     return (student1, student2) => {
       if (student1.role === student2.role) return 0;
       if (student1.role === 'moderator') return isAscending;
@@ -34,20 +34,11 @@ const StudentTable = props => {
 
   const sortedStudents = nameSortFirst
     ? props.students
-        .sort(nameComparer(nameSortToggle))
-        .sort(roleComparer(roleSortToggle))
+        .sort(nameCompareFn(nameSortToggle))
+        .sort(roleCompareFn(roleSortToggle))
     : props.students
-        .sort(roleComparer(roleSortToggle))
-        .sort(nameComparer(nameSortToggle));
-
-  console.log(
-    'students: ' +
-      sortedStudents[0].name +
-      ' ' +
-      sortedStudents[1].name +
-      ' ' +
-      sortedStudents[2].name
-  );
+        .sort(roleCompareFn(roleSortToggle))
+        .sort(nameCompareFn(nameSortToggle));
 
   console.log('name toggle: ' + nameSortToggle);
   console.log('role toggle: ' + roleSortToggle);
