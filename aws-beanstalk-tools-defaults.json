@@ -11,7 +11,7 @@
     "instance-profile" : "aws-elasticbeanstalk-ec2-role",
     "service-role"     : "aws-elasticbeanstalk-service-role",
     "health-check-url" : "/",
-    "instance-type"    : "t3a.medium",
+    "instance-type"    : "t3a.micro",
     "key-pair"         : "",
     "iis-website"      : "Default Web Site",
     "app-path"         : "/",
