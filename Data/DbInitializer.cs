@@ -11,6 +11,7 @@ namespace Waggle.Data
         public static void Initialize(WaggleContext context)
         {
             //context.Database.EnsureCreated();
+            Console.WriteLine("About to attempt access to db.Users--------------------------------------");
 
             // Look for any existing users in the database
             if (context.Users.Any())
