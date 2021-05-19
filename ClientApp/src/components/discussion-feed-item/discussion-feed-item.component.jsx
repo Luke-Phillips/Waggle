@@ -4,7 +4,7 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './discussion-feed-item.style.scss';
 
-const postTime = new Date().getTime();
+const postTime = new Date('2021/5/17 16:24:00');
 // Maybe should use children for content
 const DiscussionFeedItem = ({ children, ...otherProps }) => (
   <div className='discussion-feed-item'>

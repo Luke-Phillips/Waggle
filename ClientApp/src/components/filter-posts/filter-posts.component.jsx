@@ -8,7 +8,7 @@ const FilterPosts = () => (
   
   <form className='filter'>
     <h3>Filter Posts: </h3> 
-    <input type='checkbox' id='announcements' value='announcements'></input>
+    <input type='checkbox' name='announcements' id='announcements' value='announcements'></input>
     <label for='announcements'>Announcements</label>  
 
     <input type='checkbox' id='questions' value='questions'></input>
