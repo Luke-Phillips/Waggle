@@ -14,14 +14,16 @@
 
   .dropdown-item {
     width:100%;
-    background-color: darkgoldenrod;
+    background-color: #fac600;
+    opacity: 75%;
     //border: solid 1px black;
     
   }
 
   .dropdown-item:hover {
     background-color: black;
-    color: darkgoldenrod;
+    color: #fac600;
+    cursor: pointer;
   }
 
 }

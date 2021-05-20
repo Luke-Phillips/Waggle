@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import './module-selector.styles.scss';
 
@@ -12,10 +12,14 @@ const ModuleSelector = props => {
       <CustomButton
         className='dropdown'
         onClick={() => setShowDropdown(!showDropdown)}
-      >Modules</CustomButton>
+      >
+        Modules
+      </CustomButton>
       <div className='dropdown-content'>
         {showDropdown &&
-          props.items.map(prop => <span className='dropdown-item'>{prop}</span>)}
+          props.items.map(prop => (
+            <span className='dropdown-item'>{prop}</span>
+          ))}
       </div>
     </div>
   );

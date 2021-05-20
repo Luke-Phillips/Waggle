@@ -5,7 +5,7 @@ import './create-post.styles.scss'
 const CreatePost = () => (
   <div className='create-post'>
     <h3>Create Post:</h3>
-    <ButtonSelector labels={['Announcement', 'Question', 'Insight', 'Comment', 'Feedback Request']} />
+    <ButtonSelector labels={['Announcement', 'Question', 'Insight', 'Feedback Request']} />
   </div>
 );
 

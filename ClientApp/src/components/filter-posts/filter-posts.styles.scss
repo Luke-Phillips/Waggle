@@ -3,19 +3,21 @@
   border: solid 1px black;
   width: 100%;
   border-radius: 15px;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   align-items: baseline;
+  
 
-  input[type='checkbox']{
+  input[type='checkbox'] {
     display: inline-block;
     margin-left: 1rem;
+    margin-right: 1ch;
+    
 
   }
-  label{
-    margin-left: 0.5ch;
-  }
+
   h3 {
     width: 100%;
+    padding-left: 0.5ch;
   }
 
 }
