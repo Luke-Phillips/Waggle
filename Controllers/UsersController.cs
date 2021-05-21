@@ -48,6 +48,7 @@ namespace Waggle.Controllers
                 {
                     Email = u.Email,
                     Name = u.Name,
+                    Points = u.Points,
                     Achievements = u.Achievements,
                     ClassroomUsers = u.ClassroomUsers,
                 })

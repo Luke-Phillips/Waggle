@@ -14,6 +14,7 @@ namespace Waggle.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public int Points { get; set; }
 
         // Navigation Properties
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }
@@ -31,7 +32,7 @@ namespace Waggle.Models
         // Regular Properties
         public string Email { get; set; }
         public string Name { get; set; }
-        // public in tpoints
+        public int Points { get; set; }
 
         // Navigation Properties
         public ICollection<ClassroomUser> ClassroomUsers { get; set; }
