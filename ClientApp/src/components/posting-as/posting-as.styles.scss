@@ -7,11 +7,15 @@
   padding: 1ch 0 0 1ch;
   justify-content: center;
 
+  p {
+    margin-right: 1ch;
+  }
+
   .posting-as-button{
     justify-self: end;
-    margin-left: 1ch;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-left: 2ch;
     padding-right: 2ch;
+    
   }
 }
