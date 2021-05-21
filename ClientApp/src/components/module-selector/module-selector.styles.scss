@@ -1,0 +1,29 @@
+.module-selector {
+  width: auto;
+
+  .dropdown {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .dropdown-item {
+    width:100%;
+    background-color: #fac600;
+    opacity: 75%;
+    //border: solid 1px black;
+    
+  }
+
+  .dropdown-item:hover {
+    background-color: black;
+    color: #fac600;
+    cursor: pointer;
+  }
+
+}

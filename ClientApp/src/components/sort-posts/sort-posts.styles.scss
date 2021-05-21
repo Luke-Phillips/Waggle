@@ -4,11 +4,13 @@
   justify-content: space-between;
   border: solid 1px gray;
   border-radius: 30px;
-  padding: 2px 2px 2px 2px;
+  padding: 0.5ch;
   margin: auto;
 
-
+  .selector {
+    width: 100%;
+  }
   .button {
-    // custom button styles here
+    margin: 0 1rem 0 auto;
   }
 }

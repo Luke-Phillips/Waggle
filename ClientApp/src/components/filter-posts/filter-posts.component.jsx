@@ -1,29 +1,38 @@
-import React from 'react'
+import React from 'react';
 
-import './filter-posts.styles.scss'
+import './filter-posts.styles.scss';
 
 const FilterPosts = () => (
   // Attempting a fragment
-  <> 
-  
-  <form className='filter'>
-    <h3>Filter Posts: </h3> 
-    <input type='checkbox' id='announcements' value='announcements'></input>
-    <label for='announcements'>Announcements</label>  
+  <>
+    <form className='filter'>
+      <h3>Filter Posts: </h3>
+      <label>
+        <input
+          type='checkbox'
+          name='announcements'
+          value='announcements'
+        ></input>
+        Announcements
+      </label>
 
-    <input type='checkbox' id='questions' value='questions'></input>
-    <label for='questions'>Questions</label>
+      <label>
+        <input type='checkbox' value='questions'></input>Questions
+      </label>
 
-    <input type='checkbox' id='insights' value='insights'></input>
-    <label for='insights'>Insights</label>
+      <label>
+        <input type='checkbox' value='insights'></input>Insights
+      </label>
 
-    <input type='checkbox' id='feedback-requests' value='feedback-requests'></input>
-    <label for='feedback-requests'>Feedback Requests</label>
+      <label>
+        <input type='checkbox' value='feedback-requests'></input>Feedback
+        Requests
+      </label>
 
-    <input type='checkbox' id='comments' value='comments'></input>
-    <label for='comments'>Comments</label>
-    
-  </form>
+      <label>
+        <input type='checkbox' value='comments'></input>Comments
+      </label>
+    </form>
   </>
   // NEED to add ON CHECk
 );

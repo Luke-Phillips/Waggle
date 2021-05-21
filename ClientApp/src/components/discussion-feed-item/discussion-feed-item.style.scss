@@ -6,7 +6,6 @@
 
   .content {
     margin: auto;
-    border: dashed 1px purple;
     height: auto;
     max-height: 15ch;
     padding: 1ch;
@@ -21,16 +20,23 @@
     border-top: solid 1px black;
 
     .upload {
-      padding: 1ch 0 1ch 2ch;
+      width: 75%;
+      margin: 1rem auto 1rem 1rem;
       border-radius: 10px;
     }
 
     .feed-item-btn {
-      width: 15%;
+      width: 20%;
       align-self: flex-end;
-      margin: auto;
+      margin: 1rem 1rem 1rem auto;
       border-radius: 10px;
-      background-color: hotpink;
+      background-color: black;
+      color: white;
     }
   }
+}
+
+.discussion-feed-item:hover {
+  border-color: #883f2e;
+  background-color: rgba(255, 225, 0, 0.16);
 }
