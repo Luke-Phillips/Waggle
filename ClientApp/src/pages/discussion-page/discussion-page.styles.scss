@@ -2,14 +2,16 @@
   width: 84vw;
   border: solid 1px black;
   margin: auto;
+
   .post-feed {
-    width: 60vw;
+    max-width: 60vw;
+    min-width: none;
+    border: dashed 2px blueviolet;
     
   }
 
   .options{
-    width: 20vw;
-    
+    width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -19,7 +21,16 @@
 .discussion-board {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  max-width: 80vw;
+  min-width: 40vw;
   margin: auto; 
 }
 
+.visible {
+  width: 40vw;
+  border: dashed 2px darkgreen;
+}
+
+.hidden {
+  display: none;
+}
