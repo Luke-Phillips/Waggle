@@ -25,17 +25,17 @@ namespace Waggle.Data
            
             var users = new User[]
             {
-                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT",
+                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT", Points=0,
                     Achievements= new List<Achievement>() },
-                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA",
+                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA", Points=30,
                     Achievements= new List<Achievement> { achA } },
-                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH",
+                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH", Points=0,
                     Achievements= new List<Achievement>() },
-                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG",
+                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG", Points=43, // wth Cade
                     Achievements= new List<Achievement> { achA, achB, achC } },
-                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG",
+                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG", Points=42,
                     Achievements= new List<Achievement> { achA, achB } },
-                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP",
+                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP", Points=10,
                     Achievements= new List<Achievement> { achA } },
             };
 
