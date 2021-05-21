@@ -1,17 +1,18 @@
 .discussion-page {
-  width: 84vw;
+  width: 84%;
   border: solid 1px black;
-  margin: auto;
+  margin-right: auto;
+  margin-left: 8%;
 
   .post-feed {
-    max-width: 60vw;
-    min-width: none;
+    max-width: 100%;
+    min-width: 40%;
     border: dashed 2px blueviolet;
     
   }
 
   .options{
-    width: 15vw;
+    width: 14%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -21,13 +22,13 @@
 .discussion-board {
   display: flex;
   flex-direction: row;
-  max-width: 80vw;
-  min-width: 40vw;
+  width: 100%;
   margin: auto; 
+  border: solid 1px darkred; 
 }
 
 .visible {
-  width: 40vw;
+  width: 100%;
   border: dashed 2px darkgreen;
 }
 

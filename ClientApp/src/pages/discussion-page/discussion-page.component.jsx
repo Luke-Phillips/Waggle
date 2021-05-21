@@ -9,10 +9,6 @@ import ReviewsColumn from '../../components/reviews-column/reviews-column.compon
 
 import './discussion-page.styles.scss';
 
-// function showRightCol() {
-
-// }
-
 const postDate = new Date().getTime();
 
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
@@ -23,9 +19,16 @@ const DiscussionPage = () => {
     setShowReviews(!showReviews);
   };
 
+  const showColumn = show => {
+    if(show) {
+      return 'visible'
+    };
+    return 'hidden';
+  };
+
   return (
     <div className='discussion-page'>
-      <h1> Get ready to share </h1>
+      {/* <h1> Get ready to share </h1> */}
       <div className='discussion-board'>
         <div className='options'>
           <ModuleSelector items={modules} />
@@ -56,17 +59,14 @@ const DiscussionPage = () => {
           </DiscussionFeedItem>
         </div>
 
-        <div className={() => (showReviews ? 'visible' : 'hidden')}>
+        <div className={showColumn(showReviews)}>
           <ReviewsColumn show={showReviews} content='I am a Column' />
         </div>
+        
       </div>
     </div>
   );
 };
 
 export default DiscussionPage;
-// create post
-// post feed
-// filter :DONE
-// sort :DONE
-// class module
+

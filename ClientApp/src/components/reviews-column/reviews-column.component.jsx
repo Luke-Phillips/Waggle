@@ -8,9 +8,9 @@ const ReviewsColumn = props => {
   }
 
   return (
-    <>
+    <div className='reviews-column'>
       <h1>{props.content}</h1>
-    </>
+    </div>
   );
 };
 
