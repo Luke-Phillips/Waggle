@@ -21,7 +21,10 @@ const CardSlot = props => {
 
   return (
     <div className='cardSlot'>
-      <CardPicker pickHandler={cardPickHandler} defaultCard={props.defaultCard}/>
+      <CardPicker
+        pickHandler={cardPickHandler}
+        defaultCard={props.defaultCard}
+      />
       <CardContainer>{card}</CardContainer>
     </div>
   );
