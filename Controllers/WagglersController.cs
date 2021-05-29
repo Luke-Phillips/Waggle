@@ -13,44 +13,44 @@ namespace Waggle.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class WagglersController : ControllerBase
     {
         private readonly WaggleContext _context;
 
-        public UsersController(WaggleContext context)
+        public WagglersController(WaggleContext context)
         {
             _context = context;
         }
 
         // For Debugging Porpoises *mmmrrwwaahhh*
-        // GET: api/Users
+        // GET: api/Wagglers
         [HttpGet()]
-        public async Task<ActionResult<List<User>>> GetUsers(int id)
+        public async Task<ActionResult<List<Waggler>>> GetWagglers(int id)
         {
-            var user = await _context.Users
+            var waggler = await _context.Wagglers
                 .AsNoTracking()
                 .Include(u => u.Achievements)
-                .Include(u => u.ClassroomUsers)
+                .Include(u => u.ClassroomWagglers)
                     .ThenInclude(cu => cu.Classroom)
                 .ToListAsync();
-            return user;
+            return waggler;
         }
 
-        // GET: api/Users/5
+        // GET: api/Wagglers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUser(int id)
+        public async Task<ActionResult<WagglerDto>> GetWaggler(int id)
         {
-            var user = await _context.Users.Where(u => u.UserID == id) // replace later with sesh cookies or the like                                    
+            var user = await _context.Wagglers.Where(u => u.WagglerID == id) // replace later with sesh cookies or the like                                    
                 .Include(u => u.Achievements)                          
-                .Include(u => u.ClassroomUsers)
+                .Include(u => u.ClassroomWagglers)
                     .ThenInclude(cu => cu.Classroom)
-                .Select(u => new UserDto
+                .Select(u => new WagglerDto
                 {
                     Email = u.Email,
                     Name = u.Name,
                     Points = u.Points,
                     Achievements = u.Achievements,
-                    ClassroomUsers = u.ClassroomUsers,
+                    ClassroomWagglers = u.ClassroomWagglers,
                 })
                 .SingleOrDefaultAsync();               
 
@@ -68,21 +68,21 @@ namespace Waggle.Controllers
                     return Ok();
                 }
 
-                // GET: api/Users
+                // GET: api/Wagglers
                 [HttpGet]
-                public async Task<ActionResult<IEnumerable<User>>> GetUser()
+                public async Task<ActionResult<IEnumerable<Waggler>>> GetWaggler()
                 {
-                    return await _context.Users.ToListAsync();
+                    return await _context.Wagglers.ToListAsync();
                 }*/
 
 
 
-        /*      // PUT: api/Users/5
+        /*      // PUT: api/Wagglers/5
                 // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
                 [HttpPut("{id}")]
-                public async Task<IActionResult> PutUser(int id, User user)
+                public async Task<IActionResult> PutWaggler(int id, Waggler user)
                 {
-                    if (id != user.UserID)
+                    if (id != user.WagglerID)
                     {
                         return BadRequest();
                     }
@@ -95,7 +95,7 @@ namespace Waggle.Controllers
                     }
                     catch (DbUpdateConcurrencyException)
                     {
-                        if (!UserExists(id))
+                        if (!WagglerExists(id))
                         {
                             return NotFound();
                         }
@@ -108,36 +108,36 @@ namespace Waggle.Controllers
                     return NoContent();
                 }
 
-                // POST: api/Users
+                // POST: api/Wagglers
                 // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
                 [HttpPost]
-                public async Task<ActionResult<User>> PostUser(User user)
+                public async Task<ActionResult<Waggler>> PostWaggler(Waggler user)
                 {
-                    _context.Users.Add(user);
+                    _context.Wagglers.Add(user);
                     await _context.SaveChangesAsync();
 
-                    return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+                    return CreatedAtAction("GetWaggler", new { id = user.WagglerID }, user);
                 }
 
-                // DELETE: api/Users/5
+                // DELETE: api/Wagglers/5
                 [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteUser(int id)
+                public async Task<IActionResult> DeleteWaggler(int id)
                 {
-                    var user = await _context.Users.FindAsync(id);
+                    var user = await _context.Wagglers.FindAsync(id);
                     if (user == null)
                     {
                         return NotFound();
                     }
 
-                    _context.Users.Remove(user);
+                    _context.Wagglers.Remove(user);
                     await _context.SaveChangesAsync();
 
                     return NoContent();
                 }
 
-                private bool UserExists(int id)
+                private bool WagglerExists(int id)
                 {
-                    return _context.Users.Any(e => e.UserID == id);
+                    return _context.Wagglers.Any(e => e.WagglerID == id);
                 }*/
     }
 }

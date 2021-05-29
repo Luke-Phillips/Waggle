@@ -2,34 +2,36 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Waggle.Data;
 
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    partial class WaggleContextModelSnapshot : ModelSnapshot
+    [Migration("20210528174915_IdentityDbContext")]
+    partial class IdentityDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.6");
 
-            modelBuilder.Entity("AchievementWaggler", b =>
+            modelBuilder.Entity("AchievementUser", b =>
                 {
                     b.Property<int>("AchievementsAchievementID")
                         .HasColumnType("int");
 
-                    b.Property<int>("WagglerID")
+                    b.Property<int>("UsersUserID")
                         .HasColumnType("int");
 
-                    b.HasKey("AchievementsAchievementID", "WagglerID");
+                    b.HasKey("AchievementsAchievementID", "UsersUserID");
 
-                    b.HasIndex("WagglerID");
+                    b.HasIndex("UsersUserID");
 
-                    b.ToTable("AchievementWaggler");
+                    b.ToTable("AchievementUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -271,12 +273,12 @@ namespace Waggle.Migrations
                     b.ToTable("Classrooms");
                 });
 
-            modelBuilder.Entity("Waggle.Models.ClassroomWaggler", b =>
+            modelBuilder.Entity("Waggle.Models.ClassroomUser", b =>
                 {
                     b.Property<int>("ClassroomID")
                         .HasColumnType("int");
 
-                    b.Property<int>("WagglerID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.Property<string>("DisplayName")
@@ -285,16 +287,16 @@ namespace Waggle.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClassroomID", "WagglerID");
+                    b.HasKey("ClassroomID", "UserID");
 
-                    b.HasIndex("WagglerID");
+                    b.HasIndex("UserID");
 
-                    b.ToTable("ClassroomWagglers");
+                    b.ToTable("ClassroomUsers");
                 });
 
-            modelBuilder.Entity("Waggle.Models.Waggler", b =>
+            modelBuilder.Entity("Waggle.Models.User", b =>
                 {
-                    b.Property<int>("WagglerID")
+                    b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -310,12 +312,12 @@ namespace Waggle.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.HasKey("WagglerID");
+                    b.HasKey("UserID");
 
-                    b.ToTable("Wagglers");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AchievementWaggler", b =>
+            modelBuilder.Entity("AchievementUser", b =>
                 {
                     b.HasOne("Waggle.Models.Achievement", null)
                         .WithMany()
@@ -323,9 +325,9 @@ namespace Waggle.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Waggle.Models.Waggler", null)
+                    b.HasOne("Waggle.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("WagglerID")
+                        .HasForeignKey("UsersUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -381,33 +383,33 @@ namespace Waggle.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Waggle.Models.ClassroomWaggler", b =>
+            modelBuilder.Entity("Waggle.Models.ClassroomUser", b =>
                 {
                     b.HasOne("Waggle.Models.Classroom", "Classroom")
-                        .WithMany("ClassroomWagglers")
+                        .WithMany("ClassroomUsers")
                         .HasForeignKey("ClassroomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Waggle.Models.Waggler", "Waggler")
-                        .WithMany("ClassroomWagglers")
-                        .HasForeignKey("WagglerID")
+                    b.HasOne("Waggle.Models.User", "User")
+                        .WithMany("ClassroomUsers")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Classroom");
 
-                    b.Navigation("Waggler");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Waggle.Models.Classroom", b =>
                 {
-                    b.Navigation("ClassroomWagglers");
+                    b.Navigation("ClassroomUsers");
                 });
 
-            modelBuilder.Entity("Waggle.Models.Waggler", b =>
+            modelBuilder.Entity("Waggle.Models.User", b =>
                 {
-                    b.Navigation("ClassroomWagglers");
+                    b.Navigation("ClassroomUsers");
                 });
 #pragma warning restore 612, 618
         }

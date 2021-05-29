@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class ClassroomUser
+    public class ClassroomWaggler
     {
         // Key Properties
-        public int UserID { get; set; }
+        public int WagglerID { get; set; }
         public int ClassroomID { get; set; }
         
         // Regular Properties
         public string Role { get; set; }
         public string DisplayName { get; set; }
         // public x ProfilePicture { get; set; }
-        
+
         // Navigation Properties
-        public User User { get; set; }
+        public Waggler Waggler { get; set; }
         public Classroom Classroom { get; set; }
     }
 }

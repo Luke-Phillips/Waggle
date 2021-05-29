@@ -19,7 +19,7 @@ namespace Waggle.Models
         public string InviteCode { get; set; }
 
         // Navigation Properties
-        public ICollection<ClassroomUser> ClassroomUsers { get; set; }
+        public ICollection<ClassroomWaggler> ClassroomWagglers { get; set; }
         //[ForeignKey("OwnerID")]
         //public User Owner { get; set; }
     }

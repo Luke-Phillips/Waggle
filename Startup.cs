@@ -10,6 +10,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Pomelo.EntityFrameworkCore.MySql;
+using Waggle.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace Waggle
 {
@@ -25,18 +30,43 @@ namespace Waggle
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwt =>
+            {
+                var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+
+                jwt.SaveToken = true;
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    RequireExpirationTime = false
+                }; 
+            });
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<WaggleContext>();
             // For sessions
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
+            // services.AddDistributedMemoryCache();
+            /*services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
-            });
+            }); */
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -44,7 +74,7 @@ namespace Waggle
                 configuration.RootPath = "ClientApp/build";
             });
 
-            string mySqlConnectionStr = Configuration.GetConnectionString("RdsConnection"); // alternatively, LocalConnection
+            string mySqlConnectionStr = Configuration.GetConnectionString("LocalConnection"); // alternatively, LocalConnection
             services.AddDbContext<WaggleContext>(options =>
                     options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
@@ -72,7 +102,7 @@ namespace Waggle
             app.UseRouting();
 
             // authentication added while working on JWTs, may not need now
-            /*app.UseAuthentication();*/
+            app.UseAuthentication();
             app.UseAuthorization();
             /*app.UseSession();*/
 

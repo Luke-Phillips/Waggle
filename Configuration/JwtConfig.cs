@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Waggle.Models
+namespace Waggle.Configuration
 {
-    public class Question : Post
+    public class JwtConfig
     {
-        // branch test
+        public string Secret { get; set; }
     }
 }

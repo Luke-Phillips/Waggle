@@ -11,7 +11,7 @@ namespace Waggle.Data
         public static void Initialize(WaggleContext context)
         {        
             // Look for any existing users in the database
-            if (context.Users.Any())
+            if (context.Wagglers.Any())
             {
                 Console.WriteLine("DB has been seeded--------------------------------------");
                 return; // DB has been seeded
@@ -23,25 +23,25 @@ namespace Waggle.Data
             var achB = new Achievement { Name = "AchievementB", Description = "Dummy Achievement B", Points = 20 };
             var achC = new Achievement { Name = "AchievementB", Description = "Dummy Achievement C", Points = 30 };
            
-            var users = new User[]
+            var users = new Waggler[]
             {
-                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT", Points=0,
+                new Waggler{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT", Points=0,
                     Achievements= new List<Achievement>() },
-                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA", Points=30,
+                new Waggler{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA", Points=30,
                     Achievements= new List<Achievement> { achA } },
-                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH", Points=0,
+                new Waggler{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH", Points=0,
                     Achievements= new List<Achievement>() },
-                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG", Points=43, // wth Cade
+                new Waggler{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG", Points=43, // wth Cade
                     Achievements= new List<Achievement> { achA, achB, achC } },
-                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG", Points=42,
+                new Waggler{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG", Points=42,
                     Achievements= new List<Achievement> { achA, achB } },
-                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP", Points=10,
+                new Waggler{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP", Points=10,
                     Achievements= new List<Achievement> { achA } },
             };
 
-            foreach (User u in users)
+            foreach (Waggler u in users)
             {
-                context.Users.Add(u);
+                context.Wagglers.Add(u);
             }
             context.SaveChanges();        
 
@@ -57,20 +57,20 @@ namespace Waggle.Data
             }
             context.SaveChanges();
 
-            var classroomUsers = new ClassroomUser[]
+            var classroomWagglers = new ClassroomWaggler[]
             {
-                new ClassroomUser{UserID=1, ClassroomID=1, Role="Moderator", DisplayName="Brother Tuft"},
-                new ClassroomUser{UserID=2, ClassroomID=1, Role="Moderator", DisplayName="TA"},
-                new ClassroomUser{UserID=3, ClassroomID=2, Role="Moderator", DisplayName="Brother Howard"},
-                new ClassroomUser{UserID=4, ClassroomID=1, Role="Student", DisplayName="Cade Gardner"},
-                new ClassroomUser{UserID=5, ClassroomID=2, Role="Student", DisplayName="Fig"},
-                new ClassroomUser{UserID=6, ClassroomID=1, Role="Student", DisplayName="Luke"},
-                new ClassroomUser{UserID=6, ClassroomID=2, Role="Student", DisplayName="Lukas"},
+                new ClassroomWaggler{WagglerID=1, ClassroomID=1, Role="Moderator", DisplayName="Brother Tuft"},
+                new ClassroomWaggler{WagglerID=2, ClassroomID=1, Role="Moderator", DisplayName="TA"},
+                new ClassroomWaggler{WagglerID=3, ClassroomID=2, Role="Moderator", DisplayName="Brother Howard"},
+                new ClassroomWaggler{WagglerID=4, ClassroomID=1, Role="Student", DisplayName="Cade Gardner"},
+                new ClassroomWaggler{WagglerID=5, ClassroomID=2, Role="Student", DisplayName="Fig"},
+                new ClassroomWaggler{WagglerID=6, ClassroomID=1, Role="Student", DisplayName="Luke"},
+                new ClassroomWaggler{WagglerID=6, ClassroomID=2, Role="Student", DisplayName="Lukas"},
             };
 
-            foreach (ClassroomUser cu in classroomUsers)
+            foreach (ClassroomWaggler cu in classroomWagglers)
             {
-                context.ClassroomUsers.Add(cu);
+                context.ClassroomWagglers.Add(cu);
             }
             context.SaveChanges();
         }

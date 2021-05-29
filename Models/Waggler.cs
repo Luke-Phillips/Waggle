@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class User
+    public class Waggler
     {
         // Key Properties
-        public int UserID { get; set; }
+        public int WagglerID { get; set; }
 
         // Regular Properties
         public string Email { get; set; }
@@ -17,17 +17,17 @@ namespace Waggle.Models
         public int Points { get; set; }
 
         // Navigation Properties
-        public ICollection<ClassroomUser> ClassroomUsers { get; set; }
+        public ICollection<ClassroomWaggler> ClassroomWagglers { get; set; }
         public ICollection<Achievement> Achievements { get; set; }
         //public ICollection<Badge> Badges { get; set; }             
     }
 
-    // UserDto allows us to return a user without the password field.
+    // WagglerDto allows us to return a user without the password field.
     // Consider looking into projection (interfaces alternative)
-    public class UserDto 
+    public class WagglerDto 
     {
         // Key Properties
-        public int UserID { get; set; }
+        public int WagglerID { get; set; }
 
         // Regular Properties
         public string Email { get; set; }
@@ -35,7 +35,7 @@ namespace Waggle.Models
         public int Points { get; set; }
 
         // Navigation Properties
-        public ICollection<ClassroomUser> ClassroomUsers { get; set; }
+        public ICollection<ClassroomWaggler> ClassroomWagglers { get; set; }
         public ICollection<Achievement> Achievements { get; set; }
     }
 }

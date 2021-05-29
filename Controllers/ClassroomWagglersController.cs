@@ -12,50 +12,50 @@ namespace Waggle.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class ClassroomUsersController : ControllerBase
+    public class ClassroomWagglersController : ControllerBase
     {
         private readonly WaggleContext _context;
 
-        public ClassroomUsersController(WaggleContext context)
+        public ClassroomWagglersController(WaggleContext context)
         {
             _context = context;
         }
 
-        // GET: api/ClassroomUsers/5
+        // GET: api/ClassroomWagglers/5
         [HttpGet("classroomusers/{classroomID}")]
-        public async Task<ActionResult<List<ClassroomUser>>> GetClassroomUsers(int classroomID)
+        public async Task<ActionResult<List<ClassroomWaggler>>> GetClassroomWagglers(int classroomID)
         {
-            var classroomUser = await _context.ClassroomUsers
+            var classroomWaggler = await _context.ClassroomWagglers
                 .Where(cu => cu.ClassroomID == classroomID)
                 .ToListAsync();
 
-            return classroomUser;
+            return classroomWaggler;
         }
 
-        // GET: api/UserClassrooms/5
+        // GET: api/WagglerClassrooms/5
         [HttpGet("userclassrooms/{userID}")]
-        public async Task<ActionResult<List<ClassroomUser>>> GetUserClassrooms(int userID)
+        public async Task<ActionResult<List<ClassroomWaggler>>> GetWagglerClassrooms(int userID)
         {
-            var classroomUser = await _context.ClassroomUsers
-                .Where(cu => cu.UserID == userID)
+            var classroomWaggler = await _context.ClassroomWagglers
+                .Where(cu => cu.WagglerID == userID)
                 .Include(cu => cu.Classroom)
                 .ToListAsync();
 
-            return classroomUser;
+            return classroomWaggler;
         }
 
 /*
-        // PUT: api/ClassroomUsers/5
+        // PUT: api/ClassroomWagglers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{userID}/{classID}")]
-        public async Task<IActionResult> PutClassroomUser(int id, ClassroomUser classroomUser)
+        public async Task<IActionResult> PutClassroomWaggler(int id, ClassroomWaggler classroomWaggler)
         {
-            if (id != classroomUser.ClassroomID)
+            if (id != classroomWaggler.ClassroomID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(classroomUser).State = EntityState.Modified;
+            _context.Entry(classroomWaggler).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace Waggle.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassroomUserExists(id))
+                if (!ClassroomWagglerExists(id))
                 {
                     return NotFound();
                 }
@@ -76,19 +76,19 @@ namespace Waggle.Controllers
             return NoContent();
         }
 
-        // POST: api/ClassroomUsers
+        // POST: api/ClassroomWagglers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ClassroomUser>> PostClassroomUser(ClassroomUser classroomUser)
+        public async Task<ActionResult<ClassroomWaggler>> PostClassroomWaggler(ClassroomWaggler classroomWaggler)
         {
-            _context.ClassroomUsers.Add(classroomUser);
+            _context.ClassroomWagglers.Add(classroomWaggler);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ClassroomUserExists(classroomUser.ClassroomID))
+                if (ClassroomWagglerExists(classroomWaggler.ClassroomID))
                 {
                     return Conflict();
                 }
@@ -98,28 +98,28 @@ namespace Waggle.Controllers
                 }
             }
 
-            return CreatedAtAction("GetClassroomUser", new { id = classroomUser.ClassroomID }, classroomUser);
+            return CreatedAtAction("GetClassroomWaggler", new { id = classroomWaggler.ClassroomID }, classroomWaggler);
         }
 
-        // DELETE: api/ClassroomUsers/5
+        // DELETE: api/ClassroomWagglers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClassroomUser(int id)
+        public async Task<IActionResult> DeleteClassroomWaggler(int id)
         {
-            var classroomUser = await _context.ClassroomUsers.FindAsync(id);
-            if (classroomUser == null)
+            var classroomWaggler = await _context.ClassroomWagglers.FindAsync(id);
+            if (classroomWaggler == null)
             {
                 return NotFound();
             }
 
-            _context.ClassroomUsers.Remove(classroomUser);
+            _context.ClassroomWagglers.Remove(classroomWaggler);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ClassroomUserExists(int id)
+        private bool ClassroomWagglerExists(int id)
         {
-            return _context.ClassroomUsers.Any(e => e.ClassroomID == id);
+            return _context.ClassroomWagglers.Any(e => e.ClassroomID == id);
         }
 */
     }
