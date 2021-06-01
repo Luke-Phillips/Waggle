@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Waggle.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Waggle.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class WagglersController : ControllerBase
     {
         private readonly WaggleContext _context;

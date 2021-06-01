@@ -11,11 +11,12 @@ namespace Waggle.Data
         {
         }
 
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Waggler> Wagglers { get; set; }
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<ClassroomWaggler> ClassroomWagglers { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
