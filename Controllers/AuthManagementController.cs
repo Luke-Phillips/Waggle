@@ -22,13 +22,13 @@ namespace Waggle.Controllers
     [ApiController]
     public class AuthManagementController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly JwtConfig _jwtConfig;
         private readonly TokenValidationParameters _tokenValidationParams;
         private readonly WaggleContext _context;
 
         public AuthManagementController(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             TokenValidationParameters tokenValidationParams,
             WaggleContext context)
@@ -43,10 +43,8 @@ namespace Waggle.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto user)
         {
-            Console.WriteLine("-----------------We got past middleware------------------");
             if (ModelState.IsValid)
             {
-                Console.WriteLine("-----------------Model is valid------------------");
                 var existingUser = await _userManager.FindByEmailAsync(user.Email);
 
                 if (existingUser != null)
@@ -59,7 +57,7 @@ namespace Waggle.Controllers
                     });
                 }
 
-                var newUser = new IdentityUser() { Email = user.Email, UserName = user.Username };
+                var newUser = new ApplicationUser() { Email = user.Email, UserName = user.Username };
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
                 if (isCreated.Succeeded)
                 {
@@ -73,7 +71,6 @@ namespace Waggle.Controllers
                         Success = false
                     });
                 }
-
             }
 
             return BadRequest(new RegistrationResponse(){
@@ -104,9 +101,9 @@ namespace Waggle.Controllers
                     });
                 }
 
-                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, user.Password);
+                var passwordIsCorrect = await _userManager.CheckPasswordAsync(existingUser, user.Password);
 
-                if (!isCorrect)
+                if (!passwordIsCorrect)
                 {
                     return BadRequest(new RegistrationResponse()
                     {
@@ -165,7 +162,7 @@ namespace Waggle.Controllers
             });
         }
 
-        private async Task<AuthResult> GenerateJwt(IdentityUser user)
+        private async Task<AuthResult> GenerateJwt(ApplicationUser user)
         {
             var jwtHandler = new JwtSecurityTokenHandler();
 

@@ -9,7 +9,7 @@ namespace Waggle.Models
     public class Classroom
     {
         // Key Properties
-        public int ClassroomID { get; set; }
+        public int ClassroomId { get; set; }
         //public int OwnerID { get; set; }
 
         // Regular Properties
@@ -19,7 +19,7 @@ namespace Waggle.Models
         public string InviteCode { get; set; }
 
         // Navigation Properties
-        public ICollection<ClassroomWaggler> ClassroomWagglers { get; set; }
+        public ICollection<AppUserClassroom> AppUserClassroom { get; set; }
         //[ForeignKey("OwnerID")]
         //public User Owner { get; set; }
     }

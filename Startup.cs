@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
+using Waggle.Models;
 
 namespace Waggle
 {
@@ -61,7 +62,7 @@ namespace Waggle
                 jwt.TokenValidationParameters = tokenValidationParams;
             });
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<WaggleContext>();
             // For sessions
             // services.AddDistributedMemoryCache();
@@ -82,7 +83,7 @@ namespace Waggle
             services.AddDbContext<WaggleContext>(options =>
                     options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
-            services.AddDatabaseDeveloperPageExceptionFilter();                          
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

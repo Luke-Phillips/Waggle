@@ -18,7 +18,7 @@ namespace Waggle.Models
         public string AchievedFilePath { get; set; }
 
         // Navigation Properties
-        public ICollection<Waggler> Waggler { get; set; }
+        public ICollection<ApplicationUser> ApplicationUser { get; set; }
     }
 
     public class AchievementDto

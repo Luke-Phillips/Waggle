@@ -17,19 +17,19 @@ namespace Waggle.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.6");
 
-            modelBuilder.Entity("AchievementWaggler", b =>
+            modelBuilder.Entity("AchievementApplicationUser", b =>
                 {
                     b.Property<int>("AchievementsAchievementID")
                         .HasColumnType("int");
 
-                    b.Property<int>("WagglerID")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
 
-                    b.HasKey("AchievementsAchievementID", "WagglerID");
+                    b.HasKey("AchievementsAchievementID", "ApplicationUserId");
 
-                    b.HasIndex("WagglerID");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("AchievementWaggler");
+                    b.ToTable("AchievementApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -79,70 +79,6 @@ namespace Waggle.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -254,9 +190,100 @@ namespace Waggle.Migrations
                     b.ToTable("Achievements");
                 });
 
+            modelBuilder.Entity("Waggle.Models.AppUserClassroom", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("ClassroomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ApplicationUserId", "ClassroomId");
+
+                    b.HasIndex("ClassroomId");
+
+                    b.ToTable("AppUserClassrooms");
+                });
+
+            modelBuilder.Entity("Waggle.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("Waggle.Models.Classroom", b =>
                 {
-                    b.Property<int>("ClassroomID")
+                    b.Property<int>("ClassroomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -266,30 +293,9 @@ namespace Waggle.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ClassroomID");
+                    b.HasKey("ClassroomId");
 
                     b.ToTable("Classrooms");
-                });
-
-            modelBuilder.Entity("Waggle.Models.ClassroomWaggler", b =>
-                {
-                    b.Property<int>("ClassroomID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WagglerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ClassroomID", "WagglerID");
-
-                    b.HasIndex("WagglerID");
-
-                    b.ToTable("ClassroomWagglers");
                 });
 
             modelBuilder.Entity("Waggle.Models.RefreshToken", b =>
@@ -304,6 +310,9 @@ namespace Waggle.Migrations
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsUsed")
                         .HasColumnType("tinyint(1)");
 
@@ -316,9 +325,6 @@ namespace Waggle.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<bool>("isRevoked")
-                        .HasColumnType("tinyint(1)");
-
                     b.HasKey("RefreshTokenId");
 
                     b.HasIndex("UserId");
@@ -326,30 +332,7 @@ namespace Waggle.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
-            modelBuilder.Entity("Waggle.Models.Waggler", b =>
-                {
-                    b.Property<int>("WagglerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.HasKey("WagglerID");
-
-                    b.ToTable("Wagglers");
-                });
-
-            modelBuilder.Entity("AchievementWaggler", b =>
+            modelBuilder.Entity("AchievementApplicationUser", b =>
                 {
                     b.HasOne("Waggle.Models.Achievement", null)
                         .WithMany()
@@ -357,9 +340,9 @@ namespace Waggle.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Waggle.Models.Waggler", null)
+                    b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany()
-                        .HasForeignKey("WagglerID")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -375,7 +358,7 @@ namespace Waggle.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -384,7 +367,7 @@ namespace Waggle.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -399,7 +382,7 @@ namespace Waggle.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -408,49 +391,49 @@ namespace Waggle.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Waggle.Models.ClassroomWaggler", b =>
+            modelBuilder.Entity("Waggle.Models.AppUserClassroom", b =>
                 {
-                    b.HasOne("Waggle.Models.Classroom", "Classroom")
-                        .WithMany("ClassroomWagglers")
-                        .HasForeignKey("ClassroomID")
+                    b.HasOne("Waggle.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("AppUserClassrooms")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Waggle.Models.Waggler", "Waggler")
-                        .WithMany("ClassroomWagglers")
-                        .HasForeignKey("WagglerID")
+                    b.HasOne("Waggle.Models.Classroom", "Classroom")
+                        .WithMany("AppUserClassroom")
+                        .HasForeignKey("ClassroomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Classroom");
-
-                    b.Navigation("Waggler");
                 });
 
             modelBuilder.Entity("Waggle.Models.RefreshToken", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("Waggle.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Waggle.Models.Classroom", b =>
+            modelBuilder.Entity("Waggle.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("ClassroomWagglers");
+                    b.Navigation("AppUserClassrooms");
                 });
 
-            modelBuilder.Entity("Waggle.Models.Waggler", b =>
+            modelBuilder.Entity("Waggle.Models.Classroom", b =>
                 {
-                    b.Navigation("ClassroomWagglers");
+                    b.Navigation("AppUserClassroom");
                 });
 #pragma warning restore 612, 618
         }

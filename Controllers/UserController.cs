@@ -10,6 +10,7 @@ using Waggle.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 namespace Waggle.Controllers
 {
@@ -19,28 +20,30 @@ namespace Waggle.Controllers
     public class WagglersController : ControllerBase
     {
         private readonly WaggleContext _context;
+        private readonly UserManager<ApplicationUser> _usermanager;
 
-        public WagglersController(WaggleContext context)
+        public WagglersController(WaggleContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _usermanager = userManager;
         }
 
         // For Debugging Porpoises *mmmrrwwaahhh*
         // GET: api/Wagglers
-        [HttpGet()]
-        public async Task<ActionResult<List<Waggler>>> GetWagglers(int id)
+/*        [HttpGet()]
+        public async Task<ActionResult<List<ApplicationUser>>> GetUsers(int id)
         {
-            var waggler = await _context.Wagglers
+            var waggler = await _context.ApplicationUser
                 .AsNoTracking()
                 .Include(u => u.Achievements)
-                .Include(u => u.ClassroomWagglers)
+                .Include(u => u.AppUserClassrooms)
                     .ThenInclude(cu => cu.Classroom)
                 .ToListAsync();
             return waggler;
-        }
+        }*/
 
         // GET: api/Wagglers/5
-        [HttpGet("{id}")]
+       /* [HttpGet("{id}")]
         public async Task<ActionResult<WagglerDto>> GetWaggler(int id)
         {
             var user = await _context.Wagglers.Where(u => u.WagglerID == id) // replace later with sesh cookies or the like                                    
@@ -63,7 +66,7 @@ namespace Waggle.Controllers
             }
 
             return user;
-        }
+        }*/
 
         /*        [HttpPost("authenticate")]
                 public IActionResult Authenticate()

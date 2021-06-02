@@ -18,6 +18,6 @@ namespace Waggle.Models
         public DateTime AddedDate { get; set; }
         public DateTime ExpiryDate { get; set; }
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

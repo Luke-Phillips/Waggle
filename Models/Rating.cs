@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class Ratng
+    public class Rating
     {
     }
 }
