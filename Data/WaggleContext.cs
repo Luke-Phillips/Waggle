@@ -12,9 +12,9 @@ namespace Waggle.Data
         }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Achievement> Achievements { get; set; }
-        public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<AppUserClassroom> AppUserClassrooms { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<Post> Posts { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

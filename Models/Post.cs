@@ -10,12 +10,9 @@ namespace Waggle.Models
     {
         // Key Properties
         public int PostID { get; set; }
-        /*public int? ReplyPostID { get; set; } // include if reply post needs to know parent post
-        /*UserID: int[FK]    // not sure what we want post to reference yet
-        ClassroomId[FK]      // ditto
-        ModuleId: int[FK]*/  // ditto
 
         // Regular Properties
+        public string Type { get; set; }
         public string AuthorName { get; set; }
         [DataType(DataType.Date)] // this may be irrelevant data annotations
         public DateTime Time { get; set; }

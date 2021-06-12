@@ -10,17 +10,14 @@ namespace Waggle.Models
     {
         // Key Properties
         public int ClassroomId { get; set; }
-        //public int OwnerID { get; set; }
 
         // Regular Properties
         public string Name { get; set; }
-        // Image to represent classroom
-        // public x Icon { get; set; }        
+        // public bytes[] Image { get; set; }        
         public string InviteCode { get; set; }
 
         // Navigation Properties
         public ICollection<AppUserClassroom> AppUserClassroom { get; set; }
-        //[ForeignKey("OwnerID")]
-        //public User Owner { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }
