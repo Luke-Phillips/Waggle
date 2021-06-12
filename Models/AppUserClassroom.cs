@@ -17,7 +17,7 @@ namespace Waggle.Models
         // Regular Properties
         public string Role { get; set; }
         public string DisplayName { get; set; }
-        // public x ProfilePicture { get; set; }
+        // public X ProfilePicture { get; set; }
 
         // Navigation Properties
         public ApplicationUser ApplicationUser { get; set; }

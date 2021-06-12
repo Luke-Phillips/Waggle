@@ -17,56 +17,58 @@ namespace Waggle.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class WagglersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly WaggleContext _context;
-        private readonly UserManager<ApplicationUser> _usermanager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public WagglersController(WaggleContext context, UserManager<ApplicationUser> userManager)
+        public UsersController(WaggleContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
-            _usermanager = userManager;
+            _userManager = userManager;
         }
 
         // For Debugging Porpoises *mmmrrwwaahhh*
-        // GET: api/Wagglers
-/*        [HttpGet()]
-        public async Task<ActionResult<List<ApplicationUser>>> GetUsers(int id)
+        // GET: api/users
+        [HttpGet()]
+        public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
         {
-            var waggler = await _context.ApplicationUser
+            var users = await _userManager.Users  
                 .AsNoTracking()
                 .Include(u => u.Achievements)
                 .Include(u => u.AppUserClassrooms)
-                    .ThenInclude(cu => cu.Classroom)
+                    .ThenInclude(uc => uc.Classroom)
                 .ToListAsync();
-            return waggler;
-        }*/
+            return users;
+        }
 
         // GET: api/Wagglers/5
-       /* [HttpGet("{id}")]
-        public async Task<ActionResult<WagglerDto>> GetWaggler(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
         {
-            var user = await _context.Wagglers.Where(u => u.WagglerID == id) // replace later with sesh cookies or the like                                    
-                .Include(u => u.Achievements)                          
-                .Include(u => u.ClassroomWagglers)
+            var user = await _userManager.Users//.FirstOrDefaultAsync(u => u.Id == id)                          
+                .Include(u => u.Achievements)
+                .Include(u => u.AppUserClassrooms)
                     .ThenInclude(cu => cu.Classroom)
-                .Select(u => new WagglerDto
-                {
-                    Email = u.Email,
-                    Name = u.Name,
-                    Points = u.Points,
-                    Achievements = u.Achievements,
-                    ClassroomWagglers = u.ClassroomWagglers,
-                })
-                .SingleOrDefaultAsync();               
+                .FirstOrDefaultAsync();
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+                /* .Select(u => new WagglerDto
+                 {
+                     Email = u.Email,
+                     Name = u.Name,
+                     Points = u.Points,
+                     Achievements = u.Achievements,
+                     ClassroomWagglers = u.ClassroomWagglers,
+                 })
+                 .SingleOrDefaultAsync();       */        
 
-            return user;
-        }*/
+             if (user == null)
+             {
+                 return NotFound();
+             }
+
+             return user;
+         }
 
         /*        [HttpPost("authenticate")]
                 public IActionResult Authenticate()

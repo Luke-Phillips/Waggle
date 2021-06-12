@@ -8,11 +8,7 @@ namespace Waggle.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        // Key
-        public string ApplicationUserId { get; set; }
-        // Regular Properties
         public int Points { get; set; }
-
         // Navigation Properties
         public ICollection<AppUserClassroom> AppUserClassrooms { get; set; }
         public ICollection<Achievement> Achievements { get; set; }
