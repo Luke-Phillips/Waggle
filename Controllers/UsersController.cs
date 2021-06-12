@@ -8,59 +8,65 @@ using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Waggle.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 namespace Waggle.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : ControllerBase
     {
         private readonly WaggleContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(WaggleContext context)
+        public UsersController(WaggleContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // For Debugging Porpoises *mmmrrwwaahhh*
-        // GET: api/Users
+        // GET: api/users
         [HttpGet()]
-        public async Task<ActionResult<List<User>>> GetUsers(int id)
+        public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
         {
-            var user = await _context.Users
+            var users = await _userManager.Users  
                 .AsNoTracking()
-                .Include(u => u.Achievements)
-                .Include(u => u.ClassroomUsers)
-                    .ThenInclude(cu => cu.Classroom)
+                .Include(u => u.AppUserClassrooms)
+                    .ThenInclude(uc => uc.Classroom)
                 .ToListAsync();
-            return user;
+            return users;
         }
 
-        // GET: api/Users/5
+        // GET: api/Wagglers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUser(int id)
+        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
         {
-            var user = await _context.Users.Where(u => u.UserID == id) // replace later with sesh cookies or the like                                    
-                .Include(u => u.Achievements)                          
-                .Include(u => u.ClassroomUsers)
+            var user = await _userManager.Users//.FirstOrDefaultAsync(u => u.Id == id)                          
+                .Include(u => u.AppUserClassrooms)
                     .ThenInclude(cu => cu.Classroom)
-                .Select(u => new UserDto
-                {
-                    Email = u.Email,
-                    Name = u.Name,
-                    Points = u.Points,
-                    Achievements = u.Achievements,
-                    ClassroomUsers = u.ClassroomUsers,
-                })
-                .SingleOrDefaultAsync();               
+                .FirstOrDefaultAsync();
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+                /* .Select(u => new WagglerDto
+                 {
+                     Email = u.Email,
+                     Name = u.Name,
+                     Points = u.Points,
+                     Achievements = u.Achievements,
+                     ClassroomWagglers = u.ClassroomWagglers,
+                 })
+                 .SingleOrDefaultAsync();       */        
 
-            return user;
-        }
+             if (user == null)
+             {
+                 return NotFound();
+             }
+
+             return user;
+         }
 
         /*        [HttpPost("authenticate")]
                 public IActionResult Authenticate()
@@ -68,21 +74,21 @@ namespace Waggle.Controllers
                     return Ok();
                 }
 
-                // GET: api/Users
+                // GET: api/Wagglers
                 [HttpGet]
-                public async Task<ActionResult<IEnumerable<User>>> GetUser()
+                public async Task<ActionResult<IEnumerable<Waggler>>> GetWaggler()
                 {
-                    return await _context.Users.ToListAsync();
+                    return await _context.Wagglers.ToListAsync();
                 }*/
 
 
 
-        /*      // PUT: api/Users/5
+        /*      // PUT: api/Wagglers/5
                 // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
                 [HttpPut("{id}")]
-                public async Task<IActionResult> PutUser(int id, User user)
+                public async Task<IActionResult> PutWaggler(int id, Waggler user)
                 {
-                    if (id != user.UserID)
+                    if (id != user.WagglerID)
                     {
                         return BadRequest();
                     }
@@ -95,7 +101,7 @@ namespace Waggle.Controllers
                     }
                     catch (DbUpdateConcurrencyException)
                     {
-                        if (!UserExists(id))
+                        if (!WagglerExists(id))
                         {
                             return NotFound();
                         }
@@ -108,36 +114,36 @@ namespace Waggle.Controllers
                     return NoContent();
                 }
 
-                // POST: api/Users
+                // POST: api/Wagglers
                 // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
                 [HttpPost]
-                public async Task<ActionResult<User>> PostUser(User user)
+                public async Task<ActionResult<Waggler>> PostWaggler(Waggler user)
                 {
-                    _context.Users.Add(user);
+                    _context.Wagglers.Add(user);
                     await _context.SaveChangesAsync();
 
-                    return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+                    return CreatedAtAction("GetWaggler", new { id = user.WagglerID }, user);
                 }
 
-                // DELETE: api/Users/5
+                // DELETE: api/Wagglers/5
                 [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteUser(int id)
+                public async Task<IActionResult> DeleteWaggler(int id)
                 {
-                    var user = await _context.Users.FindAsync(id);
+                    var user = await _context.Wagglers.FindAsync(id);
                     if (user == null)
                     {
                         return NotFound();
                     }
 
-                    _context.Users.Remove(user);
+                    _context.Wagglers.Remove(user);
                     await _context.SaveChangesAsync();
 
                     return NoContent();
                 }
 
-                private bool UserExists(int id)
+                private bool WagglerExists(int id)
                 {
-                    return _context.Users.Any(e => e.UserID == id);
+                    return _context.Wagglers.Any(e => e.WagglerID == id);
                 }*/
     }
 }

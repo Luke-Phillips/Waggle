@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Waggle.Models;
 
 namespace Waggle
 {
@@ -28,8 +30,9 @@ namespace Waggle
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<WaggleContext>();                  
-                    DbInitializer.Initialize(context);
+                    var context = services.GetRequiredService<WaggleContext>();
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    DbInitializer.Initialize(context, userManager);
                 }
                 catch (Exception ex)
                 {

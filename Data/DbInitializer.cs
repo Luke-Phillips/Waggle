@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +9,13 @@ namespace Waggle.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(WaggleContext context)
-        {        
+
+        public static void Initialize(WaggleContext context, UserManager<ApplicationUser> userManager)
+        {
+            UserManager<ApplicationUser> _userManager = userManager;
+
             // Look for any existing users in the database
-            if (context.Users.Any())
+            if (_userManager.Users.Any())
             {
                 Console.WriteLine("DB has been seeded--------------------------------------");
                 return; // DB has been seeded
@@ -19,27 +23,27 @@ namespace Waggle.Data
 
             Console.WriteLine("DB has NOT been seeded, seeding now-------------------------");
 
-            var achA = new Achievement { Name = "AchievementA", Description = "Dummy Achievement A", Points = 10 };
+            /*var achA = new Achievement { Name = "AchievementA", Description = "Dummy Achievement A", Points = 10 };
             var achB = new Achievement { Name = "AchievementB", Description = "Dummy Achievement B", Points = 20 };
-            var achC = new Achievement { Name = "AchievementB", Description = "Dummy Achievement C", Points = 30 };
+            var achC = new Achievement { Name = "AchievementB", Description = "Dummy Achievement C", Points = 30 };*/
            
-            var users = new User[]
+            var users = new ApplicationUser[]
             {
-                new User{Email="tuftr@byui.edu", Name="Rob Tuft", Password="#pwRT", Points=0,
-                    Achievements= new List<Achievement>() },
-                new User{Email="msta@byui.edu", Name="Ms. TA", Password="#pwTA", Points=30,
-                    Achievements= new List<Achievement> { achA } },
-                new User{Email="howardde@byui.edu", Name="Derek Howard", Password="#pwDH", Points=0,
-                    Achievements= new List<Achievement>() },
-                new User{Email="gar17040@byui.edu", Name="Michael Gardner", Password="#pwCG", Points=43, // wth Cade
-                    Achievements= new List<Achievement> { achA, achB, achC } },
-                new User{Email="gar07024@byui.edu", Name="Michael Garrard", Password="#pwMG", Points=42,
-                    Achievements= new List<Achievement> { achA, achB } },
-                new User{Email="phi13014@byui.edu", Name="Luke Phillips", Password="#pwLP", Points=10,
-                    Achievements= new List<Achievement> { achA } },
+                new ApplicationUser{Id="0001", Email="tuftr@byui.edu", NormalizedEmail="TUFTR@BYUI.EDU",
+                    UserName="Rob Tuft", PasswordHash="#pwRT"},
+                new ApplicationUser{Id="0002", Email="msta@byui.edu", NormalizedEmail="MSTA@BYUI.EDU",
+                    UserName="Ms. TA", PasswordHash="#pwTA" },
+                new ApplicationUser{Id="0003", Email="howardde@byui.edu", NormalizedEmail="HOWARDDE@BYUI.EDU",
+                    UserName="Derek Howard", PasswordHash="#pwDH"},
+                new ApplicationUser{Id="0004", Email="gar17040@byui.edu", NormalizedEmail="GAR17040@BYUI.EDU",
+                    UserName="Michael Gardner", PasswordHash="#pwCG" },
+                new ApplicationUser{Id="0005", Email="gar07024@byui.edu", NormalizedEmail="GAR07024@BYUI.EDU",
+                    UserName="Michael Garrard", PasswordHash="#pwMG" },
+                new ApplicationUser{Id="0006", Email="phi13014@byui.edu", NormalizedEmail="PHI13014@BYUI.EDU",
+                    UserName="Luke Phillips", PasswordHash="#pwLP"},
             };
 
-            foreach (User u in users)
+            foreach (ApplicationUser u in users)
             {
                 context.Users.Add(u);
             }
@@ -57,22 +61,24 @@ namespace Waggle.Data
             }
             context.SaveChanges();
 
-            var classroomUsers = new ClassroomUser[]
+            var appUserClassrooms = new AppUserClassroom[]
             {
-                new ClassroomUser{UserID=1, ClassroomID=1, Role="Moderator", DisplayName="Brother Tuft"},
-                new ClassroomUser{UserID=2, ClassroomID=1, Role="Moderator", DisplayName="TA"},
-                new ClassroomUser{UserID=3, ClassroomID=2, Role="Moderator", DisplayName="Brother Howard"},
-                new ClassroomUser{UserID=4, ClassroomID=1, Role="Student", DisplayName="Cade Gardner"},
-                new ClassroomUser{UserID=5, ClassroomID=2, Role="Student", DisplayName="Fig"},
-                new ClassroomUser{UserID=6, ClassroomID=1, Role="Student", DisplayName="Luke"},
-                new ClassroomUser{UserID=6, ClassroomID=2, Role="Student", DisplayName="Lukas"},
+                new AppUserClassroom{ApplicationUserId="0001", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="Brother Tuft"},
+                new AppUserClassroom{ApplicationUserId="0002", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="TA"},
+                new AppUserClassroom{ApplicationUserId="0003", ClassroomId=2, IsModerator=true, isEnrolled=true, DisplayName="Brother Howard"},
+                new AppUserClassroom{ApplicationUserId="0004", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Cade Gardner"},
+                new AppUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Fig"},
+                new AppUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Luke"},
+                new AppUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Lukas"},
             };
 
-            foreach (ClassroomUser cu in classroomUsers)
+            foreach (AppUserClassroom ac in appUserClassrooms)
             {
-                context.ClassroomUsers.Add(cu);
+                context.AppUserClassrooms.Add(ac);
             }
             context.SaveChanges();
+
+            Console.WriteLine("DB has now been seeded -------------------------------------");
         }
     }
 }
