@@ -1,4 +1,9 @@
 import React from 'react';
+import { ReactComponent as CommentIcon } from '../../assets/comment-2.svg';
+// import { ReactComponent as QuestionIcon } from '../../assets/question-mark.svg';
+import { ReactComponent as AnswerIcon } from '../../assets/answer.svg';
+import { ReactComponent as FbRequestIcon } from '../../assets/fb-request.svg';
+import { ReactComponent as FbResponseIcon } from '../../assets/fb-response.svg';
 
 import './post-header.styles.scss';
 
@@ -41,11 +46,19 @@ function timeElapsedSincePosted(timePosted) {
 
 const PostHeader = props => (
   <div className='post-header'>
-    <p>{`Posted by ${props.user} ${timeElapsedSincePosted(props.date)} ago`}</p>
-    <p>{`${props.date.toLocaleString(navigator.language, {
-      dateStyle: 'full',
-      timeStyle: 'short',
-    })}`}</p>
+    <div className='icon-container'>
+      {/* <CommentIcon className='icon'/> */}
+      <AnswerIcon />
+    </div>
+    <div className='header-info'>
+      <p>{`Posted by ${props.user} ${timeElapsedSincePosted(
+        props.date
+      )} ago`}</p>
+      <p>{`${props.date.toLocaleString(navigator.language, {
+        dateStyle: 'full',
+        timeStyle: 'short',
+      })}`}</p>
+    </div>
   </div>
 );
 

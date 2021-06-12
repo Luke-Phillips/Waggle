@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .a {
+        fill: #d3d4ed;
+      }
+    </style>
+  </defs>
+  <title>3 Drawing pin</title>
+  <path class="a" d="M41.41,12,30.05.59a2,2,0,0,0-3.36,1.87l.55,2.4-12,9.19-6.52.72a3,3,0,0,0-1.79,5.11l5.31,5.3L.23,40.37a1,1,0,0,0,1.4,1.4l15.19-12,5.3,5.31a3,3,0,0,0,5.11-1.79L28,26.78l9.19-12,2.4.55A2,2,0,0,0,41.41,12Z"/>
+</svg>
