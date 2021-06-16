@@ -6,6 +6,7 @@ const SortPosts = props => (
   <div className='sort-posts'>
     <ButtonSelector
       className='selector'
+      logName='--------- Sort Posts -----------'
       labels={['Oldest', 'Newest', 'Most Replies', 'Least Replies']}
     />
   </div>

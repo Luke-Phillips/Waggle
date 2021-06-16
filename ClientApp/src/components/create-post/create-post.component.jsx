@@ -1,35 +1,42 @@
 import React from 'react';
 import ButtonSelector from '../button-selector/button-selector.component';
+import DiscussionPost from '../discussion-post/discussion-post.component';
+import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import './create-post.styles.scss';
 
 const CreatePost = () => {
-  function one() {
-    alert('one');
-  }
+  const announcement = () => {
+    // alert('announcment');
+    return (
+      console.log('Announcement clicked'),
+      <DiscussionPost user='Cade' type='announcment' />
+    );
+  };
 
-  function two() {
-    alert('two');
-  }
+  const question = () => {
+    alert('question');
+  };
 
-  function three() {
-    alert('three');
-  }
+  const insight = () => {
+    alert('insight');
+  };
 
-  function four() {
-    alert('four');
-  }
+  const feedback = () => {
+    alert('feedback');
+  };
 
-  function five() {
-    alert('five');
-  }
+  const labels = ['Announcement', 'Question', 'Insight', 'Feedback Request'];
+  const postTypes = [announcement, question, insight, feedback];
 
-  // const funcArray = [one, two, three, four, five];
-
-  const lables = ['Announcement', 'Question', 'Insight', 'Feedback Request'];
+  console.log('Create Post Comp');
   return (
     <div className='create-post'>
       <h3>Create Post:</h3>
-      <ButtonSelector functions={[one, two, three, four]} labels={lables} />
+      <ButtonSelector
+        logName='--------- Create Post -----------'
+        labels={labels}
+        postTypes={postTypes}
+      />
     </div>
   );
 };

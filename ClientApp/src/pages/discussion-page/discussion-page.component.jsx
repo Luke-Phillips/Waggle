@@ -6,10 +6,10 @@ import DiscussionPost from '../../components/discussion-post/discussion-post.com
 import DiscussionFeedItem from '../../components/discussion-feed-item/discussion-feed-item.component';
 import ModuleSelector from '../../components/module-selector/module-selector.component';
 import ReviewsColumn from '../../components/reviews-column/reviews-column.component';
+import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './discussion-page.styles.scss';
 
-const postDate = new Date().getTime();
 
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 const DiscussionPage = () => {
@@ -26,6 +26,10 @@ const DiscussionPage = () => {
     return 'hidden';
   };
 
+  function handleClick() {
+    alert('OIIII!! YOU clicked ME!!!')
+  }
+  console.log("Discussion Pg")
   return (
     <div className='discussion-page'>
       {/* <h1> Get ready to share </h1> */}
@@ -38,7 +42,8 @@ const DiscussionPage = () => {
 
         <div className='post-feed'>
           <SortPosts />
-          <DiscussionPost />
+          <DiscussionPost user='Cade' type='question'/>
+
           <DiscussionFeedItem btnName='Answer' onClick={toggleShowReviews}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -63,6 +68,7 @@ const DiscussionPage = () => {
           <ReviewsColumn show={showReviews} content='I am a Column' />
         </div>
         
+
       </div>
     </div>
   );
