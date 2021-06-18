@@ -90,9 +90,9 @@ namespace Waggle.Data
             var answer = new AnswerPost
             {
                 ClassroomId = 2,
-                AuthorName = "Cade Gardner",
-                Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
-                Content = "Where is the bathroom?",
+                AuthorName = "Luke Phillips",
+                Time = DateTime.Parse("6/17/2021 8:59:26 PM"),
+                Content = "I don't know, but this is an answer post.",
                 isRepliable = false,
                 ReplyPosts = null
             };
@@ -101,7 +101,7 @@ namespace Waggle.Data
                 ClassroomId = 2,
                 AuthorName = "Cade Gardner",
                 Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
-                Content = "Where is the bathroom?",
+                Content = "What is a question post?",
                 isRepliable = false,
                 ReplyPosts = new Post[] { answer }
             };
