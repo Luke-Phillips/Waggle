@@ -70,13 +70,48 @@ namespace Waggle.Data
                 new AppUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Fig"},
                 new AppUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Luke"},
                 new AppUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Lukas"},
-            };
+            };         
 
             foreach (AppUserClassroom ac in appUserClassrooms)
             {
                 context.AppUserClassrooms.Add(ac);
             }
             context.SaveChanges();
+
+            var insight = new InsightPost
+            {
+                ClassroomId = 2,
+                AuthorName = "Luke Phillips",
+                Time = DateTime.Parse("6/17/2021 8:44:45 PM"),
+                Content = "I'm sharing an Insight, learn mine knowledge!",
+                isRepliable = true,
+                ReplyPosts = null
+            };
+            var answer = new AnswerPost
+            {
+                ClassroomId = 2,
+                AuthorName = "Cade Gardner",
+                Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
+                Content = "Where is the bathroom?",
+                isRepliable = false,
+                ReplyPosts = null
+            };
+            var question = new QuestionPost
+            {
+                ClassroomId = 2,
+                AuthorName = "Cade Gardner",
+                Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
+                Content = "Where is the bathroom?",
+                isRepliable = false,
+                ReplyPosts = new Post[] { answer }
+            };
+
+            foreach (Post p in new Post[] { insight, question, answer })
+            {
+                context.Posts.Add(p);
+            }
+            context.SaveChanges();
+
 
             Console.WriteLine("DB has now been seeded -------------------------------------");
         }
