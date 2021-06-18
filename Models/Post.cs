@@ -12,14 +12,13 @@ namespace Waggle.Models
         public int PostID { get; set; }
 
         // Regular Properties
-        public string Type { get; set; }
         public string AuthorName { get; set; }
         [DataType(DataType.Date)] // this may be irrelevant data annotations
         public DateTime Time { get; set; }
         public string Content { get; set; }
+        public string isReplyable { get; set; }
 
         // Navigation Properties
         public ICollection<Post> ReplyPosts { get; set; }
-        // public User User { get; set; } // owner of post
     }
 }
