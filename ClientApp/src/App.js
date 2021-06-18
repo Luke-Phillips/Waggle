@@ -21,7 +21,7 @@ export default class App extends Component {
         <Route path='/home' component={HomePage} />
         <Route path='/signin' component={SignInAndSignUpPage} />
         <Route path='/hive'>
-          <ClassNav userId={6} />
+          <ClassNav userId={'0006'} />
         </Route>
         <Route path='/hive/discussion' component={DiscussionPage} />
         <Route path='/hive/profile' component={ProfilePage} />

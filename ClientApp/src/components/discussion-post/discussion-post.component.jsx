@@ -6,11 +6,10 @@ import CustomButton from '../custom-button/custom-button.component'
 
 import './discussion-post.styles.scss'
 
-const postDate = new Date().getTime();
 
-const DiscussionPost = () => (
+const DiscussionPost = props => (
   <div className='discussion-post'>
-    <PostingAs className='posting-as' user='Cade' type='Question' />
+    <PostingAs className='posting-as' user={props.user} type={props.type} />
     <FormTextArea className='enter-text' placeholder='Enter text here...'/>
     <CustomButton className='post-button'>Post</CustomButton>
   </div>
