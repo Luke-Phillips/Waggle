@@ -22,10 +22,6 @@ namespace Waggle.Data
             }
 
             Console.WriteLine("DB has NOT been seeded, seeding now-------------------------");
-
-            /*var achA = new Achievement { Name = "AchievementA", Description = "Dummy Achievement A", Points = 10 };
-            var achB = new Achievement { Name = "AchievementB", Description = "Dummy Achievement B", Points = 20 };
-            var achC = new Achievement { Name = "AchievementB", Description = "Dummy Achievement C", Points = 30 };*/
            
             var users = new ApplicationUser[]
             {
@@ -111,7 +107,6 @@ namespace Waggle.Data
                 context.Posts.Add(p);
             }
             context.SaveChanges();
-
 
             Console.WriteLine("DB has now been seeded -------------------------------------");
         }

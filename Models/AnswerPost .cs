@@ -7,6 +7,6 @@ namespace Waggle.Models
 {
     public class AnswerPost : Post
     {
-        public ICollection<ApplicationUser> ButtonPressers { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

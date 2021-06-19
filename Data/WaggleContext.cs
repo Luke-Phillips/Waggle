@@ -22,6 +22,7 @@ namespace Waggle.Data
         public DbSet<FeedbackPost> FeedbackPosts { get; set; }
         public DbSet<AnnouncementPost> AnnouncementPosts { get; set; }
         public DbSet<CommentPost> CommentPosts { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

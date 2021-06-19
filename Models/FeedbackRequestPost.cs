@@ -8,5 +8,6 @@ namespace Waggle.Models
     public class FeedbackRequestPost : Post
     {
         public byte[] File { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }
