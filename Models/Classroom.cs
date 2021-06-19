@@ -13,7 +13,7 @@ namespace Waggle.Models
 
         // Regular Properties
         public string Name { get; set; }
-        // public bytes[] Image { get; set; }        
+        public byte[] Image { get; set; }        
         public string InviteCode { get; set; }
 
         // Navigation Properties
