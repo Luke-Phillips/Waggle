@@ -57,20 +57,20 @@ namespace Waggle.Data
             }
             context.SaveChanges();
 
-            var appUserClassrooms = new AppUserClassroom[]
+            var applicationUserClassrooms = new ApplicationUserClassroom[]
             {
-                new AppUserClassroom{ApplicationUserId="0001", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="Brother Tuft"},
-                new AppUserClassroom{ApplicationUserId="0002", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="TA"},
-                new AppUserClassroom{ApplicationUserId="0003", ClassroomId=2, IsModerator=true, isEnrolled=true, DisplayName="Brother Howard"},
-                new AppUserClassroom{ApplicationUserId="0004", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Cade Gardner"},
-                new AppUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Fig"},
-                new AppUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Luke"},
-                new AppUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Lukas"},
+                new ApplicationUserClassroom{ApplicationUserId="0001", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="Brother Tuft"},
+                new ApplicationUserClassroom{ApplicationUserId="0002", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="TA"},
+                new ApplicationUserClassroom{ApplicationUserId="0003", ClassroomId=2, IsModerator=true, isEnrolled=true, DisplayName="Brother Howard"},
+                new ApplicationUserClassroom{ApplicationUserId="0004", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Cade Gardner"},
+                new ApplicationUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Fig"},
+                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Luke"},
+                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Lukas"},
             };         
 
-            foreach (AppUserClassroom ac in appUserClassrooms)
+            foreach (ApplicationUserClassroom ac in applicationUserClassrooms)
             {
-                context.AppUserClassrooms.Add(ac);
+                context.ApplicationUserClassrooms.Add(ac);
             }
             context.SaveChanges();
 

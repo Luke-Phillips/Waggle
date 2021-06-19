@@ -35,7 +35,7 @@ namespace Waggle.Controllers
         {
             var users = await _userManager.Users  
                 .AsNoTracking()
-                .Include(u => u.AppUserClassrooms)
+                .Include(u => u.ApplicationUserClassrooms)
                     .ThenInclude(uc => uc.Classroom)
                 .ToListAsync();
             return users;
@@ -46,7 +46,7 @@ namespace Waggle.Controllers
         public async Task<ActionResult<ApplicationUser>> GetUser(string id)
         {
             var user = await _userManager.Users//.FirstOrDefaultAsync(u => u.Id == id)                          
-                .Include(u => u.AppUserClassrooms)
+                .Include(u => u.ApplicationUserClassrooms)
                     .ThenInclude(cu => cu.Classroom)
                 .FirstOrDefaultAsync();
 

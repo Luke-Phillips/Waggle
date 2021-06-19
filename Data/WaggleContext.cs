@@ -12,7 +12,7 @@ namespace Waggle.Data
         }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<AppUserClassroom> AppUserClassrooms { get; set; }
+        public DbSet<ApplicationUserClassroom> ApplicationUserClassrooms { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<InsightPost> InsightPosts { get; set; }
@@ -27,7 +27,7 @@ namespace Waggle.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<AppUserClassroom>()
+            modelBuilder.Entity<ApplicationUserClassroom>()
                 .HasKey(ac => new { ac.ApplicationUserId, ac.ClassroomId });
         }
     }

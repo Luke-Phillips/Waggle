@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models
 {
-    public class AppUserClassroom
+    public class ApplicationUserClassroom
     {
         // Key Properties
         [ForeignKey("ApplicationUser")]

@@ -10,6 +10,6 @@ namespace Waggle.Models
     {
         public int RatingId { get; set; }
         public Rating Rating { get; set; }
-        public ICollection<AppUserClassroom> AppUserClassrooms { get; set; }           
+        public ICollection<ApplicationUserClassroom> ApplicationUserClassrooms { get; set; }           
     }
 }

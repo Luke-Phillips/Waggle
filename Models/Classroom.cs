@@ -17,7 +17,7 @@ namespace Waggle.Models
         public string InviteCode { get; set; }
 
         // Navigation Properties
-        public ICollection<AppUserClassroom> AppUserClassroom { get; set; }
+        public ICollection<ApplicationUserClassroom> ApplicationUserClassroom { get; set; }
         public ICollection<Post> Posts { get; set; }
     }
 }

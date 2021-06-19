@@ -12,20 +12,20 @@ namespace Waggle.Controllers
 {
     [Route("api")]
     [ApiController]
-    public class AppUserClassroomsController : ControllerBase
+    public class ApplicationUserClassroomsController : ControllerBase
     {
         private readonly WaggleContext _context;
 
-        public AppUserClassroomsController(WaggleContext context)
+        public ApplicationUserClassroomsController(WaggleContext context)
         {
             _context = context;
         }
 
         // GET: api/ClassroomWagglers/5
         [HttpGet("classroomusers/{classroomID}")]
-        public async Task<ActionResult<List<AppUserClassroom>>> GetClassroomWagglers(int classroomID)
+        public async Task<ActionResult<List<ApplicationUserClassroom>>> GetClassroomWagglers(int classroomID)
         {
-            var classroomWaggler = await _context.AppUserClassrooms
+            var classroomWaggler = await _context.ApplicationUserClassrooms
                 .Where(cu => cu.ClassroomId == classroomID)
                 .ToListAsync();
 
@@ -34,9 +34,9 @@ namespace Waggle.Controllers
 
         // GET: api/WagglerClassrooms/5
         [HttpGet("userclassrooms/{userID}")]
-        public async Task<ActionResult<List<AppUserClassroom>>> GetAppUserClassrooms(string userID)
+        public async Task<ActionResult<List<ApplicationUserClassroom>>> GetApplicationUserClassrooms(string userID)
         {
-            var classroomWaggler = await _context.AppUserClassrooms
+            var classroomWaggler = await _context.ApplicationUserClassrooms
                 .Where(cu => cu.ApplicationUserId == userID)
                 .Include(cu => cu.Classroom)
                 .ToListAsync();
