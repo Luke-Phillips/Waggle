@@ -23,6 +23,11 @@ namespace Waggle.Data
 
             Console.WriteLine("DB has NOT been seeded, seeding now-------------------------");
            
+            /*var ratings = new Ratings[]
+            {
+
+            }*/
+
             var users = new ApplicationUser[]
             {
                 new ApplicationUser{Id="0001", Email="tuftr@byui.edu", NormalizedEmail="TUFTR@BYUI.EDU",

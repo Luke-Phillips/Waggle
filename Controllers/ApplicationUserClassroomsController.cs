@@ -22,7 +22,7 @@ namespace Waggle.Controllers
             _context = context;
         }
 
-        [HttpGet("userclassrooms/{userID}")]
+        [HttpGet("applicationuserclassrooms/{userID}")]
         public async Task<ActionResult<List<ClassroomDto>>> GetApplicationUserClassrooms(string userID)
         {
             List<ApplicationUserClassroom> applicationUserClassrooms = await _context.ApplicationUserClassrooms
@@ -30,6 +30,7 @@ namespace Waggle.Controllers
                 .Include(cu => cu.Classroom)
                 .ToListAsync();
 
+            Console.WriteLine("--- aucs: ", applicationUserClassrooms);
             var classrooms = new List<ClassroomDto>();
             foreach(ApplicationUserClassroom appUserClass in applicationUserClassrooms)
             {

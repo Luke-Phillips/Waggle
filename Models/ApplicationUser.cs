@@ -8,8 +8,7 @@ namespace Waggle.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public int RatingId { get; set; }
-        public Rating Rating { get; set; }
-        public ICollection<ApplicationUserClassroom> ApplicationUserClassrooms { get; set; }           
+        public ICollection<ApplicationUserClassroom> ApplicationUserClassrooms { get; set; }   
+        public ICollection<Rating> Ratings { get; set; }
     }
 }
