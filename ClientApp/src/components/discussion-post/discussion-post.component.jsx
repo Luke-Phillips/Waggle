@@ -7,13 +7,24 @@ import CustomButton from '../custom-button/custom-button.component'
 import './discussion-post.styles.scss'
 
 
-const DiscussionPost = props => (
+const DiscussionPost = props => {
+  if (!props.type) {
+    return null;
+  }
+  const handleFeebackType = type => {
+    if(type === 'feedback') {
+      return 'feedback request'
+    } 
+    return type
+  }
+  
+  return (
   <div className='discussion-post'>
-    <PostingAs className='posting-as' user={props.user} type={props.type} />
+    <PostingAs className='posting-as' user={props.user} type={handleFeebackType(props.type)} />
     <FormTextArea className='enter-text' placeholder='Enter text here...'/>
     <CustomButton className='post-button'>Post</CustomButton>
   </div>
 
-);
+  )};
 
 export default DiscussionPost;

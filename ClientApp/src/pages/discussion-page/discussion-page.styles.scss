@@ -6,7 +6,7 @@
 
   .post-feed {
     max-width: 100%;
-    min-width: 40%;
+    min-width: 20%;
     border: dashed 2px blueviolet;
     
   }
@@ -29,9 +29,8 @@
 
 .visible {
   width: 100%;
+  min-width: 40%;
   border: dashed 2px darkgreen;
+
 }
 
-.hidden {
-  display: none;
-}

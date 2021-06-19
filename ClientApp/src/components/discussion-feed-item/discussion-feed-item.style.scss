@@ -4,6 +4,14 @@
   border: solid 2px black;
   border-radius: 15px;
 
+  @media (min-width: 80%) {
+    .discussion-feed-item {width: 85%;}
+  }
+
+  @media (max-width: 80%) {
+    width: 60%;
+  }
+
   .content {
     margin: auto;
     height: auto;

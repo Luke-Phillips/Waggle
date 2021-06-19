@@ -1,5 +1,5 @@
 import React from 'react';
-
+import DiscussionPost from '../discussion-post/discussion-post.component';
 import './custom-button.styles.scss';
 
 const CustomButton = ({ children, ...otherProps }) => {
