@@ -10,26 +10,76 @@ import CustomButton from '../../components/custom-button/custom-button.component
 
 import './discussion-page.styles.scss';
 
+const data = {
+  posts: [
+    {
+      user: 'Cade',
+      text: "Hello I'm a student and I would like to be heard",
+      btnName: 'comment',
+      postType: 'insight',
+    },
+    {
+      user: 'Luke',
+      text: 'I am here to Announce I am the avatar!!',
+      btnName: 'comment',
+      postType: 'comment',
+    },
+    {
+      user: 'Michael',
+      text: 'That question is very silly ask another',
+      btnName: 'comment',
+      postType: 'answer',
+    },
+    {
+      user: 'Brooklynn',
+      text: 'You seem very intelligent, this was very well written. Good job',
+      btnName: 'comment',
+      postType: 'feedback',
+    },
+  ],
+};
 
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+
 const DiscussionPage = () => {
   const [showReviews, setShowReviews] = useState(false);
+  const [postInfo, setPostInfo] = useState({});
 
-  const toggleShowReviews = e => {
+  const [id, setId] = useState(0);
+
+  const toggleShowReviews = (id, e) => {
     setShowReviews(!showReviews);
   };
 
-  const showColumn = show => {
-    if(show) {
-      return 'visible'
-    };
-    return 'hidden';
+  
+
+  const announcement = () => {
+    setPostInfo({
+      postType: 'announcement',
+    });
   };
 
-  function handleClick() {
-    alert('OIIII!! YOU clicked ME!!!')
-  }
-  console.log("Discussion Pg")
+  const question = () => {
+    setPostInfo({
+      postType: 'question',
+    });
+  };
+
+  const insight = () => {
+    setPostInfo({
+      postType: 'insight',
+    });
+  };
+
+  const feedback = () => {
+    setPostInfo({
+      postType: 'feedback',
+    });
+  };
+
+  const postTypes = [announcement, question, insight, feedback];
+
+  console.log('Discussion Pg');
   return (
     <div className='discussion-page'>
       {/* <h1> Get ready to share </h1> */}
@@ -37,12 +87,12 @@ const DiscussionPage = () => {
         <div className='options'>
           <ModuleSelector items={modules} />
           <FilterPost />
-          <CreatePost />
+          <CreatePost postTypes={postTypes} />
         </div>
 
         <div className='post-feed'>
           <SortPosts />
-          <DiscussionPost user='Cade' type='question'/>
+          <DiscussionPost user='placeholder' type={postInfo.postType} />
 
           <DiscussionFeedItem btnName='Answer' onClick={toggleShowReviews}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -64,15 +114,25 @@ const DiscussionPage = () => {
           </DiscussionFeedItem>
         </div>
 
-        <div className={showColumn(showReviews)}>
-          <ReviewsColumn show={showReviews} content='I am a Column' />
-        </div>
+        {/* <div className={showColumn(showReviews)}> */}
         
-
+          <ReviewsColumn className='visible'
+            show={showReviews}
+            data={data}
+            onClick={toggleShowReviews}
+          />
+        
       </div>
     </div>
   );
 };
 
 export default DiscussionPage;
+//TODO: create function to take a post type and output a button label
+// question --> answer
+// answer --> comment
+// comment --> comment
+// insight --> comment
+// feedbackReq --> response?? (essentially a comment)
 
+// TODO:  Create rating component

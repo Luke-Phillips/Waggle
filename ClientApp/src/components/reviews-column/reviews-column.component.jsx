@@ -1,15 +1,18 @@
 import React from 'react';
-
+import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import './reviews-column.styles.scss';
 
-const ReviewsColumn = props => {
+const ReviewsColumn = ({data, ...props}) => {
   if (!props.show) {
     return null;
   }
 
+  console.log('DATA: ' ,data)
   return (
     <div className='reviews-column'>
-      <h1>{props.content}</h1>
+     {data.posts.map(( post )=> (
+      <DiscussionFeedItem user={post.user} id={post.postType} btnName={post.btnName}>{post.text}</DiscussionFeedItem>
+     ))}
       
     </div>
   );
