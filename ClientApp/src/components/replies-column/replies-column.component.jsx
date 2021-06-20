@@ -1,6 +1,6 @@
 import React from 'react';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
-import './reviews-column.styles.scss';
+import './replies-column.styles.scss';
 
 const ReviewsColumn = ({data, ...props}) => {
   if (!props.show) {
@@ -11,7 +11,7 @@ const ReviewsColumn = ({data, ...props}) => {
   return (
     <div className='reviews-column'>
      {data.posts.map(( post )=> (
-      <DiscussionFeedItem user={post.user} id={post.postType} btnName={post.btnName}>{post.text}</DiscussionFeedItem>
+      <DiscussionFeedItem user={post.user} id={post.postType} postWidth={props.postWidth} btnName={post.btnName}>{post.text}</DiscussionFeedItem>
      ))}
       
     </div>

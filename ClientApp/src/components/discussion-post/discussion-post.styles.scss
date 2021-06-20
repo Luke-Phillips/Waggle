@@ -1,16 +1,11 @@
 .discussion-post {
-  width: 60%;
+  // width: 60%;
   margin: auto;
   border: solid 2px black;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
 
-  
-  .post-header {
-
-
-  }
 
   .text-area{
     margin: auto;
@@ -30,4 +25,12 @@
     margin-right: auto;
     border-radius: 10px;
   }
+}
+
+.wide {
+  width: 85%;
+}
+
+.normal {
+  width: 60%;
 }

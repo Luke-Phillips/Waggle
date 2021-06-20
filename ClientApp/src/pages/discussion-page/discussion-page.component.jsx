@@ -5,7 +5,7 @@ import CreatePost from '../../components/create-post/create-post.component';
 import DiscussionPost from '../../components/discussion-post/discussion-post.component';
 import DiscussionFeedItem from '../../components/discussion-feed-item/discussion-feed-item.component';
 import ModuleSelector from '../../components/module-selector/module-selector.component';
-import ReviewsColumn from '../../components/reviews-column/reviews-column.component';
+import RepliesColumn from '../../components/replies-column/replies-column.component'
 import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './discussion-page.styles.scss';
@@ -47,11 +47,23 @@ const DiscussionPage = () => {
 
   const [id, setId] = useState(0);
 
-  const toggleShowReviews = (id, e) => {
-    setShowReviews(!showReviews);
-  };
+  const [postWidth, setPostWidth] = useState('normal')
 
-  
+  const toggleShowReviews = (id, e) => {
+
+    setShowReviews(!showReviews);
+
+  }
+
+  const handlePostWidth = () => {
+    if(postWidth === 'normal') {
+      setPostWidth('wide')
+    }
+    else {
+      setPostWidth('normal')
+    }
+    
+  }
 
   const announcement = () => {
     setPostInfo({
@@ -92,9 +104,9 @@ const DiscussionPage = () => {
 
         <div className='post-feed'>
           <SortPosts />
-          <DiscussionPost user='placeholder' type={postInfo.postType} />
+          <DiscussionPost user='placeholder' type={postInfo.postType} postWidth={postWidth}/>
 
-          <DiscussionFeedItem btnName='Answer' onClick={toggleShowReviews}>
+          <DiscussionFeedItem btnName='Answer' onClick={() => {toggleShowReviews(); handlePostWidth()}} postWidth={postWidth}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -103,7 +115,7 @@ const DiscussionPage = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </DiscussionFeedItem>
-          <DiscussionFeedItem btnName='Answer' onClick={toggleShowReviews}>
+          <DiscussionFeedItem btnName='Answer' onClick={() => {toggleShowReviews(); handlePostWidth()}} postWidth={postWidth}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -113,13 +125,12 @@ const DiscussionPage = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </DiscussionFeedItem>
         </div>
-
-        {/* <div className={showColumn(showReviews)}> */}
         
-          <ReviewsColumn className='visible'
+          <RepliesColumn className='visible'
             show={showReviews}
             data={data}
             onClick={toggleShowReviews}
+            postWidth={postWidth}
           />
         
       </div>
