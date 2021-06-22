@@ -19,7 +19,7 @@ const DiscussionPost = props => {
   }
   
   return (
-  <div className='discussion-post'>
+  <div className={`discussion-post ${props.postWidth}`}>
     <PostingAs className='posting-as' user={props.user} type={handleFeebackType(props.type)} />
     <FormTextArea className='enter-text' placeholder='Enter text here...'/>
     <CustomButton className='post-button'>Post</CustomButton>
