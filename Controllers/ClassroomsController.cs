@@ -28,19 +28,31 @@ namespace Waggle.Controllers
         }
 
         // POST: api/Classrooms
-        [HttpPost("{userId}")]
+        [HttpPost]
         public async Task<JsonResult> CreateClassroom(ClassroomCreationDto classroomDto)
         {
+            string ownerId = classroomDto.OwnerId;
+            var owner = await _context.Users.FirstOrDefaultAsync(u => u.Id == ownerId);
 
-            var inviteCode = Guid.NewGuid().ToString();
             var classroom = new Classroom
             {
-                Owner = await _userManager.FindByIdAsync(classroomDto.OwnerId),
+                OwnerId = ownerId,            
                 Name = classroomDto.Name,
-                Image = Encoding.ASCII.GetBytes(classroomDto.Image),
-                InviteCode = inviteCode
+                Image = classroomDto.Image == "null" ? null : Encoding.ASCII.GetBytes(classroomDto.Image),
+                InviteCode = Guid.NewGuid().ToString()
             };
             await _context.Classrooms.AddAsync(classroom);
+
+            var appUserClassroom = new ApplicationUserClassroom
+            {
+                ApplicationUser = owner,
+                Classroom = classroom,
+                IsModerator = true,
+                isEnrolled = true,
+                DisplayName = owner.UserName
+            };
+            await _context.ApplicationUserClassrooms.AddAsync(appUserClassroom);
+
             await _context.SaveChangesAsync();
 
             var response = new JsonResult(new { Id = classroom.ClassroomId });
