@@ -3,7 +3,10 @@ import Slider from '@material-ui/core/Slider';
 
 import './ratings.styles.scss';
 
-const Ratings = () => {
+const Ratings = props => {
+  if(props.isReply) {
+    return null
+  }
   const marks = [
     {
       value: 0,

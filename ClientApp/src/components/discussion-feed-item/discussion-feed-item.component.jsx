@@ -19,7 +19,7 @@ const DiscussionFeedItem = ({ children, ...otherProps }) => (
     </div>
 
     <div className='footer'>
-      <Ratings />
+      <Ratings isReply={otherProps.isReply}/>
       <div className='btnContainer'>
         <input className='upload' type='file' />
         <CustomButton className='feed-item-btn'>
