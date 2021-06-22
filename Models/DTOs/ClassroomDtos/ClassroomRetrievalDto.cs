@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Waggle.Models.DTOs
+namespace Waggle.Models.DTOs.ClassroomDtos
 {
-    public class ClassroomDto
+    public class ClassroomRetrievalDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
