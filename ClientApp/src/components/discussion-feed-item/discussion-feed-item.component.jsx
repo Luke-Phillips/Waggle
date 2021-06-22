@@ -7,6 +7,24 @@ import './discussion-feed-item.style.scss';
 
 const postTime = new Date('2021/5/17 16:24:00');
 // Maybe should use children for content
+
+  //TODO: create function to take a post type and output a button label
+// question --> answer
+// answer --> comment
+// comment --> comment
+// insight --> comment
+// feedbackReq --> response?? (essentially a comment)
+
+const buttonLabeler = postType => {
+  if(postType === 'question') {
+    return 'Answer'
+  }
+  if(postType === 'feedback') {
+    return 'Respond'
+  }
+  return 'Comment'
+}
+
 const DiscussionFeedItem = ({ children, ...otherProps }) => (
   <div
     id={otherProps.postType}
@@ -23,7 +41,7 @@ const DiscussionFeedItem = ({ children, ...otherProps }) => (
       <div className='btnContainer'>
         <input className='upload' type='file' />
         <CustomButton className='feed-item-btn'>
-          {otherProps.btnName}
+          {buttonLabeler(otherProps.type)}
         </CustomButton>
       </div>
     </div>

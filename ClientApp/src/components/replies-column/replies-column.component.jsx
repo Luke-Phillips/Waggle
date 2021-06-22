@@ -13,7 +13,7 @@ const ReviewsColumn = ({ data, ...props }) => {
       {data.posts.map(post => (
         <DiscussionFeedItem
           user={post.user}
-          id={post.postType}
+          type={post.postType}
           postWidth={props.postWidth}
           btnName={post.btnName}
           isReply={post.isReply}

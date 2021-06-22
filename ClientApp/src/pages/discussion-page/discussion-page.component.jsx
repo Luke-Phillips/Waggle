@@ -111,7 +111,7 @@ const DiscussionPage = () => {
           />
 
           <DiscussionFeedItem
-            btnName='Answer'
+            type='question'
             onClick={() => {
               toggleShowReviews();
               handlePostWidth();
@@ -127,7 +127,7 @@ const DiscussionPage = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </DiscussionFeedItem>
           <DiscussionFeedItem
-            btnName='Answer'
+            type='feedback'
             onClick={() => {
               toggleShowReviews();
               handlePostWidth();
@@ -157,11 +157,6 @@ const DiscussionPage = () => {
 };
 
 export default DiscussionPage;
-//TODO: create function to take a post type and output a button label
-// question --> answer
-// answer --> comment
-// comment --> comment
-// insight --> comment
-// feedbackReq --> response?? (essentially a comment)
+
 
 
