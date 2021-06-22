@@ -10,6 +10,7 @@ namespace Waggle.Models
     {
         // Key Properties
         public int ClassroomId { get; set; }
+        public string OwnerId { get; set; }
 
         // Regular Properties
         public string Name { get; set; }
@@ -17,6 +18,8 @@ namespace Waggle.Models
         public string InviteCode { get; set; }
 
         // Navigation Properties
+        [ForeignKey("OwnerId")]
+        public ApplicationUser Owner { get; set; }
         public ICollection<ApplicationUserClassroom> ApplicationUserClassroom { get; set; }
         public ICollection<Post> Posts { get; set; }
     }

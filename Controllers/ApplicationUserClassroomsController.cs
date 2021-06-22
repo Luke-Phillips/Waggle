@@ -22,33 +22,6 @@ namespace Waggle.Controllers
             _context = context;
         }
 
-        [HttpGet("applicationuserclassrooms/{userID}")]
-        public async Task<ActionResult<List<ClassroomDto>>> GetApplicationUserClassrooms(string userID)
-        {
-            List<ApplicationUserClassroom> applicationUserClassrooms = await _context.ApplicationUserClassrooms
-                .Where(cu => cu.ApplicationUserId == userID)
-                .Include(cu => cu.Classroom)
-                .ToListAsync();
-
-            Console.WriteLine("--- aucs: ", applicationUserClassrooms);
-            var classrooms = new List<ClassroomDto>();
-            foreach(ApplicationUserClassroom appUserClass in applicationUserClassrooms)
-            {
-                classrooms.Add(new ClassroomDto
-                {
-                    Id = appUserClass.Classroom.ClassroomId,
-                    Name = appUserClass.Classroom.Name,
-                    Image = appUserClass.Classroom.Image,
-                    InviteCode = appUserClass.IsModerator ? appUserClass.Classroom.InviteCode : null,
-                    IsModerator = appUserClass.IsModerator,
-                    isEnrolled = appUserClass.isEnrolled,
-                    DisplayName = appUserClass.DisplayName
-                });
-            }
-
-            return classrooms;
-        }
-
         // GET: api/ClassroomWagglers/5
         /*[HttpGet("classroomusers/{classroomID}")]
         public async Task<ActionResult<List<ApplicationUserClassroom>>> GetClassroomWagglers(int classroomID)

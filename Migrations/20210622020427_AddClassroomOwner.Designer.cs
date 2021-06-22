@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Waggle.Data;
 
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    partial class WaggleContextModelSnapshot : ModelSnapshot
+    [Migration("20210622020427_AddClassroomOwner")]
+    partial class AddClassroomOwner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
