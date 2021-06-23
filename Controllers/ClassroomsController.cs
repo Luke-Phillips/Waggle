@@ -29,7 +29,7 @@ namespace Waggle.Controllers
 
         // POST: api/Classrooms
         [HttpPost]
-        public async Task<JsonResult> CreateClassroom(ClassroomCreationDto classroomDto)
+        public async Task<JsonResult> CreateAndJoinClassroom(ClassroomCreationDto classroomDto)
         {
             string ownerId = classroomDto.OwnerId;
             var owner = await _context.Users.FirstOrDefaultAsync(u => u.Id == ownerId);
@@ -86,22 +86,6 @@ namespace Waggle.Controllers
             return classrooms;
         }
 
-        
-
-        // GET: api/Classrooms/5
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<Classroom>> GetClassroom(int id)
-        {
-            var classroom = await _context.Classrooms.FindAsync(id);
-
-            if (classroom == null)
-            {
-                return NotFound();
-            }
-
-            return classroom;
-        }
-
         // PUT: api/Classrooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -120,7 +104,7 @@ namespace Waggle.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassroomExists(id))
+                if (_context.Classrooms.Any(e => e.ClassroomId == id))
                 {
                     return NotFound();
                 }
@@ -131,17 +115,6 @@ namespace Waggle.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Classrooms
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Classroom>> PostClassroom(Classroom classroom)
-        {
-            _context.Classrooms.Add(classroom);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetClassroom", new { id = classroom.ClassroomId }, classroom);
         }
 
         // DELETE: api/Classrooms/5
@@ -159,10 +132,5 @@ namespace Waggle.Controllers
 
             return NoContent();
         }
-
-        private bool ClassroomExists(int id)
-        {
-            return _context.Classrooms.Any(e => e.ClassroomId == id);
-        }*/
     }
 }
