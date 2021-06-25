@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Waggle.Data;
 
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    partial class WaggleContextModelSnapshot : ModelSnapshot
+    [Migration("20210624031813_RemovePostTypeEntities")]
+    partial class RemovePostTypeEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +270,10 @@ namespace Waggle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AuthorName")
                         .HasColumnType("longtext");
 
                     b.Property<int>("ClassroomId")
@@ -280,17 +285,17 @@ namespace Waggle.Migrations
                     b.Property<byte[]>("File")
                         .HasColumnType("longblob");
 
-                    b.Property<bool>("IsRepliable")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("PostType")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ReplyToPostId")
+                    b.Property<int>("ReplyToPostId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isRepliable")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("PostId");
 
@@ -454,7 +459,9 @@ namespace Waggle.Migrations
 
                     b.HasOne("Waggle.Models.Post", "ReplyToPost")
                         .WithMany("ReplyPosts")
-                        .HasForeignKey("ReplyToPostId");
+                        .HasForeignKey("ReplyToPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ReplyToPost");
                 });

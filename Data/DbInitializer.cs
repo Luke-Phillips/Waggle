@@ -79,31 +79,28 @@ namespace Waggle.Data
             }
             context.SaveChanges();
 
-            var insight = new InsightPost
+            var insight = new Post
             {
                 ClassroomId = 2,
-                AuthorName = "Luke Phillips",
                 Time = DateTime.Parse("6/17/2021 8:44:45 PM"),
                 Content = "I'm sharing an Insight, learn mine knowledge!",
-                isRepliable = true,
+                IsRepliable = true,
                 ReplyPosts = null
             };
-            var answer = new AnswerPost
+            var answer = new Post
             {
                 ClassroomId = 2,
-                AuthorName = "Luke Phillips",
                 Time = DateTime.Parse("6/17/2021 8:59:26 PM"),
                 Content = "I don't know, but this is an answer post.",
-                isRepliable = false,
+                IsRepliable = false,
                 ReplyPosts = null
             };
-            var question = new QuestionPost
+            var question = new Post
             {
                 ClassroomId = 2,
-                AuthorName = "Cade Gardner",
                 Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
                 Content = "What is a question post?",
-                isRepliable = false,
+                IsRepliable = false,
                 ReplyPosts = new Post[] { answer }
             };
 

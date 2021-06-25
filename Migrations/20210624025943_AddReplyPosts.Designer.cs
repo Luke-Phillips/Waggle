@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Waggle.Data;
 
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    partial class WaggleContextModelSnapshot : ModelSnapshot
+    [Migration("20210624025943_AddReplyPosts")]
+    partial class AddReplyPosts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +270,10 @@ namespace Waggle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AuthorName")
                         .HasColumnType("longtext");
 
                     b.Property<int>("ClassroomId")
@@ -277,20 +282,18 @@ namespace Waggle.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("longtext");
 
-                    b.Property<byte[]>("File")
-                        .HasColumnType("longblob");
-
-                    b.Property<bool>("IsRepliable")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("PostType")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ReplyToPostId")
+                    b.Property<int>("ReplyToPostId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isRepliable")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("PostId");
 
@@ -299,12 +302,17 @@ namespace Waggle.Migrations
                     b.HasIndex("ReplyToPostId");
 
                     b.ToTable("Posts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
             modelBuilder.Entity("Waggle.Models.Rating", b =>
                 {
                     b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AnswerPostPostId")
                         .HasColumnType("int");
 
                     b.Property<int>("ApplicationUserId")
@@ -316,17 +324,37 @@ namespace Waggle.Migrations
                     b.Property<bool?>("BinaryMetric")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int?>("FeedbackPostPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FeedbackRequestPostPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InsightPostPostId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("NumericMetric")
                         .HasColumnType("int");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("QuestionPostPostId")
+                        .HasColumnType("int");
+
                     b.HasKey("RatingId");
+
+                    b.HasIndex("AnswerPostPostId");
 
                     b.HasIndex("ApplicationUserId1");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("FeedbackPostPostId");
+
+                    b.HasIndex("FeedbackRequestPostPostId");
+
+                    b.HasIndex("InsightPostPostId");
+
+                    b.HasIndex("QuestionPostPostId");
 
                     b.ToTable("Ratings");
                 });
@@ -363,6 +391,66 @@ namespace Waggle.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("Waggle.Models.AnnouncementPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("longblob")
+                        .HasColumnName("AnnouncementPost_File");
+
+                    b.HasDiscriminator().HasValue("AnnouncementPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.AnswerPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.HasDiscriminator().HasValue("AnswerPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.CommentPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.HasDiscriminator().HasValue("CommentPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.FeedbackPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("longblob")
+                        .HasColumnName("FeedbackPost_File");
+
+                    b.HasDiscriminator().HasValue("FeedbackPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.FeedbackRequestPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("longblob");
+
+                    b.HasDiscriminator().HasValue("FeedbackRequestPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.InsightPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.HasDiscriminator().HasValue("InsightPost");
+                });
+
+            modelBuilder.Entity("Waggle.Models.QuestionPost", b =>
+                {
+                    b.HasBaseType("Waggle.Models.Post");
+
+                    b.HasDiscriminator().HasValue("QuestionPost");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -454,22 +542,38 @@ namespace Waggle.Migrations
 
                     b.HasOne("Waggle.Models.Post", "ReplyToPost")
                         .WithMany("ReplyPosts")
-                        .HasForeignKey("ReplyToPostId");
+                        .HasForeignKey("ReplyToPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ReplyToPost");
                 });
 
             modelBuilder.Entity("Waggle.Models.Rating", b =>
                 {
+                    b.HasOne("Waggle.Models.AnswerPost", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("AnswerPostPostId");
+
                     b.HasOne("Waggle.Models.ApplicationUser", null)
                         .WithMany("Ratings")
                         .HasForeignKey("ApplicationUserId1");
 
-                    b.HasOne("Waggle.Models.Post", null)
+                    b.HasOne("Waggle.Models.FeedbackPost", null)
                         .WithMany("Ratings")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FeedbackPostPostId");
+
+                    b.HasOne("Waggle.Models.FeedbackRequestPost", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("FeedbackRequestPostPostId");
+
+                    b.HasOne("Waggle.Models.InsightPost", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("InsightPostPostId");
+
+                    b.HasOne("Waggle.Models.QuestionPost", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("QuestionPostPostId");
                 });
 
             modelBuilder.Entity("Waggle.Models.RefreshToken", b =>
@@ -497,9 +601,32 @@ namespace Waggle.Migrations
 
             modelBuilder.Entity("Waggle.Models.Post", b =>
                 {
-                    b.Navigation("Ratings");
-
                     b.Navigation("ReplyPosts");
+                });
+
+            modelBuilder.Entity("Waggle.Models.AnswerPost", b =>
+                {
+                    b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("Waggle.Models.FeedbackPost", b =>
+                {
+                    b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("Waggle.Models.FeedbackRequestPost", b =>
+                {
+                    b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("Waggle.Models.InsightPost", b =>
+                {
+                    b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("Waggle.Models.QuestionPost", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

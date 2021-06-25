@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Waggle.Data;
 
 namespace Waggle.Migrations
 {
     [DbContext(typeof(WaggleContext))]
-    partial class WaggleContextModelSnapshot : ModelSnapshot
+    [Migration("20210624041409_StringAuthorName")]
+    partial class StringAuthorName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,9 +282,6 @@ namespace Waggle.Migrations
                     b.Property<byte[]>("File")
                         .HasColumnType("longblob");
 
-                    b.Property<bool>("IsRepliable")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("PostType")
                         .HasColumnType("longtext");
 
@@ -291,6 +290,9 @@ namespace Waggle.Migrations
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isRepliable")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("PostId");
 
