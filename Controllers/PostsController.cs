@@ -37,7 +37,7 @@ namespace Waggle.Controllers
         };
 
 
-    public PostsController(WaggleContext context)
+        public PostsController(WaggleContext context)
         {
             _context = context;
         }
@@ -101,7 +101,13 @@ namespace Waggle.Controllers
         [HttpGet("{classId}")]
         public async Task<ActionResult<IEnumerable<Post>>> GetClassroomPosts(int classId)
         {
-            var posts = await _context.Posts
+            return await _context.Posts
+                .Where(
+                    p => p.ClassroomId == classId &&
+                    p.ReplyToPostId == null)
+                .Include(p => p.ReplyPosts)
+                .ToListAsync();
+            /*var posts = await _context.Posts
                 .Where(
                     p => p.ClassroomId == classId &&
                     p.ReplyToPostId == null)
@@ -118,14 +124,15 @@ namespace Waggle.Controllers
             {
                 StatusCode = 201
             };
-            return response;
+            return response;*/
         }
 
         private IPostDto ToPostDto(Post post)
         {
+            Console.WriteLine("Post id: " + post.PostId);
             if (post.IsRepliable)
             {
-                var replyPosts = new List<ReplyPostDto>();
+                var replyPosts = new List<IPostDto>();
                 if (!post.ReplyPosts.Any() || post.ReplyPosts is null)
                 {
                     replyPosts = null;
@@ -134,7 +141,7 @@ namespace Waggle.Controllers
                 {
                     foreach (Post replyPost in post.ReplyPosts)
                     {
-                        ToPostDto(post);
+                        replyPosts.Add(ToPostDto(post));
                     }
                 }
 

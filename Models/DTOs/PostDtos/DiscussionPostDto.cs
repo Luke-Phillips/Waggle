@@ -14,7 +14,7 @@ namespace Waggle.Models.DTOs.PostDtos
         public bool IsRepliable { get; set; }
         public string File { get; set; }
 
-        public ICollection<ReplyPostDto> ReplyPosts { get; set; }
+        public ICollection<IPostDto> ReplyPosts { get; set; }
         //public ICollection<Rating> Ratings { get; set; }
     }
 }
