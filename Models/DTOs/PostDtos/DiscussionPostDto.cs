@@ -7,6 +7,7 @@ namespace Waggle.Models.DTOs.PostDtos
 {
     public class DiscussionPostDto : IPostDto
     {
+        public int PostId { get; set; }
         public string PostType { get; set; }
         public string AuthorId { get; set; }
         public DateTime Time { get; set; }

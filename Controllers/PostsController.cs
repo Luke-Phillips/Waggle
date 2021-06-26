@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Waggle.Data;
 using Waggle.Models;
 using Waggle.Models.DTOs.PostDtos;
@@ -16,6 +17,7 @@ namespace Waggle.Controllers
     public class PostsController : ControllerBase
     {
         private readonly WaggleContext _context;
+        private readonly ILogger<PostsController> _logger;
 
         private readonly List<string> postTypes = new()
         {
@@ -37,15 +39,16 @@ namespace Waggle.Controllers
         };
 
 
-        public PostsController(WaggleContext context)
+        public PostsController(WaggleContext context, ILogger<PostsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // POST: api/Posts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Post>> CreatePost(NewPostDto newPost)
+        public async Task<ActionResult> CreatePost(NewPostDto newPost)
         {
             if (await _context.Classrooms.AsNoTracking().FirstOrDefaultAsync(c => c.ClassroomId == newPost.ClassroomId) is null)
             {
@@ -101,13 +104,7 @@ namespace Waggle.Controllers
         [HttpGet("{classId}")]
         public async Task<ActionResult<IEnumerable<Post>>> GetClassroomPosts(int classId)
         {
-            return await _context.Posts
-                .Where(
-                    p => p.ClassroomId == classId &&
-                    p.ReplyToPostId == null)
-                .Include(p => p.ReplyPosts)
-                .ToListAsync();
-            /*var posts = await _context.Posts
+            var posts = await _context.Posts
                 .Where(
                     p => p.ClassroomId == classId &&
                     p.ReplyToPostId == null)
@@ -124,13 +121,24 @@ namespace Waggle.Controllers
             {
                 StatusCode = 201
             };
-            return response;*/
+            return response;
         }
+
+        /* [HttpDelete("{postId}")]
+         public async Task<ActionResult> DeletePost(int postId)
+         {
+
+         }*/
+
+        /* [HttpPut("{postId}")]
+        public async Task<ActionResult> EditPost(int postId)
+        {
+            
+        }*/
 
         private IPostDto ToPostDto(Post post)
         {
-            Console.WriteLine("Post id: " + post.PostId);
-            if (post.IsRepliable)
+            if (post.ReplyToPostId is null)
             {
                 var replyPosts = new List<IPostDto>();
                 if (!post.ReplyPosts.Any() || post.ReplyPosts is null)
@@ -141,30 +149,33 @@ namespace Waggle.Controllers
                 {
                     foreach (Post replyPost in post.ReplyPosts)
                     {
-                        replyPosts.Add(ToPostDto(post));
+
+                        replyPosts.Add(ToPostDto(replyPost));
                     }
                 }
 
                 return new DiscussionPostDto
                 {
+                    PostId = post.PostId,
                     PostType = post.PostType,
                     AuthorId = post.AuthorId,
                     Time = post.Time,
                     Content = post.Content,
                     IsRepliable = post.IsRepliable,
-                    File = BitConverter.ToString(post.File),
+                    File = post.File is not null ? BitConverter.ToString(post.File) : null,
                     ReplyPosts = replyPosts
                 };
             }
 
             return new ReplyPostDto
             {
+                PostId = post.PostId,
                 PostType = post.PostType,
                 AuthorId = post.AuthorId,
                 Time = post.Time,
                 Content = post.Content,
                 IsRepliable = post.IsRepliable,
-                File = BitConverter.ToString(post.File)
+                File = post.File is not null ? BitConverter.ToString(post.File) : null
             };
         }      
     }
