@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Waggle.Models;
-using Waggle.Models.DTOs;
+using Waggle.Models.DTOs.PostDtos;
 
 namespace Waggle.Controllers
 {
@@ -17,7 +17,8 @@ namespace Waggle.Controllers
     {
         private readonly WaggleContext _context;
 
-        private List<string> postTypes = new List<string> {
+        private readonly List<string> postTypes = new()
+        {
             "insight",
             "question",
             "answer",
@@ -27,7 +28,7 @@ namespace Waggle.Controllers
             "comment"
         };
 
-        private List<string> repliablePostTypes = new List<string> {
+        private readonly List<string> repliablePostTypes = new() {
             "insight",
             "question",
             "feedbackRequest",
@@ -81,7 +82,7 @@ namespace Waggle.Controllers
                 ReplyToPostId = newPost.ReplyToPostId,
                 PostType = newPost.PostType,
                 AuthorId = newPost.AuthorId,
-                Time = newPost.Time,         // check this
+                Time = newPost.Time,
                 Content = newPost.Content,
                 IsRepliable = newPost.ReplyToPostId is null &&
                     repliablePostTypes.Contains(newPost.PostType),        
@@ -89,82 +90,75 @@ namespace Waggle.Controllers
             });
             await _context.SaveChangesAsync();
 
-            var result = new JsonResult(new { });
-            result.StatusCode = 201;
+            var result = new JsonResult(null)
+            {
+                StatusCode = 201
+            };
             return result;
         }
 
         // GET: api/Posts
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        [HttpGet("{classId}")]
+        public async Task<ActionResult<IEnumerable<Post>>> GetClassroomPosts(int classId)
         {
-            return await _context.Posts.ToListAsync();
+            var posts = await _context.Posts
+                .Where(
+                    p => p.ClassroomId == classId &&
+                    p.ReplyToPostId == null)
+                .Include(p => p.ReplyPosts)
+                .ToListAsync();
+
+            var postResponse = new List<IPostDto>();
+            foreach (Post post in posts)
+            {
+                postResponse.Add(ToPostDto(post));
+            }
+
+            var response = new JsonResult(postResponse)
+            {
+                StatusCode = 201
+            };
+            return response;
         }
 
-        // GET: api/Posts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(int id)
+        private IPostDto ToPostDto(Post post)
         {
-            var post = await _context.Posts.FindAsync(id);
-
-            if (post == null)
+            if (post.IsRepliable)
             {
-                return NotFound();
-            }
-
-            return post;
-        }
-
-        // PUT: api/Posts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
-        {
-            if (id != post.PostId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(post).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(id))
+                var replyPosts = new List<ReplyPostDto>();
+                if (!post.ReplyPosts.Any() || post.ReplyPosts is null)
                 {
-                    return NotFound();
-                }
+                    replyPosts = null;
+                }                  
                 else
                 {
-                    throw;
+                    foreach (Post replyPost in post.ReplyPosts)
+                    {
+                        ToPostDto(post);
+                    }
                 }
+
+                return new DiscussionPostDto
+                {
+                    PostType = post.PostType,
+                    AuthorId = post.AuthorId,
+                    Time = post.Time,
+                    Content = post.Content,
+                    IsRepliable = post.IsRepliable,
+                    File = BitConverter.ToString(post.File),
+                    ReplyPosts = replyPosts
+                };
             }
 
-            return NoContent();
-        }
-
-        // DELETE: api/Posts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePost(int id)
-        {
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
+            return new ReplyPostDto
             {
-                return NotFound();
-            }
-
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PostExists(int id)
-        {
-            return _context.Posts.Any(e => e.PostId == id);
-        }
+                PostType = post.PostType,
+                AuthorId = post.AuthorId,
+                Time = post.Time,
+                Content = post.Content,
+                IsRepliable = post.IsRepliable,
+                File = BitConverter.ToString(post.File)
+            };
+        }      
     }
 }

@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 
 namespace Waggle.Models.DTOs.PostDtos
 {
-    public class NewPostDto
+    public class DiscussionPostDto : IPostDto
     {
-        public int ClassroomId { get; set; }
-        public int? ReplyToPostId { get; set; }
         public string PostType { get; set; }
         public string AuthorId { get; set; }
         public DateTime Time { get; set; }
         public string Content { get; set; }
+        public bool IsRepliable { get; set; }
         public string File { get; set; }
+
+        public ICollection<ReplyPostDto> ReplyPosts { get; set; }
+        //public ICollection<Rating> Ratings { get; set; }
     }
 }
