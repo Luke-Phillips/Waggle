@@ -29,7 +29,7 @@ namespace Waggle.Controllers
 
         // POST: api/Classrooms
         [HttpPost]
-        public async Task<JsonResult> CreateAndJoinClassroom(ClassroomCreationDto classroomDto)
+        public async Task<ActionResult> CreateAndJoinClassroom(ClassroomCreationDto classroomDto)
         {
             string ownerId = classroomDto.OwnerId;
             var owner = await _context.Users.FirstOrDefaultAsync(u => u.Id == ownerId);
@@ -55,9 +55,7 @@ namespace Waggle.Controllers
 
             await _context.SaveChangesAsync();
 
-            var response = new JsonResult(new { Id = classroom.ClassroomId });
-            response.StatusCode = 201;
-            return response;
+            return StatusCode(201);
         }
 
         // POST: api/Classrooms

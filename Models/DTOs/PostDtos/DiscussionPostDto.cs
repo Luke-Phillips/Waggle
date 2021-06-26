@@ -16,6 +16,6 @@ namespace Waggle.Models.DTOs.PostDtos
         public string File { get; set; }
 
         public ICollection<IPostDto> ReplyPosts { get; set; }
-        //public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

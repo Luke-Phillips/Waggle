@@ -78,35 +78,30 @@ namespace Waggle.Controllers
             });
             await _context.SaveChangesAsync();
 
-            var result = new JsonResult(null)
-            {
-                StatusCode = 201
-            };
-            return result;
+            return StatusCode(201);
         }
 
         // GET: api/Posts
         [HttpGet("{classId}")]
-        public async Task<ActionResult<IEnumerable<Post>>> GetClassroomPosts(int classId)
+        public async Task<ActionResult<IEnumerable<IPostDto>>> GetClassroomPosts(int classId)
         {
+            // TODO verify user is enrolled in class
+
             var posts = await _context.Posts
                 .Where(
                     p => p.ClassroomId == classId &&
                     p.ReplyToPostId == null)
                 .Include(p => p.ReplyPosts)
+                .Include(p => p.Ratings)
                 .ToListAsync();
 
             var postResponse = new List<IPostDto>();
             foreach (Post post in posts)
             {
-                postResponse.Add(ToPostDto(post));
+                postResponse.Add(ToPostDto(post)); // at some point we may want a rating dto to hide other user's ids
             }
 
-            var response = new JsonResult(postResponse)
-            {
-                StatusCode = 201
-            };
-            return response;
+            return postResponse;
         }
 
         /* [HttpDelete("{postId}")]
@@ -155,7 +150,8 @@ namespace Waggle.Controllers
                     Content = post.Content,
                     IsRepliable = post.IsRepliable,
                     File = post.File,
-                    ReplyPosts = replyPosts
+                    ReplyPosts = replyPosts,
+                    Ratings = post.Ratings
                 };
             }
 
@@ -167,7 +163,8 @@ namespace Waggle.Controllers
                 Time = post.Time,
                 Content = post.Content,
                 IsRepliable = post.IsRepliable,
-                File = post.File
+                File = post.File,
+                Ratings = post.Ratings
             };
         }      
     }
