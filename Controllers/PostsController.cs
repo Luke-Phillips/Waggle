@@ -65,20 +65,6 @@ namespace Waggle.Controllers
             }
             if (!postTypes.Contains<string>(newPost.PostType)) return BadRequest("invalid post type");
 
-            byte[] file;
-            if (newPost.File is null) file = null;
-            else
-            {
-                try
-                {
-                    file = Convert.FromBase64String(newPost.File); //undo: BitConverter.ToString(newBytes))
-                }
-                catch (FormatException)
-                {
-                    return BadRequest("file should be a base-64 encoding");
-                }
-            }
-
             await _context.Posts.AddAsync(new Post
             {
                 ClassroomId = newPost.ClassroomId,
@@ -87,9 +73,8 @@ namespace Waggle.Controllers
                 AuthorId = newPost.AuthorId,
                 Time = newPost.Time,
                 Content = newPost.Content,
-                IsRepliable = newPost.ReplyToPostId is null &&
-                    repliablePostTypes.Contains(newPost.PostType),        
-                File = file
+                IsRepliable = IsRepliable(newPost),        
+                File = newPost.File
             });
             await _context.SaveChangesAsync();
 
@@ -136,6 +121,13 @@ namespace Waggle.Controllers
             
         }*/
 
+        private bool IsRepliable(NewPostDto post)
+        {
+            return
+                post.ReplyToPostId is null &&
+                repliablePostTypes.Contains(post.PostType);
+        }
+
         private IPostDto ToPostDto(Post post)
         {
             if (post.ReplyToPostId is null)
@@ -162,7 +154,7 @@ namespace Waggle.Controllers
                     Time = post.Time,
                     Content = post.Content,
                     IsRepliable = post.IsRepliable,
-                    File = post.File is not null ? BitConverter.ToString(post.File) : null,
+                    File = post.File,
                     ReplyPosts = replyPosts
                 };
             }
@@ -175,7 +167,7 @@ namespace Waggle.Controllers
                 Time = post.Time,
                 Content = post.Content,
                 IsRepliable = post.IsRepliable,
-                File = post.File is not null ? BitConverter.ToString(post.File) : null
+                File = post.File
             };
         }      
     }

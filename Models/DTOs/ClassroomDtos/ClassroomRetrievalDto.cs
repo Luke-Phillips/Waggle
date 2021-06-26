@@ -9,7 +9,7 @@ namespace Waggle.Models.DTOs.ClassroomDtos
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public byte[] Image { get; set; }
+        public string Icon { get; set; }
         public string InviteCode { get; set; }
         public bool IsModerator { get; set; }
         public bool isEnrolled { get; set; }

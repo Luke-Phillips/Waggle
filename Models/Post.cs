@@ -21,7 +21,7 @@ namespace Waggle.Models
         public DateTime Time { get; set; }
         public string Content { get; set; }
         public bool IsRepliable { get; set; }
-        public byte[] File { get; set; }
+        public string File { get; set; }
 
         // Navigation Properties
         [ForeignKey("ReplyToPostId")]

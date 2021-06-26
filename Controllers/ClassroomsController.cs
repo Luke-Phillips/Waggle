@@ -38,7 +38,7 @@ namespace Waggle.Controllers
             {
                 OwnerId = ownerId,            
                 Name = classroomDto.Name,
-                Image = classroomDto.Image == "null" ? null : Encoding.ASCII.GetBytes(classroomDto.Image),
+                Icon = classroomDto.Icon,
                 InviteCode = Guid.NewGuid().ToString()
             };
             await _context.Classrooms.AddAsync(classroom);
@@ -60,6 +60,30 @@ namespace Waggle.Controllers
             return response;
         }
 
+        // POST: api/Classrooms
+        [HttpPost("{userId}/{inviteCode}")]
+        public async Task<ActionResult> JoinClassroom(string userId, string inviteCode)
+        {
+            var classId = (await _context.Classrooms.FirstOrDefaultAsync(c => c.InviteCode == inviteCode))?.ClassroomId;
+            if (classId is null) return BadRequest("Invalid Invite Code");
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user is null) return BadRequest("User doesn't exist");
+
+            var classroomUser = new ApplicationUserClassroom
+            {
+                ApplicationUserId = userId,
+                ClassroomId = (int)classId,
+                IsModerator = false,
+                isEnrolled = false,
+                DisplayName = user.UserName,
+                ProfilePicture = null
+            };
+            await _context.ApplicationUserClassrooms.AddAsync(classroomUser);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpGet("{userID}")]
         public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetApplicationUserClassrooms(string userID)
         {
@@ -75,7 +99,7 @@ namespace Waggle.Controllers
                 {
                     Id = appUserClass.Classroom.ClassroomId,
                     Name = appUserClass.Classroom.Name,
-                    Image = appUserClass.Classroom.Image,
+                    Icon = appUserClass.Classroom.Icon,
                     InviteCode = appUserClass.IsModerator ? appUserClass.Classroom.InviteCode : null,
                     IsModerator = appUserClass.IsModerator,
                     isEnrolled = appUserClass.isEnrolled,
