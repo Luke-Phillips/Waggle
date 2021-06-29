@@ -27,7 +27,7 @@ namespace Waggle.Controllers
             _userManager = userManager;
         }
 
-        // POST: api/Classrooms
+        // POST /classrooms
         [HttpPost]
         public async Task<ActionResult> CreateAndJoinClassroom(ClassroomCreationDto classroomDto)
         {
@@ -58,7 +58,7 @@ namespace Waggle.Controllers
             return StatusCode(201);
         }
 
-        // POST: api/Classrooms
+        // POST /classrooms/{userId}/{inviteCode}
         [HttpPost("{userId}/{inviteCode}")]
         public async Task<ActionResult> JoinClassroom(string userId, string inviteCode)
         {
@@ -82,8 +82,9 @@ namespace Waggle.Controllers
             return Ok();
         }
 
+        // GET: /classrooms/{userId}
         [HttpGet("{userID}")]
-        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetApplicationUserClassrooms(string userID)
+        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetUserClassrooms(string userID)
         {
             List<ApplicationUserClassroom> applicationUserClassrooms = await _context.ApplicationUserClassrooms
                 .Where(cu => cu.ApplicationUserId == userID)
@@ -108,10 +109,10 @@ namespace Waggle.Controllers
             return classrooms;
         }
 
-        // PUT: api/Classrooms/5
+        // PUT: /classrooms/{id}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClassroom(int id, Classroom classroom)
+        public async Task<IActionResult> EditClassroom(int id, Classroom classroom)
         {
             if (id != classroom.ClassroomId)
             {
@@ -139,11 +140,11 @@ namespace Waggle.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Classrooms/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClassroom(int id)
+        // DELETE: /classrooms/{classId}
+        [HttpDelete("{classId}")]
+        public async Task<IActionResult> DeleteClassroom(int classId)
         {
-            var classroom = await _context.Classrooms.FindAsync(id);
+            var classroom = await _context.Classrooms.FindAsync(classId);
             if (classroom == null)
             {
                 return NotFound();

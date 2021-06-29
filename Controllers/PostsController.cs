@@ -45,7 +45,7 @@ namespace Waggle.Controllers
             _logger = logger;
         }
 
-        // POST: api/Posts
+        // POST /posts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult> CreatePost(NewPostDto newPost)
@@ -81,7 +81,7 @@ namespace Waggle.Controllers
             return StatusCode(201);
         }
 
-        // GET: api/Posts
+        // GET /posts/{classId}
         [HttpGet("{classId}")]
         public async Task<ActionResult<IEnumerable<IPostDto>>> GetClassroomPosts(int classId)
         {

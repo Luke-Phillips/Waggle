@@ -23,11 +23,11 @@ namespace Waggle.Controllers
         }
 
         // GET: api/Ratings
-        [HttpGet]
+/*        [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
         {
             return await _context.Ratings.ToListAsync();
-        }
+        }*/
 
         // GET: api/Ratings/5
         /*[HttpGet("{id}")]
@@ -45,10 +45,10 @@ namespace Waggle.Controllers
 
         
 
-        // POST: api/Ratings
+        // POST: /ratings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rating>> PostRating(Rating rating)
+        public async Task<ActionResult<Rating>> CreateRating(Rating rating)
         {
             // TODO check if token id matches body user id
             
@@ -64,10 +64,10 @@ namespace Waggle.Controllers
             return StatusCode(201);
         }
 
-        // PUT: api/Ratings/5
+        // PUT: /ratings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
-        public async Task<IActionResult> PutRating(EditRatingDto editedRating)
+        public async Task<IActionResult> EditRating(EditRatingDto editedRating)
         {
             // TODO auth: check if token id matches body user id
             

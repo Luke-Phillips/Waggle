@@ -8,6 +8,5 @@ namespace Waggle.Models.DTOs.Responses
 {
     public class RegistrationResponse : AuthResult
     {
-
     }
 }
