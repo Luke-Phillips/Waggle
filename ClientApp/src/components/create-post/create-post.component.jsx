@@ -14,7 +14,6 @@ const CreatePost = props => {
     <div className='create-post'>
       <h3>Create Post:</h3>
       <ButtonSelector
-        logName='--------- Create Post -----------'
         labels={labels}
         postTypes={props.postTypes}
       />

@@ -4,9 +4,8 @@ import './posting-as.styles.scss'
 
 const PostingAs = props => (
   <div className='posting-as'>
-    <p>{`Posting ${props.type} as`}</p> 
-    <CustomButton className='posting-as-button' value={props.user}>{props.user}</CustomButton>
-    <CustomButton className='posting-as-button' value='anonymous'>Anonymous</CustomButton>
+    <p>{`Posting ${props.type} as {props.user}`}</p> 
+    
   </div>
 );
 

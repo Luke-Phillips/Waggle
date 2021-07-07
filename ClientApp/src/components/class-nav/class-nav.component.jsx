@@ -6,14 +6,12 @@ const ClassNav = props => {
   const [classrooms, setClassrooms] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/userclassrooms/${props.userId}`)
+    fetch(`/userclassrooms/${props.userId}`)
       .then(res => res.json())
       .then(response => {
         setClassrooms(response);
       });
   }, [props.userId]);
-  //   const classrooms = fetch(`/api/userclassrooms/${props.userId}`).then((res) =>
-  //     res.json());
 
   console.log(classrooms);
   console.log(props.userId);

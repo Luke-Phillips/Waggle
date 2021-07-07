@@ -4,11 +4,6 @@ import CustomButton from '../custom-button/custom-button.component';
 import './button-selector.styles.scss';
 
 const ButtonSelector = ({ postTypes = [],...props}) => {   
-
-  console.log(props.logName)
-  console.log('BtnSelector')
-  console.log ('postTypes', postTypes)
-  console.log('labels',props.labels)
   
   return (  
   <>

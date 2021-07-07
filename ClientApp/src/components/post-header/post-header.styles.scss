@@ -1,24 +1,26 @@
 .post-header {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   border-bottom: solid 1px black;
 
 }
 
 .icon-container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 1ch;
+  width: 7%;
+  margin: 0 1ch 0 auto;
+  justify-self: flex-end;
+  
 
 }
 
 
 .header-info {
-  width: 100%;
+  width: 85%;
+  font-size: 10pt;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 1ch 0 1ch;
+  padding: 1ch 0 0 1ch;
 }
