@@ -48,7 +48,7 @@ namespace Waggle.Controllers
                 ApplicationUser = owner,
                 Classroom = classroom,
                 IsModerator = true,
-                isEnrolled = true,
+                EnrollmentStatus = EnrollmentStatus.Enrolled,
                 DisplayName = owner.UserName
             };
             await _context.ApplicationUserClassrooms.AddAsync(appUserClassroom);
@@ -56,6 +56,19 @@ namespace Waggle.Controllers
             await _context.SaveChangesAsync();
 
             return StatusCode(201);
+        }
+
+        // GET: /classrooms/invite-code/{classId}
+        [HttpGet("invite-code/{classId}")]
+        public async Task<ActionResult<string>> GetInviteCode(int classId)
+        {
+            var classroom = await _context.Classrooms
+                .Where(c => c.ClassroomId == classId)
+                .FirstOrDefaultAsync();
+            
+            if (classroom is null) return BadRequest("classroom does not exist");
+            
+            return Ok(classroom.InviteCode);
         }
 
         // POST /classrooms/{userId}/{inviteCode}
@@ -72,7 +85,7 @@ namespace Waggle.Controllers
                 ApplicationUserId = userId,
                 ClassroomId = (int)classId,
                 IsModerator = false,
-                isEnrolled = false,
+                EnrollmentStatus = EnrollmentStatus.Pending,
                 DisplayName = user.UserName,
                 ProfilePicture = null
             };
@@ -101,7 +114,7 @@ namespace Waggle.Controllers
                     Icon = appUserClass.Classroom.Icon,
                     InviteCode = appUserClass.IsModerator ? appUserClass.Classroom.InviteCode : null,
                     IsModerator = appUserClass.IsModerator,
-                    isEnrolled = appUserClass.isEnrolled,
+                    EnrollmentStatus = appUserClass.EnrollmentStatus,
                     DisplayName = appUserClass.DisplayName
                 });
             }

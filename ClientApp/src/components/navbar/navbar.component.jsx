@@ -9,7 +9,8 @@ const Navbar = () => (
             <Logo className='logo' />
         </Link>
         <div className='options'>
-            <Link className='option' to='/hive/profile'> PROFILE </Link>
+            <Link className='option' to='/hive/settings'> SETTINGS </Link>
+            <Link className='option' to='/hive/profile'> PROFILE (old) </Link>
             <Link className='option' to='/hive/discussion'> DISCUSSION </Link>
             <Link className='option' to='/signin'> SIGN IN </Link>
         </div>

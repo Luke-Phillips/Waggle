@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Waggle.Data;
 using Waggle.Models;
+using Waggle.Models.DTOs.UserDtos;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,9 +15,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Waggle.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : ControllerBase
     {
         private readonly WaggleContext _context;
@@ -41,32 +42,77 @@ namespace Waggle.Controllers
             return users;
         }
 
-        // GET: api/Wagglers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
+        [HttpGet("class/{classId}")]
+        public async Task<ActionResult<List<ClassroomUsersDto>>> GetClassroomUsers(int classId)
         {
-            var user = await _userManager.Users//.FirstOrDefaultAsync(u => u.Id == id)                          
-                .Include(u => u.ApplicationUserClassrooms)
-                    .ThenInclude(cu => cu.Classroom)
+            var users = await _context.ApplicationUserClassrooms
+                .Where(u =>
+                    u.ClassroomId == classId)
+                .Include(u => u.ApplicationUser)
+                .Select(u => 
+                    new ClassroomUsersDto {
+                        UserId = u.ApplicationUser.Id,
+                        IsModerator = u.IsModerator,
+                        EnrollmentStatus = u.EnrollmentStatus,
+                        UserName = u.ApplicationUser.UserName,
+                        DisplayName = u.DisplayName,
+                        Email = u.ApplicationUser.Email
+                    }
+                )
+                .ToListAsync();
+
+            return users;
+        }
+
+        [HttpPut("{userId}/class/{classId}")]
+        public async Task<IActionResult> UpdateUser(string userId, int classId, [FromBody] UpdatedUserDto updatedUser)
+        {
+            var classroomUser = await _context.ApplicationUserClassrooms
+                .Where(uc => uc.ApplicationUserId == userId && uc.ClassroomId == classId)
+                //.Include(uc => uc.ApplicationUser)
                 .FirstOrDefaultAsync();
 
-                /* .Select(u => new WagglerDto
-                 {
-                     Email = u.Email,
-                     Name = u.Name,
-                     Points = u.Points,
-                     Achievements = u.Achievements,
-                     ClassroomWagglers = u.ClassroomWagglers,
-                 })
-                 .SingleOrDefaultAsync();       */        
+            if (classroomUser is null)
+            {
+                return BadRequest("user or classroom does not exist");
+            }
 
-             if (user == null)
-             {
-                 return NotFound();
-             }
+            //if (updatedUser.UserName is not null) classroomUser.ApplicationUser.UserName = updatedUser.UserName;
+            if (updatedUser.IsModerator is not null) classroomUser.IsModerator = (bool) updatedUser.IsModerator;
+            if (updatedUser.EnrollmentStatus is not null) classroomUser.EnrollmentStatus = (EnrollmentStatus) updatedUser.EnrollmentStatus;
+            if (updatedUser.DisplayName is not null) classroomUser.DisplayName = updatedUser.DisplayName;
+            if (updatedUser.ProfilePicture is not null) classroomUser.ProfilePicture = updatedUser.ProfilePicture;
+            
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
-             return user;
-         }
+        // GET: api/Wagglers/5
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<ApplicationUser>> GetUser(string id)
+        // {
+        //     var user = await _userManager.Users//.FirstOrDefaultAsync(u => u.Id == id)                          
+        //         .Include(u => u.ApplicationUserClassrooms)
+        //             .ThenInclude(cu => cu.Classroom)
+        //         .FirstOrDefaultAsync();
+
+        //         /* .Select(u => new WagglerDto
+        //          {
+        //              Email = u.Email,
+        //              Name = u.Name,
+        //              Points = u.Points,
+        //              Achievements = u.Achievements,
+        //              ClassroomWagglers = u.ClassroomWagglers,
+        //          })
+        //          .SingleOrDefaultAsync();       */        
+
+        //      if (user == null)
+        //      {
+        //          return NotFound();
+        //      }
+
+        //      return user;
+        //  }
 
         /*        [HttpPost("authenticate")]
                 public IActionResult Authenticate()

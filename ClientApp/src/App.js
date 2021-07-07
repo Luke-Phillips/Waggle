@@ -6,6 +6,7 @@ import HomePage from './pages/homepage/homepage.component';
 import ClassNav from './components/class-nav/class-nav.component';
 import DiscussionPage from './pages/discussion-page/discussion-page.component';
 import ProfilePage from './pages/profile-page/profile-page.component';
+import SettingsPage from './pages/settings-page/settings-page.component';
 import './custom.css';
 
 export default class App extends Component {
@@ -25,6 +26,7 @@ export default class App extends Component {
         </Route>
         <Route path='/hive/discussion' component={DiscussionPage} />
         <Route path='/hive/profile' component={ProfilePage} />
+        <Route path='/hive/settings' component={SettingsPage} />
 
         {/* <Navbar />
         <Switch>

@@ -64,13 +64,13 @@ namespace Waggle.Data
 
             var applicationUserClassrooms = new ApplicationUserClassroom[]
             {
-                new ApplicationUserClassroom{ApplicationUserId="0001", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="Brother Tuft"},
-                new ApplicationUserClassroom{ApplicationUserId="0002", ClassroomId=1, IsModerator=true, isEnrolled=true, DisplayName="TA"},
-                new ApplicationUserClassroom{ApplicationUserId="0003", ClassroomId=2, IsModerator=true, isEnrolled=true, DisplayName="Brother Howard"},
-                new ApplicationUserClassroom{ApplicationUserId="0004", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Cade Gardner"},
-                new ApplicationUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Fig"},
-                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, isEnrolled=true, DisplayName="Luke"},
-                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, isEnrolled=true, DisplayName="Lukas"},
+                new ApplicationUserClassroom{ApplicationUserId="0001", ClassroomId=1, IsModerator=true, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="Brother Tuft"},
+                new ApplicationUserClassroom{ApplicationUserId="0002", ClassroomId=1, IsModerator=true, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="TA"},
+                new ApplicationUserClassroom{ApplicationUserId="0003", ClassroomId=2, IsModerator=true, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="Brother Howard"},
+                new ApplicationUserClassroom{ApplicationUserId="0004", ClassroomId=1, IsModerator=false, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="Cade Gardner"},
+                new ApplicationUserClassroom{ApplicationUserId="0005", ClassroomId=2, IsModerator=false, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="Fig"},
+                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=1, IsModerator=false, EnrollmentStatus=EnrollmentStatus.Enrolled, DisplayName="Luke"},
+                new ApplicationUserClassroom{ApplicationUserId="0006", ClassroomId=2, IsModerator=false, EnrollmentStatus=EnrollmentStatus.Pending, DisplayName="Lukas"},
             };         
 
             foreach (ApplicationUserClassroom ac in applicationUserClassrooms)

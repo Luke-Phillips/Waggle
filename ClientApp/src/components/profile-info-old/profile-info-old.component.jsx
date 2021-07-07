@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import './profile-info.styles.scss';
 
-const ProfileInfo = ({user, profileChangeHandler}) => {
-
-  // not sure if fetch call will be done in the card or if user info will be passed as props yet
-  // for now, it's hardcoded
-  const [name, setName] = useState(user.userName);
-  const [displayName, setDisplayName] = useState(user.displayName);
-  const [email, setEmail] = useState(user.email);
+const ProfileInfo = props => {
+  const [name, setName] = useState(props.name);
+  const [displayName, setDisplayName] = useState(props.displayName);
+  const [email, setEmail] = useState(props.email);
 
   const nameChangeHandler = e => setName(e.target.value);
   const displayNameChangeHandler = e => setDisplayName(e.target.value);
@@ -18,7 +15,8 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
   }
 
   return (
-    <div className='profileInfo'>
+    <div>
+      <p>profile pic</p>
       <input value={name}
              onChange={nameChangeHandler}
              placeholder='Name' />
