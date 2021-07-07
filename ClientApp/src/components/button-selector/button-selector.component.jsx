@@ -3,12 +3,12 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './button-selector.styles.scss';
 
-const ButtonSelector = ({ postTypes = [],...props}) => {   
+const ButtonSelector = ({ clickFuncs = [],...props}) => {   
   
   return (  
   <>
     {props.labels.map((label, index) => (
-      <CustomButton key={index} className='button'  onClick={postTypes[index]}> {label}</CustomButton>
+      <CustomButton key={index} className='button'  onClick={clickFuncs[index]}> {label}</CustomButton>
       
     ))}
     

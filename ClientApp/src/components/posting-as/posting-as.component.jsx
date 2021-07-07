@@ -4,7 +4,7 @@ import './posting-as.styles.scss'
 
 const PostingAs = props => (
   <div className='posting-as'>
-    <p>{`Posting ${props.type} as {props.user}`}</p> 
+    <p>{`Posting ${props.type} as ${props.user}`}</p> 
     
   </div>
 );

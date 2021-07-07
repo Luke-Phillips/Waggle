@@ -1,14 +1,16 @@
 .sort-posts{
   width: 60%;
+  height: auto;
   display: flex;
   justify-content: space-between;
-  border: solid 1px gray;
+  border: solid 1px black;
   border-radius: 30px;
   padding: 0.5ch;
   margin: auto;
 
   .button {
     margin: 0 auto 0 auto;
+    height: auto;
     
   }
 }

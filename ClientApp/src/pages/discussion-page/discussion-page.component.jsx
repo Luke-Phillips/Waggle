@@ -43,32 +43,23 @@ const data = {
   ],
 };
 const DiscussionPage = () => {
-  const [showReplies, setShowReplies] = useState(false);
+
   const [postInfo, setPostInfo] = useState({});
 
   const [id, setId] = useState(0);
 
-  const [postWidth, setPostWidth] = useState('normal');
-
   const [showPostType, setShowPostType] = useState([]);
 
-  const [discussionFeedPosts, setDiscussionFeedPosts] = useState([]);
+  const [sortBy, setSortBy] = useState('')
+
 
   const showPosts = postTypes => {
     setShowPostType(postTypes);
   };
 
-  const toggleShowReplies = (id, e) => {
-    setShowReplies(!showReplies);
-  };
-
-  const handlePostWidth = () => {
-    if (postWidth === 'normal') {
-      setPostWidth('wide');
-    } else {
-      setPostWidth('normal');
-    }
-  };
+  const handleSortBy = sortOrder => {
+    setSortBy(sortOrder);
+  }
 
   const announcement = () => {
     setPostInfo({
@@ -96,13 +87,10 @@ const DiscussionPage = () => {
 
   const postTypes = [announcement, question, insight, feedback];
 
-  console.log('Discussion Pg');
-  const checker = () => {
-    console.log('SHOW POST TYPE:', showPostType);
-  };
+  console.log('Discussion Pg Stuff:');
+
   return (
     <div className='discussion-page'>
-      {/* <h1> Get ready to share </h1> */}
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost setPostTypes={showPosts} />
@@ -111,47 +99,15 @@ const DiscussionPage = () => {
 
         <div className='post-feed'>
           
-          <SortPosts />
-          <DiscussionPost
-            user='placeholder'
-            type={postInfo.postType}
-            postWidth={postWidth}
-          />
-
-          {/* 
-            I think I will need a HOC for conditional rendering of post types 
-            Then the fetch can happen there 
-            Will need to pass handlePostWidth and toggleShowReivews
-
-          */}
+          <SortPosts setSortByValue={handleSortBy}/>
+          
           <DiscussionFeed
             shownPostTypes={showPostType}
-            postWidth={postWidth}
-            onClick={() => {
-              toggleShowReplies();
-              handlePostWidth();
-            }}
-            showReplies={showReplies}
+            sortPostsBy={sortBy}
+            discussionPostType={postInfo.postType}
 
           />
-
-          {/* <DiscussionFeedItem
-            type='feedback'
-            onClick={() => {
-              toggleShowReviews();
-              handlePostWidth();
-            }}
-            postWidth={postWidth}
-          > */}
         </div>
-
-        {/* <RepliesColumn
-          className='visible'
-          show={showReplies}
-          data={data}
-          onClick={toggleShowReplies}
-          postWidth={postWidth}
-        /> */}
       </div>
     </div>
   );

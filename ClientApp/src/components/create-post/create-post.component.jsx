@@ -15,7 +15,7 @@ const CreatePost = props => {
       <h3>Create Post:</h3>
       <ButtonSelector
         labels={labels}
-        postTypes={props.postTypes}
+        clickFuncs={props.postTypes}
       />
     </div>
   );
