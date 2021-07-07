@@ -6,10 +6,12 @@ import RepliesColumn from '../replies-column/replies-column.component';
 import './discussion-feed.styles.scss';
 
 const DiscussionFeed = (props) => {
-  const [whenPostedToggle, setWhenPostedToggle] = useState(1); // 1 = most recent
+  
   const [numResponsesToggle, setNumResponsesToggle] = useState(1); // 1 = most replies
-  const [showReplies, setShowReplies] = useState(false);
   const [postWidth, setPostWidth] = useState('normal');
+  const [replyType, setReplyType] = useState('')
+  const [showReplies, setShowReplies] = useState(false);
+  const [whenPostedToggle, setWhenPostedToggle] = useState(1); // 1 = most recent
 
   const shownPostTypes = props.shownPostTypes;
   const sortPostsBy = props.sortPostsBy;
@@ -59,6 +61,11 @@ const DiscussionFeed = (props) => {
       setPostWidth('normal');
     }
   };
+
+  const handleReplyType = newReplyType => {
+    console.log('Handle Reply Type Called')
+    setReplyType(newReplyType)
+  }
 
   const whenPostedHandler = sortBy => {
     console.log('When Posted called');
@@ -145,6 +152,7 @@ const DiscussionFeed = (props) => {
               toggleShowReplies();
               handlePostWidth();
             }}
+            btnFunc={handleReplyType}
           >
             {feedItem.text}
           </DiscussionFeedItem>
@@ -156,6 +164,7 @@ const DiscussionFeed = (props) => {
         data={data}
         onClick={toggleShowReplies}
         postWidth={postWidth}
+        replyType={replyType}
       />
     </div>
   );

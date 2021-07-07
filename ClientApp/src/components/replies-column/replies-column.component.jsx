@@ -1,15 +1,19 @@
 import React from 'react';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
+import DiscussionPost from '../discussion-post/discussion-post.component';
 import './replies-column.styles.scss';
 
 const ReviewsColumn = ({ data, ...props }) => {
   if (!props.show) {
     return null;
   }
+  
 
-  console.log('DATA: ', data);
+  console.log('Reply Type: ', props.replyType)
   return (
     <div className='reviews-column'>
+      <DiscussionPost user='Placeholder' type={props.replyType} postWidth={props.postWidth}/>
+
       {data.posts.map(post => (
         <DiscussionFeedItem
           user={post.user}

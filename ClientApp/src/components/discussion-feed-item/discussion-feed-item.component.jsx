@@ -25,7 +25,15 @@ const buttonLabeler = postType => {
   return 'Comment'
 }
 
-const DiscussionFeedItem = ({ children, ...otherProps }) => (
+const DiscussionFeedItem = ({ btnFunc = () => {} , children, ...otherProps }) => {
+  
+  const replyBtnClickHandler = () => {
+    btnFunc(buttonLabeler(otherProps.type))
+  }
+  
+  
+  
+  return (
   <div
     id={otherProps.postType}
     className={`discussion-feed-item ${otherProps.postWidth}`}
@@ -40,12 +48,12 @@ const DiscussionFeedItem = ({ children, ...otherProps }) => (
       <Ratings postType={otherProps.type}/>
       <div className='btnContainer'>
         <input className='upload' type='file' />
-        <CustomButton className='feed-item-btn'>
+        <CustomButton className='feed-item-btn' onClick={replyBtnClickHandler}>
           {buttonLabeler(otherProps.type)}
         </CustomButton>
       </div>
     </div>
   </div>
-);
+)};
 
 export default DiscussionFeedItem;
