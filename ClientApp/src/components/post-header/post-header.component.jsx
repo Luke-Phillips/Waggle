@@ -46,10 +46,7 @@ function timeElapsedSincePosted(timePosted) {
 
 const PostHeader = props => (
   <div className='post-header'>
-    <div className='icon-container'>
-      {/* <CommentIcon className='icon'/> */}
-      <AnswerIcon />
-    </div>
+
     <div className='header-info'>
       <p>{`Posted by ${props.user} ${timeElapsedSincePosted(
         props.date
@@ -57,7 +54,11 @@ const PostHeader = props => (
       <p>{`${props.date.toLocaleString(navigator.language, {
         dateStyle: 'full',
         timeStyle: 'short',
-      })}`}</p>
+      })}`}</p> 
+    </div>
+    <div className='icon-container'>
+      {/* <CommentIcon className='icon'/> */}
+      <FbRequestIcon />
     </div>
   </div>
 );

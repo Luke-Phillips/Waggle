@@ -4,8 +4,8 @@ import Slider from '@material-ui/core/Slider';
 import './ratings.styles.scss';
 
 const Ratings = props => {
-  if(props.isReply) {
-    return null
+  if (props.postType === 'announcement' || props.postType === 'comment') {
+    return null;
   }
   const marks = [
     {
@@ -29,7 +29,15 @@ const Ratings = props => {
   return (
     <div className='ratings'>
       <p>Rate this Post:</p>
-      <Slider className='slider' step={1} marks={marks} min={0} max={3} defaultValue={0} valueLabelDisplay='auto' />
+      <Slider
+        className='slider'
+        step={1}
+        marks={marks}
+        min={0}
+        max={3}
+        defaultValue={0}
+        valueLabelDisplay='auto'
+      />
     </div>
   );
 };

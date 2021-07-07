@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './student-table.styles.scss';
 
+// NOTE: when -+ is seen the + operator is converting the value
+//       to a number and the - operator is negating it. 
+
 const StudentTable = props => {
   const [nameSortToggle, setNameSortToggle] = useState(1); // 1 = sort ascending
   const [roleSortToggle, setRoleSortToggle] = useState(-1); // 0 = sort ascending
