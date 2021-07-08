@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ButtonSelector from '../button-selector/button-selector.component';
 import './sort-posts.styles.scss';
 
-const SortPosts = ({setSortByValue}) => {
+const SortPosts = ({setSortByValue, showbtn}) => {
 
   const orderByOldest = () => {
     setSortByValue('oldest')
@@ -27,6 +27,7 @@ const SortPosts = ({setSortByValue}) => {
         className='selector'
         clickFuncs={setSortBy}
         labels={['Oldest', 'Newest', 'Most Replies', 'Least Replies']}
+        showbtn={showbtn}
       />
     </div>
 )};

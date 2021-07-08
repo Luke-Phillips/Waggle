@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FilterPost from '../../components/filter-posts/filter-posts.component';
 import SortPosts from '../../components/sort-posts/sort-posts.component';
 import CreatePost from '../../components/create-post/create-post.component';
-import DiscussionPost from '../../components/discussion-post/discussion-post.component';
 import DiscussionFeed from '../../components/discussion-feed/discussion-feed.component';
-import DiscussionFeedItem from '../../components/discussion-feed-item/discussion-feed-item.component';
-import ModuleSelector from '../../components/module-selector/module-selector.component';
-import RepliesColumn from '../../components/replies-column/replies-column.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './discussion-page.styles.scss';
@@ -48,10 +44,9 @@ const DiscussionPage = () => {
 
   const [id, setId] = useState(0);
 
-  const [showPostType, setShowPostType] = useState([]);
-
   const [sortBy, setSortBy] = useState('')
-
+  
+  const [showPostType, setShowPostType] = useState([]);
 
   const showPosts = postTypes => {
     setShowPostType(postTypes);
@@ -87,24 +82,23 @@ const DiscussionPage = () => {
 
   const postTypes = [announcement, question, insight, feedback];
 
-  console.log('Discussion Pg Stuff:');
-
   return (
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost setPostTypes={showPosts} />
-          <CreatePost postTypes={postTypes} />
+          <CreatePost postTypes={postTypes} showbtn={true}/>
         </div>
 
         <div className='post-feed'>
           
-          <SortPosts setSortByValue={handleSortBy}/>
+          <SortPosts setSortByValue={handleSortBy} showbtn={true}/>
           
           <DiscussionFeed
             shownPostTypes={showPostType}
             sortPostsBy={sortBy}
             discussionPostType={postInfo.postType}
+            showbtn={true}
           />
         </div>
       </div>

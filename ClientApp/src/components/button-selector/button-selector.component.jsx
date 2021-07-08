@@ -8,7 +8,7 @@ const ButtonSelector = ({ clickFuncs = [],...props}) => {
   return (  
   <>
     {props.labels.map((label, index) => (
-      <CustomButton key={index} className='button'  onClick={clickFuncs[index]}> {label}</CustomButton>
+      <CustomButton key={index} className='button' showbtn={props.showbtn} onClick={clickFuncs[index]}> {label}</CustomButton>
       
     ))}
     

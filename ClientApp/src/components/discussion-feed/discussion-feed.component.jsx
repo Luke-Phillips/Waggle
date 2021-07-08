@@ -6,7 +6,7 @@ import RepliesColumn from '../replies-column/replies-column.component';
 import './discussion-feed.styles.scss';
 
 
-const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
+const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbtn}) => {
   const [posts, setPosts] = useState([]);
   const popularitySortToggle = sortPostsBy === 'least' ? -1 : 1; // default = 1 = most replies
   const timeSortToggle = sortPostsBy === 'oldest' ? -1 : 1; // default = 1 = most recent
@@ -68,8 +68,12 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
   };
 
   const handleReplyType = newReplyType => {
-    console.log('Handle Reply Type Called')
     setReplyType(newReplyType)
+  }
+
+  const handleReplyClick = () => {
+    setShowReplies(true)
+    setPostWidth('wide')
   }
 
   const timeCompare = isAscending => {
@@ -100,8 +104,6 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
     : filteredPosts.slice()
         .sort(popularityCompare(popularitySortToggle))
         .sort(timeCompare(timeSortToggle));
-  
-  console.log('sorted posts after sort', sortedPosts);
 
   return (
     <div className='discussion-feed'>
@@ -110,6 +112,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
             user='placeholder'
             type={discussionPostType}
             postWidth={postWidth}
+            showbtn={true}
           />
 
         {sortedPosts.map(feedItem => (
@@ -121,7 +124,9 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
               toggleShowReplies();
               handlePostWidth();
             }}
+            showbtn={showbtn}
             btnFunc={handleReplyType}
+            replyClick={handleReplyClick}
           >
             {feedItem.text}
           </DiscussionFeedItem>
@@ -134,6 +139,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
         onClick={toggleShowReplies}
         postWidth={postWidth}
         replyType={replyType}
+        showbtn={false}
       />
     </div>
   );

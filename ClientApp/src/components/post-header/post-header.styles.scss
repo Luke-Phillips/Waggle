@@ -8,13 +8,21 @@
 }
 
 .icon-container {
-  width: 7%;
-  margin: 0 1ch 0 auto;
-  justify-self: flex-end;
-  
+  // width: 7%;
+  // margin: 0 1ch 0 auto;
+  // justify-self: flex-end;
+
 
 }
 
+.post-identifier {
+  background-color: green;
+  width: 1.5%;
+  justify-self: flex-end;
+  border-radius: 0 13px 0 0;
+  //height: 2ch;
+  
+}
 
 .header-info {
   width: 85%;
