@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 import ButtonSelector from '../button-selector/button-selector.component';
 import './sort-posts.styles.scss';
 
-const SortPosts = props => {
+const SortPosts = ({setSortByValue}) => {
 
   const orderByOldest = () => {
-    props.setSortByValue('oldest')
+    setSortByValue('oldest')
   }
 
   const orderByNewest = () => {
-    props.setSortByValue('newest')
+    setSortByValue('newest')
   }
   
   const orderByMost = () => {
-
-    props.setSortByValue('most')
+    setSortByValue('most')
   }
 
   const orderByLeast = () => {
-    props.setSortByValue('least')
+    setSortByValue('least')
   }
 
   const setSortBy = [ orderByOldest, orderByNewest, orderByMost, orderByLeast ]

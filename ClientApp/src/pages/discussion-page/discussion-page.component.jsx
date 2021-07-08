@@ -105,7 +105,6 @@ const DiscussionPage = () => {
             shownPostTypes={showPostType}
             sortPostsBy={sortBy}
             discussionPostType={postInfo.postType}
-
           />
         </div>
       </div>

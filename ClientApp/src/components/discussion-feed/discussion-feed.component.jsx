@@ -5,16 +5,15 @@ import DiscussionPost from '../discussion-post/discussion-post.component';
 import RepliesColumn from '../replies-column/replies-column.component';
 import './discussion-feed.styles.scss';
 
-const DiscussionFeed = (props) => {
+const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
   
   const [numResponsesToggle, setNumResponsesToggle] = useState(1); // 1 = most replies
+  const [whenPostedToggle, setWhenPostedToggle] = useState(1); // 1 = most recent
   const [postWidth, setPostWidth] = useState('normal');
   const [replyType, setReplyType] = useState('')
   const [showReplies, setShowReplies] = useState(false);
-  const [whenPostedToggle, setWhenPostedToggle] = useState(1); // 1 = most recent
 
-  const shownPostTypes = props.shownPostTypes;
-  const sortPostsBy = props.sortPostsBy;
+
   let filteredPosts = [];
   const data = {
     posts: [
@@ -121,7 +120,7 @@ const DiscussionFeed = (props) => {
     }
   };
 
-  if (props.shownPostTypes.length !== 0) {
+  if (shownPostTypes.length !== 0) {
     filteredPosts = data.posts.filter(post =>
       shownPostTypes.includes(post.postType)
     );
@@ -139,7 +138,7 @@ const DiscussionFeed = (props) => {
       <div className='main-thread'>
       <DiscussionPost
             user='placeholder'
-            type={props.discussionPostType}
+            type={discussionPostType}
             postWidth={postWidth}
           />
 
