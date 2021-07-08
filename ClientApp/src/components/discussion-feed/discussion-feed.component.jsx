@@ -1,28 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreatePost from '../create-post/create-post.component';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import RepliesColumn from '../replies-column/replies-column.component';
 import './discussion-feed.styles.scss';
 
+
 const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
-  
-  const [numResponsesToggle, setNumResponsesToggle] = useState(1); // 1 = most replies
-  const [whenPostedToggle, setWhenPostedToggle] = useState(1); // 1 = most recent
+  const [posts, setPosts] = useState([]);
+  const popularitySortToggle = sortPostsBy === 'least' ? -1 : 1; // default = 1 = most replies
+  const timeSortToggle = sortPostsBy === 'oldest' ? -1 : 1; // default = 1 = most recent
+  const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
+
   const [postWidth, setPostWidth] = useState('normal');
   const [replyType, setReplyType] = useState('')
   const [showReplies, setShowReplies] = useState(false);
 
-
-  let filteredPosts = [];
-  const data = {
-    posts: [
+  useEffect(() => {
+    // this will actually be a fetch
+    //fetch(``)
+    setPosts([
       {
         user: 'Cade',
         text: "Hello I'm a student and I would like to be heard",
-        time: "2021-06-17T20:47:18",
+        time: "2021-06-18T20:47:18",
         postType: 'insight',
         isReply: true,
+        replies: [0]
       },
       {
         user: 'Luke',
@@ -30,24 +34,26 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
         time : "2021-06-17T20:59:26",
         postType: 'comment',
         isReply: true,
+        replies: [0, 0]
       },
       {
         user: 'Michael',
         text: 'That question is very silly ask another',
-        time: "2021-06-17T20:44:45",
+        time: "2021-06-20T20:44:45",
         postType: 'answer',
         isReply: true,
+        replies: [0, 0, 0, 0]
       },
       {
         user: 'Brooklynn',
         text: 'You seem very intelligent, this was very well written. Good job',
-        time: "2021-06-17T20:41:41",
+        time: "2021-06-19T20:41:41",
         postType: 'fbrequest',
         isReply: true,
+        replies: [0, 0, 0]
       },
-    ],
-  };
-
+    ])
+  }, []);
 
   const toggleShowReplies = () => {
     setShowReplies(!showReplies);
@@ -66,31 +72,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
     setReplyType(newReplyType)
   }
 
-  const whenPostedHandler = sortBy => {
-    console.log('When Posted called');
-    if (sortBy === 'oldest') {
-      // console.log('Case oldest')
-      // setWhenPostedToggle(-1);
-      return -1
-    }
-    if (sortBy === 'newest') {
-      // console.log('Case newest')
-      // setWhenPostedToggle(1);
-      return 1
-    }
-  };
-
-  const numResponsesHandler = sortBy => {
-    console.log('Num Responses called');
-    if (sortBy === 'least') {
-      setNumResponsesToggle(-1);
-    } 
-    if (sortBy === 'most') {
-      setNumResponsesToggle(1);
-    }
-  };
-
-  const whenPostedCompare = isAscending => {
+  const timeCompare = isAscending => {
     return (post1, post2) => {
       if (post1.time > post2.time) return isAscending;
       if (post1.time < post2.time) return -+isAscending;
@@ -98,41 +80,29 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
     };
   };
 
-  const numResponsesCompare = isAscending => {
+  const popularityCompare = isAscending => {
     return (post1, post2) => {
       if (post1.replies.length > post2.replies.length) return isAscending;
       if (post1.replies.length < post2.replies.length) return -+isAscending;
     };
   };
-
-  const sortDiscussionFeed = sortPostsBy => {
-
-    if (sortPostsBy === 'oldest' || sortPostsBy === 'newest') {
-      setWhenPostedToggle(whenPostedHandler(sortPostsBy));
-      filteredPosts.sort(whenPostedCompare(whenPostedToggle));
-    } 
-    if (sortPostsBy === 'most' || sortPostsBy === 'least') {
-      numResponsesHandler(sortPostsBy);
-      filteredPosts.sort(numResponsesCompare(numResponsesToggle));
-    }
-    else {
-      return
-    }
-  };
-
-  if (shownPostTypes.length !== 0) {
-    filteredPosts = data.posts.filter(post =>
+  
+  const filteredPosts = shownPostTypes.length === 0 ?
+    posts.slice() :
+    posts.slice().filter(post =>
       shownPostTypes.includes(post.postType)
     );
-    console.log('Filtered Posts', filteredPosts);
-  } else {
-    filteredPosts = data.posts;
-  }
 
-  if (sortPostsBy !== '') {
-    sortDiscussionFeed(sortPostsBy);
-  }
+  const sortedPosts = timeSortIsFirst
+    ? filteredPosts.slice()
+        .sort(popularityCompare(timeSortToggle))
+        .sort(timeCompare(popularitySortToggle))
+    : filteredPosts.slice()
+        .sort(popularityCompare(popularitySortToggle))
+        .sort(timeCompare(timeSortToggle));
   
+  console.log('sorted posts after sort', sortedPosts);
+
   return (
     <div className='discussion-feed'>
       <div className='main-thread'>
@@ -142,7 +112,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
             postWidth={postWidth}
           />
 
-        {filteredPosts.map(feedItem => (
+        {sortedPosts.map(feedItem => (
           <DiscussionFeedItem
             user={feedItem.user}
             type={feedItem.postType}
@@ -160,7 +130,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType}) => {
       <RepliesColumn
         className='visible'
         show={showReplies}
-        data={data}
+        posts={posts}
         onClick={toggleShowReplies}
         postWidth={postWidth}
         replyType={replyType}

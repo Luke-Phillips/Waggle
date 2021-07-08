@@ -3,7 +3,7 @@ import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.com
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import './replies-column.styles.scss';
 
-const ReviewsColumn = ({ data, ...props }) => {
+const ReviewsColumn = ({ posts, ...props }) => {
   if (!props.show) {
     return null;
   }
@@ -14,7 +14,7 @@ const ReviewsColumn = ({ data, ...props }) => {
     <div className='reviews-column'>
       <DiscussionPost user='Placeholder' type={props.replyType} postWidth={props.postWidth}/>
 
-      {data.posts.map(post => (
+      {posts.map(post => (
         <DiscussionFeedItem
           user={post.user}
           type={post.postType}
