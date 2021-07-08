@@ -67,6 +67,11 @@ const DiscussionFeed = (props) => {
     setReplyType(newReplyType)
   }
 
+  const handleReplyClick = () => {
+    setShowReplies(true)
+    setPostWidth('wide')
+  }
+
   const whenPostedHandler = sortBy => {
     console.log('When Posted called');
     if (sortBy === 'oldest') {
@@ -141,6 +146,7 @@ const DiscussionFeed = (props) => {
             user='placeholder'
             type={props.discussionPostType}
             postWidth={postWidth}
+            showbtn={true}
           />
 
         {filteredPosts.map(feedItem => (
@@ -152,7 +158,9 @@ const DiscussionFeed = (props) => {
               toggleShowReplies();
               handlePostWidth();
             }}
+            showbtn={props.showbtn}
             btnFunc={handleReplyType}
+            replyClick={handleReplyClick}
           >
             {feedItem.text}
           </DiscussionFeedItem>
@@ -165,6 +173,7 @@ const DiscussionFeed = (props) => {
         onClick={toggleShowReplies}
         postWidth={postWidth}
         replyType={replyType}
+        showbtn={false}
       />
     </div>
   );

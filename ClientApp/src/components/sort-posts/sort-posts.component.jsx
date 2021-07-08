@@ -28,6 +28,7 @@ const SortPosts = props => {
         className='selector'
         clickFuncs={setSortBy}
         labels={['Oldest', 'Newest', 'Most Replies', 'Least Replies']}
+        showbtn={props.showbtn}
       />
     </div>
 )};

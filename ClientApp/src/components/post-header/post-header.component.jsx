@@ -56,9 +56,9 @@ const PostHeader = props => (
         timeStyle: 'short',
       })}`}</p> 
     </div>
-    <div className='icon-container'>
+    <div className='icon-container post-identifier'>
       {/* <CommentIcon className='icon'/> */}
-      <FbRequestIcon />
+      {/* <FbRequestIcon /> */}
     </div>
   </div>
 );

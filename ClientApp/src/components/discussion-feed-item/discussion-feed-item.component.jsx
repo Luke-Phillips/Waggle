@@ -1,6 +1,7 @@
 import React from 'react';
-import PostHeader from '../post-header/post-header.component';
 import CustomButton from '../custom-button/custom-button.component';
+import FileUpload from '../file-upload/file-upload.component';
+import PostHeader from '../post-header/post-header.component';
 import Ratings from '../ratings/ratings.component';
 
 import './discussion-feed-item.style.scss';
@@ -15,41 +16,46 @@ const postTime = new Date('2021/5/17 16:24:00');
 // insight --> comment
 // feedbackReq --> response?? (essentially a comment)
 
-const buttonLabeler = postType => {
-  if(postType === 'question') {
-    return 'Answer'
-  }
-  if(postType === 'feedback') {
-    return 'Respond'
-  }
-  return 'Comment'
-}
+const DiscussionFeedItem = ({ btnFunc = () => {} , children, ...props }) => {
 
-const DiscussionFeedItem = ({ btnFunc = () => {} , children, ...otherProps }) => {
+  const buttonLabeler = (postType, isResponse = false) => {
+    if(postType === 'question') {
+      return 'Answer'
+    }
+    if(postType === 'feedback') {
+      return 'Respond'
+    }
+    if(postType === 'feedback' && isResponse) {
+      return 'Response'
+    }
+
+    return 'Comment'
+  }
   
   const replyBtnClickHandler = () => {
-    btnFunc(buttonLabeler(otherProps.type))
+    btnFunc(buttonLabeler(props.type, true))
+    props.replyClick()
+  
   }
-  
-  
-  
+
   return (
   <div
-    id={otherProps.postType}
-    className={`discussion-feed-item ${otherProps.postWidth}`}
+    id={props.postType} // This needs to change!!! 
+    className={`discussion-feed-item ${props.postWidth}`}
     
   >
-    <div onClick={otherProps.onClick}>
-    <PostHeader user={otherProps.user} date={postTime} />
+    <div onClick={props.onClick}>
+    <PostHeader user={props.user} date={postTime} />
     <p className='content'>{children}</p>
     </div>
 
     <div className='footer'>
-      <Ratings postType={otherProps.type}/>
+      <Ratings postType={props.type}/>
+      <FileUpload allowUpload={props.type}/>
       <div className='btnContainer'>
-        <input className='upload' type='file' />
-        <CustomButton className='feed-item-btn' onClick={replyBtnClickHandler}>
-          {buttonLabeler(otherProps.type)}
+        
+        <CustomButton className='feed-item-btn' showbtn={props.showbtn} onClick={replyBtnClickHandler}>
+          {buttonLabeler(props.type)}
         </CustomButton>
       </div>
     </div>
