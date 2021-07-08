@@ -23,7 +23,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Cade',
         text: "Hello I'm a student and I would like to be heard",
-        time: "2021-06-18T20:47:18",
+        time: "2021-06-18T20:47:18", // 2
         postType: 'insight',
         isReply: true,
         replies: [0]
@@ -31,7 +31,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Luke',
         text: 'I am here to Announce I am the avatar!!',
-        time : "2021-06-17T20:59:26",
+        time : "2021-06-17T20:59:26", // 1 
         postType: 'comment',
         isReply: true,
         replies: [0, 0]
@@ -39,7 +39,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Michael',
         text: 'That question is very silly ask another',
-        time: "2021-06-20T20:44:45",
+        time: "2021-06-20T20:44:45", // 4 
         postType: 'answer',
         isReply: true,
         replies: [0, 0, 0, 0]
@@ -47,7 +47,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Brooklynn',
         text: 'You seem very intelligent, this was very well written. Good job',
-        time: "2021-06-19T20:41:41",
+        time: "2021-06-19T20:41:41", // 3
         postType: 'fbrequest',
         isReply: true,
         replies: [0, 0, 0]
@@ -127,6 +127,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
             showbtn={showbtn}
             btnFunc={handleReplyType}
             replyClick={handleReplyClick}
+            time={feedItem.time}
           >
             {feedItem.text}
           </DiscussionFeedItem>

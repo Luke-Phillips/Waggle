@@ -7,51 +7,55 @@ import { ReactComponent as FbResponseIcon } from '../../assets/fb-response.svg';
 
 import './post-header.styles.scss';
 
-function equalToOne(timeMetric) {
-  return timeMetric === 1 ? true : false;
-}
+const PostHeader = props => {
+  
+  const datePosted = new Date(props.date)
 
-function timeElapsedSincePosted(timePosted) {
-  let currentDate = new Date();
-  let timeElapsed = '';
-  let diffInMilliSeconds =
-    Math.abs(currentDate.getTime() - timePosted.getTime()) / 1000;
-  let days = Math.floor(diffInMilliSeconds / 86400);
-  let hours = Math.floor(diffInMilliSeconds / 3600);
-  let minutes = Math.floor(diffInMilliSeconds / 60);
-
-  if (days > 0) {
-    equalToOne(days)
-      ? (timeElapsed = `${days} day`)
-      : (timeElapsed = `${days} days`);
-    return timeElapsed;
+  function equalToOne(timeMetric) {
+    return timeMetric === 1 ? true : false;
   }
-
-  if (hours > 0 && hours < 24) {
-    equalToOne(hours)
-      ? (timeElapsed = `${hours} hour`)
-      : (timeElapsed = `${hours} hours`);
-    return timeElapsed;
+  
+  function timeElapsedSincePosted(timePosted) {
+    let currentDate = new Date();
+    let timeElapsed = '';
+    let diffInMilliSeconds =
+      Math.abs(currentDate.getTime() - timePosted.getTime()) / 1000;
+    let days = Math.floor(diffInMilliSeconds / 86400);
+    let hours = Math.floor(diffInMilliSeconds / 3600);
+    let minutes = Math.floor(diffInMilliSeconds / 60);
+  
+    if (days > 0) {
+      equalToOne(days)
+        ? (timeElapsed = `${days} day`)
+        : (timeElapsed = `${days} days`);
+      return timeElapsed;
+    }
+  
+    if (hours > 0 && hours < 24) {
+      equalToOne(hours)
+        ? (timeElapsed = `${hours} hour`)
+        : (timeElapsed = `${hours} hours`);
+      return timeElapsed;
+    }
+  
+    if (minutes > 0 && minutes < 60) {
+      equalToOne(minutes)
+        ? (timeElapsed = `${minutes} minute`)
+        : (timeElapsed = `${minutes} minutes`);
+      return timeElapsed;
+    }
+  
+    return 'less than a minute';
   }
-
-  if (minutes > 0 && minutes < 60) {
-    equalToOne(minutes)
-      ? (timeElapsed = `${minutes} minute`)
-      : (timeElapsed = `${minutes} minutes`);
-    return timeElapsed;
-  }
-
-  return 'less than a minute';
-}
-
-const PostHeader = props => (
+  
+  return(
   <div className='post-header'>
 
     <div className='header-info'>
       <p>{`Posted by ${props.user} ${timeElapsedSincePosted(
-        props.date
+        datePosted
       )} ago`}</p>
-      <p>{`${props.date.toLocaleString(navigator.language, {
+      <p>{`${datePosted.toLocaleString(navigator.language, {
         dateStyle: 'full',
         timeStyle: 'short',
       })}`}</p> 
@@ -61,6 +65,6 @@ const PostHeader = props => (
       {/* <FbRequestIcon /> */}
     </div>
   </div>
-);
+)};
 
 export default PostHeader;

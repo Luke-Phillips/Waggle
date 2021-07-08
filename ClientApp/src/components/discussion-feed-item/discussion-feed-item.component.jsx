@@ -30,14 +30,16 @@ const DiscussionFeedItem = ({ btnFunc = () => {} , children, ...props }) => {
     }
 
     return 'Comment'
-  }
   
+  }
+  //Need to create a reply header labler func 
+
   const replyBtnClickHandler = () => {
     btnFunc(buttonLabeler(props.type, true))
     props.replyClick()
   
   }
-
+  
   return (
   <div
     id={props.postType} // This needs to change!!! 
@@ -45,7 +47,7 @@ const DiscussionFeedItem = ({ btnFunc = () => {} , children, ...props }) => {
     
   >
     <div onClick={props.onClick}>
-    <PostHeader user={props.user} date={postTime} />
+    <PostHeader user={props.user} date={props.time} />
     <p className='content'>{children}</p>
     </div>
 
