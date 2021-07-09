@@ -7,23 +7,23 @@ import { UserAndClassIds } from '../user-and-class-context/user-and-class-contex
 import './discussion-feed.styles.scss';
 
 
-const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbtn}) => {
+const DiscussionFeed = ({shownPostTypes, sortPostsBy, timeAscending, popularityAscending, discussionPostType, showbtn}) => {
+  const {userId, classId} = useContext(UserAndClassIds);
+
   const [posts, setPosts] = useState([]);
-  const popularitySortToggle = sortPostsBy === 'least' ? -1 : 1; // default = 1 = most replies
-  const timeSortToggle = sortPostsBy === 'oldest' ? -1 : 1; // default = 1 = most recent
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const [postWidth, setPostWidth] = useState('normal');
   const [replyType, setReplyType] = useState('')
   const [showReplies, setShowReplies] = useState(false);
 
-  console.log('PST',popularitySortToggle)
-  console.log('TST',timeSortToggle)
-  console.log('SortFirst', timeSortIsFirst)
-
-  useEffect(() => {
-    // this will actually be a fetch
-    //fetch(``)
+    useEffect(() => {
+    // console.log('class id is', classId);
+    // classId &&
+    //   fetch(`posts/${classId}`)
+    //     .then(res => res.json())
+    //     .then(res => setPosts(res))
+    
     setPosts([
       {
         user: 'Cade',
@@ -31,7 +31,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
         time: "2021-06-18T20:47:18", 
         postType: 'insight',
         isReply: true,
-        replies: [0]
+        replyPosts: [0, 0]
       },
       {
         user: 'Luke',
@@ -39,7 +39,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
         time : "2021-06-17T20:59:26",  
         postType: 'comment',
         isReply: true,
-        replies: [0, 0]
+        replyPosts: [0, 0]
       },
       {
         user: 'Michael',
@@ -47,7 +47,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
         time: "2021-06-20T20:44:45",  
         postType: 'answer',
         isReply: true,
-        replies: [0, 0, 0, 0]
+        replyPosts: [0, 0, 0, 0]
       },
       {
         user: 'Brooklynn',
@@ -55,13 +55,10 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
         time: "2021-06-19T20:41:41",
         postType: 'fbrequest',
         isReply: true,
-        replies: [0, 0, 0]
+        replyPosts: [0, 0, 0]
       },
     ])
-  }, []); 
-
-  const dFContext = useContext(UserAndClassIds)
-  console.log('DissFeedContext: ', dFContext.userId)
+  }, [classId]);
 
   const toggleShowReplies = () => {
     setShowReplies(!showReplies);
@@ -86,16 +83,16 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
 
   const timeCompare = isAscending => {
     return (post1, post2) => {
-      if (post1.time < post2.time) return isAscending;
-      if (post1.time > post2.time) return -+isAscending;
+      if (post1.time > post2.time) return isAscending ? 1 : -1;
+      if (post1.time < post2.time) return -(isAscending ? 1 : -1);
       return 0;
     };
   };
 
   const popularityCompare = isAscending => {
     return (post1, post2) => {
-      if (post1.replies.length > post2.replies.length) return isAscending;
-      if (post1.replies.length < post2.replies.length) return -+isAscending;
+      if (post1.replyPosts.length > post2.replyPosts.length) return isAscending ? 1 : -1;
+      if (post1.replyPosts.length < post2.replyPosts.length) return -(isAscending ? 1 : -1);
       return 0;
     };
   };
@@ -108,11 +105,11 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
 
   const sortedPosts = timeSortIsFirst
     ? filteredPosts.slice()
-        .sort(timeCompare(popularitySortToggle))
-        .sort(popularityCompare(timeSortToggle))
+        .sort(timeCompare(timeAscending))
+        .sort(popularityCompare(popularityAscending))
     : filteredPosts.slice()
-        .sort(popularityCompare(popularitySortToggle))
-        .sort(timeCompare(timeSortToggle));
+        .sort(popularityCompare(popularityAscending))
+        .sort(timeCompare(timeAscending));
 
   return (
     <div className='discussion-feed'>

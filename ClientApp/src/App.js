@@ -14,13 +14,13 @@ const App = () => {
   
   const [classAndUserId, setClassAndUserId] = useState({
     userId: null,
-    classId: '',
+    classId: null,
   });
 
   useEffect(() => {
     setClassAndUserId({
-      userId: 2,
-      classId: '0006',
+      userId: '0006',
+      classId: 2,
     });
   }, [])
 

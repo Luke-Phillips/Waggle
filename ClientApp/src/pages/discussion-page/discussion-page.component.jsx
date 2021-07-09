@@ -11,16 +11,14 @@ import './discussion-page.styles.scss';
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
 const DiscussionPage = () => {
-
+  
   const contextCheck = useContext(UserAndClassIds)
-
-  console.log('Context Check', contextCheck)
 
   const [postInfo, setPostInfo] = useState({});
 
-  const [id, setId] = useState(0);
-
-  const [sortBy, setSortBy] = useState('')
+  const [sortBy, setSortBy] = useState('newest')
+  const [sortByTimeAscending, setSortByTimeAscending] = useState(false) // newest posts
+  const [sortByPopularityAscending, setSortByPopularityAscending] = useState(true) // least replies
   
   const [showPostType, setShowPostType] = useState([]);
 
@@ -28,8 +26,16 @@ const DiscussionPage = () => {
     setShowPostType(postTypes);
   };
 
-  const handleSortBy = sortOrder => {
-    setSortBy(sortOrder);
+  const handleSortBy = sortBy => {
+    setSortBy(sortBy);
+    if (sortBy === 'newest' || sortBy === 'oldest')
+    {
+      setSortByTimeAscending(sortBy === 'oldest')
+    }
+    else 
+    {
+      setSortByPopularityAscending(sortBy === 'least')
+    }
   }
 
   const announcement = () => {
@@ -73,6 +79,8 @@ const DiscussionPage = () => {
           <DiscussionFeed
             shownPostTypes={showPostType}
             sortPostsBy={sortBy}
+            timeAscending={sortByTimeAscending}
+            popularityAscending={sortByPopularityAscending}
             discussionPostType={postInfo.postType}
             showbtn={true}
           />
