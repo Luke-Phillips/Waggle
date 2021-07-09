@@ -1,3 +1,13 @@
+$question-color: darkgoldenrod;
+$fbrequest-color: blue;
+$comment-color: black;
+$insight-color: darkcyan;
+$announcement-color: crimson;
+
+@mixin postColor () {
+  
+}
+
 .post-header {
   width: 100%;
   display: flex;
@@ -21,7 +31,6 @@
   justify-self: flex-end;
   border-radius: 0 13px 0 0;
   //height: 2ch;
-  
 }
 
 
@@ -32,4 +41,44 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 1ch 0 0 1ch;
+}
+
+.question {
+  border-color: $question-color;
+}
+
+.fbrequest {
+  border-color: $fbrequest-color;
+}
+
+.comment {
+  border-color: $comment-color;
+}
+
+.insight {
+  border-color: $insight-color;
+}
+
+.announcement {
+  border-color: $announcement-color;
+}
+
+#question {
+ background-color: $question-color;
+}
+
+#fbrequest {
+  background-color: $fbrequest-color;
+}
+
+#comment {
+  background-color: $comment-color;
+}
+
+#insight {
+  background-color: $insight-color;
+}
+
+#announcement {
+  background-color: $announcement-color;
 }

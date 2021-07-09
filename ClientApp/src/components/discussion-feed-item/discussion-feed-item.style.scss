@@ -1,7 +1,13 @@
+$question-color: darkgoldenrod;
+$fbrequest-color: blue;
+$comment-color: black;
+$insight-color: darkcyan;
+$announcement-color: crimson;
+
 .discussion-feed-item {
   // width: 60%;
   margin: 2ch auto;
-  border: solid 2px black;
+  border: solid 2px;
   border-radius: 15px;
 
   .content {
@@ -54,4 +60,24 @@
 .discussion-feed-item:hover {
   border-color: #883f2e;
   background-color: rgba(255, 225, 0, 0.16);
+}
+
+.question {
+  border-color: $question-color;
+}
+
+.fbrequest {
+  border-color: $fbrequest-color;
+}
+
+.comment {
+  border-color: $comment-color;
+}
+
+.insight {
+  border-color: $insight-color;
+}
+
+.announcement {
+  border-color: $announcement-color;
 }

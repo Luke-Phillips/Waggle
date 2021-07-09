@@ -52,7 +52,6 @@ const PostHeader = props => {
     return authorId === null ? 'No User Name O:' : authorId
   }
 
-
   return(
   <div className='post-header'>
 
@@ -65,7 +64,7 @@ const PostHeader = props => {
         timeStyle: 'short',
       })}`}</p> 
     </div>
-    <div className='icon-container post-identifier'>
+    <div id={`${props.type}`} className='icon-container post-identifier'>
       {/* <CommentIcon className='icon'/> */}
       {/* <FbRequestIcon /> */}
     </div>

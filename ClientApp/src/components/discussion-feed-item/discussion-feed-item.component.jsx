@@ -44,11 +44,11 @@ const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
 
   return (
     <div
-      id={props.postType} // This needs to change!!!
-      className={`discussion-feed-item ${props.postWidth}`}
+      key={props.postType} // This needs to change!!!
+      className={`discussion-feed-item ${props.postWidth} ${props.type}`}
     >
       <div onClick={props.onClick}>
-        <PostHeader user={props.user} date={props.time} />
+        <PostHeader className={`${props.type}`} type={props.type} user={props.user} date={props.time} />
         <p className='content'>{children}</p>
       </div>
 
