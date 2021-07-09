@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext ,useEffect, useState } from 'react';
 import CreatePost from '../create-post/create-post.component';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import RepliesColumn from '../replies-column/replies-column.component';
+import { UserAndClassIds } from '../user-and-class-context/user-and-class-context';
 import './discussion-feed.styles.scss';
 
 
@@ -16,6 +17,10 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
   const [replyType, setReplyType] = useState('')
   const [showReplies, setShowReplies] = useState(false);
 
+  console.log('PST',popularitySortToggle)
+  console.log('TST',timeSortToggle)
+  console.log('SortFirst', timeSortIsFirst)
+
   useEffect(() => {
     // this will actually be a fetch
     //fetch(``)
@@ -23,7 +28,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Cade',
         text: "Hello I'm a student and I would like to be heard",
-        time: "2021-06-18T20:47:18", // 2
+        time: "2021-06-18T20:47:18", 
         postType: 'insight',
         isReply: true,
         replies: [0]
@@ -31,7 +36,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Luke',
         text: 'I am here to Announce I am the avatar!!',
-        time : "2021-06-17T20:59:26", // 1 
+        time : "2021-06-17T20:59:26",  
         postType: 'comment',
         isReply: true,
         replies: [0, 0]
@@ -39,7 +44,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Michael',
         text: 'That question is very silly ask another',
-        time: "2021-06-20T20:44:45", // 4 
+        time: "2021-06-20T20:44:45",  
         postType: 'answer',
         isReply: true,
         replies: [0, 0, 0, 0]
@@ -47,13 +52,16 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
       {
         user: 'Brooklynn',
         text: 'You seem very intelligent, this was very well written. Good job',
-        time: "2021-06-19T20:41:41", // 3
+        time: "2021-06-19T20:41:41",
         postType: 'fbrequest',
         isReply: true,
         replies: [0, 0, 0]
       },
     ])
-  }, []);
+  }, []); 
+
+  const dFContext = useContext(UserAndClassIds)
+  console.log('DissFeedContext: ', dFContext.userId)
 
   const toggleShowReplies = () => {
     setShowReplies(!showReplies);
@@ -78,8 +86,8 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
 
   const timeCompare = isAscending => {
     return (post1, post2) => {
-      if (post1.time > post2.time) return isAscending;
-      if (post1.time < post2.time) return -+isAscending;
+      if (post1.time < post2.time) return isAscending;
+      if (post1.time > post2.time) return -+isAscending;
       return 0;
     };
   };
@@ -88,6 +96,7 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
     return (post1, post2) => {
       if (post1.replies.length > post2.replies.length) return isAscending;
       if (post1.replies.length < post2.replies.length) return -+isAscending;
+      return 0;
     };
   };
   
@@ -99,8 +108,8 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
 
   const sortedPosts = timeSortIsFirst
     ? filteredPosts.slice()
-        .sort(popularityCompare(timeSortToggle))
         .sort(timeCompare(popularitySortToggle))
+        .sort(popularityCompare(timeSortToggle))
     : filteredPosts.slice()
         .sort(popularityCompare(popularitySortToggle))
         .sort(timeCompare(timeSortToggle));
@@ -112,7 +121,6 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
             user='placeholder'
             type={discussionPostType}
             postWidth={postWidth}
-            showbtn={true}
           />
 
         {sortedPosts.map(feedItem => (
@@ -124,7 +132,6 @@ const DiscussionFeed = ({shownPostTypes, sortPostsBy, discussionPostType, showbt
               toggleShowReplies();
               handlePostWidth();
             }}
-            showbtn={showbtn}
             btnFunc={handleReplyType}
             replyClick={handleReplyClick}
             time={feedItem.time}

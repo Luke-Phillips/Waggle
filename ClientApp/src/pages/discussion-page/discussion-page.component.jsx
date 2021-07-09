@@ -1,44 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FilterPost from '../../components/filter-posts/filter-posts.component';
 import SortPosts from '../../components/sort-posts/sort-posts.component';
 import CreatePost from '../../components/create-post/create-post.component';
 import DiscussionFeed from '../../components/discussion-feed/discussion-feed.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import { UserAndClassIds } from '../../components/user-and-class-context/user-and-class-context'
 
 import './discussion-page.styles.scss';
 
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
-const feedData = [];
-const data = {
-  posts: [
-    {
-      user: 'Cade',
-      text: "Hello I'm a student and I would like to be heard",
-      postType: 'insight',
-      isReply: true,
-    },
-    {
-      user: 'Luke',
-      text: 'I am here to Announce I am the avatar!!',
-      postType: 'comment',
-      isReply: true,
-    },
-    {
-      user: 'Michael',
-      text: 'That question is very silly ask another',
-      postType: 'answer',
-      isReply: true,
-    },
-    {
-      user: 'Brooklynn',
-      text: 'You seem very intelligent, this was very well written. Good job',
-      postType: 'fbrequest',
-      isReply: true,
-    },
-  ],
-};
 const DiscussionPage = () => {
+
+  const contextCheck = useContext(UserAndClassIds)
+
+  console.log('Context Check', contextCheck)
 
   const [postInfo, setPostInfo] = useState({});
 

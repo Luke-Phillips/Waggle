@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClassNavIcon from '../class-nav-icon/class-nav-icon.component';
+import { UserAndClassIds } from '../../components/user-and-class-context/user-and-class-context'
 import './class-nav.styles.scss';
 
 const ClassNav = props => {
@@ -13,9 +14,8 @@ const ClassNav = props => {
       });
   }, [props.userId]);
 
-  console.log(classrooms);
-  console.log(props.userId);
-  console.log('Hello world');
+  console.log('ClassNav Classrooms:', classrooms);
+  console.log('ClassNav UserID:', props.userId); 
   return (
     <div className='class-nav'>
       {classrooms.map(classroom => (

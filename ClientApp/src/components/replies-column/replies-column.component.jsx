@@ -12,7 +12,7 @@ const ReviewsColumn = ({ posts, ...props }) => {
   console.log('Reply Type: ', props.replyType)
   return (
     <div className='reviews-column'>
-      <DiscussionPost user='Placeholder' type={props.replyType} postWidth={props.postWidth} showbtn={true}/>
+      <DiscussionPost user='Placeholder' type={props.replyType} postWidth={props.postWidth} />
 
       {posts.map(post => (
         <DiscussionFeedItem

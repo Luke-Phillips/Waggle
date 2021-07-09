@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ProfileInfo from '../../components/profile-info/profile-info.component';
 import HiveManager from '../../components/hive-manager/hive-manager.component';
+import { UserAndClassIds } from '../../components/user-and-class-context/user-and-class-context'
 import './settings-page.styles.scss';
+import { Fragment } from 'react';
 
 const SettingsPage = () => {
   const userId = '0006'; // hardcoded for now, use context later
@@ -67,7 +69,7 @@ const SettingsPage = () => {
   console.log(filteredStudents);
 
   return (
-    <>
+    <div className='settings-page'>
       <ProfileInfo
         user={students.filter(s => s.UserId === userId)}
         profileChangeHandler = {profileChangeHandler}
@@ -78,7 +80,7 @@ const SettingsPage = () => {
         enrollmentHandler={enrollmentHandler}
         roleHandler={roleHandler}
       />
-    </>
+    </div>
   )
 };
 

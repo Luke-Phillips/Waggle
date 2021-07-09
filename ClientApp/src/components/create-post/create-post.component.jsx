@@ -8,8 +8,6 @@ const CreatePost = props => {
 
   const labels = ['Announcement', 'Question', 'Insight', 'Feedback Request'];
   
-
-  console.log('Create Post Comp');
   return (
     <div className='create-post'>
       <h3>Create Post:</h3>

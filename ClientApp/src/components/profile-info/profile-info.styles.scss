@@ -1,3 +1,21 @@
-.profileInfo > input {
-  display: block;
+.profileInfo {
+  width: 30%;
+  border: dotted 2px blueviolet;
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-box {
+    border: solid 2px darkcyan;
+  }
+
+  input {
+    width: 80%;
+    margin: 2ch auto 0 auto;
+    
+  }
+  
 }

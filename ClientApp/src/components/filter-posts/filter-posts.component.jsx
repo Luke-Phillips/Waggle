@@ -17,7 +17,6 @@ const FilterPosts = props => {
     }
 
     if (isChecked) {  
-      console.log(value, 'added')
       setCheckedValues(checkedValues =>[...checkedValues, value])
     }
 
@@ -74,7 +73,6 @@ const FilterPosts = props => {
           Comments
         </label>
       </form>
-      {console.log('Checked but Later', checkedValues)}
     </>
   );
 };
