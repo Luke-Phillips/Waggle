@@ -14,6 +14,7 @@ import './discussion-feed-item.style.scss';
 // feedbackReq --> response?? (essentially a comment)
 
 const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
+  
 
   const buttonLabeler = postType => {
     if (postType === 'question') {

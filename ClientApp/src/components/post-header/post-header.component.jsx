@@ -48,11 +48,16 @@ const PostHeader = props => {
     return 'less than a minute';
   }
   
+  const handleNullUser = authorId => {
+    return authorId === null ? 'No User Name O:' : authorId
+  }
+
+
   return(
   <div className='post-header'>
 
     <div className='header-info'>
-      <p>{`Posted by ${props.user} ${timeElapsedSincePosted(
+      <p>{`Posted by ${handleNullUser(props.user)} ${timeElapsedSincePosted(
         datePosted
       )} ago`}</p>
       <p>{`${datePosted.toLocaleString(navigator.language, {

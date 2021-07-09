@@ -84,6 +84,7 @@ namespace Waggle.Data
                 ClassroomId = 2,
                 Time = DateTime.Parse("6/17/2021 8:44:45 PM"),
                 Content = "I'm sharing an Insight, learn mine knowledge!",
+                PostType = "insight",
                 IsRepliable = true,
                 ReplyPosts = null
             };
@@ -92,6 +93,7 @@ namespace Waggle.Data
                 ClassroomId = 2,
                 Time = DateTime.Parse("6/17/2021 8:59:26 PM"),
                 Content = "I don't know, but this is an answer post.",
+                PostType = "answer",
                 IsRepliable = false,
                 ReplyPosts = null
             };
@@ -100,6 +102,7 @@ namespace Waggle.Data
                 ClassroomId = 2,
                 Time = DateTime.Parse("6/17/2021 8:47:18 PM"),
                 Content = "What is a question post?",
+                PostType = "question",
                 IsRepliable = false,
                 ReplyPosts = new Post[] { answer }
             };
