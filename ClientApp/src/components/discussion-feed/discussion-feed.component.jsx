@@ -7,7 +7,7 @@ import { UserAndClassIds } from '../user-and-class-context/user-and-class-contex
 import './discussion-feed.styles.scss';
 
 const DiscussionFeed = ({
-  shownPostTypes,
+  filteredPostTypes,
   sortPostsBy,
   timeAscending,
   popularityAscending,
@@ -37,7 +37,7 @@ const DiscussionFeed = ({
       authorId: 'Luke',
       content: 'I am here to Announce I am the avatar!!',
       time: '2021-06-17T20:59:26',
-      postType: 'comment',
+      postType: 'announcement',
       isRepliable: true,
       replyPosts: [0, 0],
     },
@@ -67,7 +67,7 @@ const DiscussionFeed = ({
         .then(res => res.json())
         .then(res => setPosts(res));
 
-    // setPosts(dummyData)
+    //setPosts(dummyData)
   }, [classId]);
 
   const toggleShowReplies = numReplies => {
@@ -129,9 +129,9 @@ const DiscussionFeed = ({
   };
 
   const filteredPosts =
-    shownPostTypes.length === 0
+    filteredPostTypes.length === 0
       ? posts.slice()
-      : posts.slice().filter(post => shownPostTypes.includes(post.postType));
+      : posts.slice().filter(post => filteredPostTypes.includes(post.postType));
 
   const sortedPosts = timeSortIsFirst
     ? filteredPosts
