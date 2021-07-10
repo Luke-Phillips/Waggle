@@ -7,7 +7,7 @@ import { UserAndClassIds } from '../user-and-class-context/user-and-class-contex
 import './discussion-feed.styles.scss';
 
 const DiscussionFeed = ({
-  shownPostTypes,
+  filteredPostTypes,
   sortPostsBy,
   timeAscending,
   popularityAscending,
@@ -62,12 +62,12 @@ const DiscussionFeed = ({
 
   useEffect(() => {
     console.log('class id is', classId);
-    classId &&
-      fetch(`posts/${classId}`)
-        .then(res => res.json())
-        .then(res => setPosts(res));
+    // classId &&
+    //   fetch(`posts/${classId}`)
+    //     .then(res => res.json())
+    //     .then(res => setPosts(res));
 
-    // setPosts(dummyData)
+    setPosts(dummyData)
   }, [classId]);
 
   const toggleShowReplies = numReplies => {
@@ -129,9 +129,9 @@ const DiscussionFeed = ({
   };
 
   const filteredPosts =
-    shownPostTypes.length === 0
+    filteredPostTypes.length === 0
       ? posts.slice()
-      : posts.slice().filter(post => shownPostTypes.includes(post.postType));
+      : posts.slice().filter(post => filteredPostTypes.includes(post.postType));
 
   const sortedPosts = timeSortIsFirst
     ? filteredPosts

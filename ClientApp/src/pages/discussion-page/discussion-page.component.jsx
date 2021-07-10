@@ -20,10 +20,18 @@ const DiscussionPage = () => {
   const [sortByTimeAscending, setSortByTimeAscending] = useState(false) // newest posts
   const [sortByPopularityAscending, setSortByPopularityAscending] = useState(true) // least replies
   
-  const [showPostType, setShowPostType] = useState([]);
+  const [filteredPostTypes, setFilteredPostTypes] = useState([]);
 
-  const showPosts = postTypes => {
-    setShowPostType(postTypes);
+  const handleFilterPostTypes = e => {
+    const postType = e.target.value;
+    const isFiltered = e.target.checked;
+
+    const newFilteredPostTypes = isFiltered ?
+      [postType, ...filteredPostTypes] :
+      filteredPostTypes.filter(pt => pt !== postType);
+    {console.log('new filters', newFilteredPostTypes)}
+    setFilteredPostTypes(newFilteredPostTypes);
+    {console.log('state filters imm. after setting state', filteredPostTypes)}
   };
 
   const handleSortBy = sortBy => {
@@ -66,9 +74,10 @@ const DiscussionPage = () => {
 
   return (
     <div className='discussion-page'>
+    {console.log('filters', filteredPostTypes)}
       <div className='discussion-board'>
         <div className='options'>
-          <FilterPost setPostTypes={showPosts} />
+          <FilterPost handleCheckFilter={handleFilterPostTypes} />
           <CreatePost postTypes={postTypes} showbtn={true}/>
         </div>
 
@@ -77,7 +86,7 @@ const DiscussionPage = () => {
           <SortPosts setSortByValue={handleSortBy} showbtn={true}/>
           
           <DiscussionFeed
-            shownPostTypes={showPostType}
+            filteredPostTypes={filteredPostTypes}
             sortPostsBy={sortBy}
             timeAscending={sortByTimeAscending}
             popularityAscending={sortByPopularityAscending}

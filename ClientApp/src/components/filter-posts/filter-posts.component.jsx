@@ -2,79 +2,57 @@ import React, { useState } from 'react';
 import UseState from 'react';
 import './filter-posts.styles.scss';
 
-const FilterPosts = props => {
-  const [checkedValues, setCheckedValues] = useState([]);
+const FilterPosts = ({handleCheckFilter}) => (
+  <>
+    <form className='filter'>
+      <h3>Filter Posts: </h3>
+      <label>
+        <input
+          type='checkbox'
+          name='announcements'
+          value='announcement'
+          onChange={handleCheckFilter}
+        ></input>
+        Announcements
+      </label>
 
-  const handleCheck = e => {
-    const value = e.target.value
-    const isInCheckedValues = checkedValues.includes(value)
-    const isChecked = e.target.checked
+      <label>
+        <input
+          type='checkbox'
+          value='question'
+          onChange={handleCheckFilter}
+        ></input>
+        Questions
+      </label>
 
-    if(isChecked === false && isInCheckedValues) {
-      
-      const arr = checkedValues.filter(checkedItem => checkedItem !== value)
-      setCheckedValues(arr)
-    }
+      <label>
+        <input
+          type='checkbox'
+          value='insight'
+          onChange={handleCheckFilter}
+        ></input>
+        Insights
+      </label>
 
-    if (isChecked) {  
-      setCheckedValues(checkedValues =>[...checkedValues, value])
-    }
+      <label>
+        <input
+          type='checkbox'
+          value='fbrequest'
+          onChange={handleCheckFilter}
+        ></input>
+        Feedback Requests
+      </label>
 
-    props.setPostTypes(checkedValues);
-
-  };
-  return (
-    <>
-      <form className='filter'>
-        <h3>Filter Posts: </h3>
-        <label>
-          <input
-            type='checkbox'
-            name='announcements'
-            value='announcement'
-            onChange={handleCheck}
-          ></input>
-          Announcements
-        </label>
-
-        <label>
-          <input
-            type='checkbox'
-            value='question'
-            onChange={handleCheck}
-          ></input>
-          Questions
-        </label>
-
-        <label>
-          <input
-            type='checkbox'
-            value='insight'
-            onChange={handleCheck}
-          ></input>
-          Insights
-        </label>
-
-        <label>
-          <input
-            type='checkbox'
-            value='fbrequest'
-            onChange={handleCheck}
-          ></input>
-          Feedback Requests
-        </label>
-
-        <label>
-          <input
-            type='checkbox'
-            value='comment'
-            onChange={handleCheck}
-          ></input>
-          Comments
-        </label>
-      </form>
-    </>
-  );
-};
+      <label>
+        <input
+          type='checkbox'
+          value='comment'
+          onChange={handleCheckFilter}
+        ></input>
+        Comments
+      </label>
+    </form>
+  </>
+)
 
 export default FilterPosts;
