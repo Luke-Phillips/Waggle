@@ -181,11 +181,13 @@ const DiscussionFeed = ({
         //replyType={replyType}
         showbtn={false}
       >
+        
         <DiscussionPost
           user='Placeholder'
           type={replyType}
           postWidth={postWidth}
         />
+
       </RepliesColumn>
     </div>
   );

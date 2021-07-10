@@ -4,7 +4,7 @@ import StudentTable from '../student-table/student-table.component';
 import './hive-manager.styles.scss';
 
 const HiveManager = ({inviteCode, students, enrollmentHandler, roleHandler}) => (
-    <div>
+    <div className='hiveManager'>
       <p>Invite Code: {inviteCode}</p>
       <StudentTable
         students={students}

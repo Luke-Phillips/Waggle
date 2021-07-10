@@ -3,6 +3,7 @@ $fbrequest-color: blue;
 $comment-color: black;
 $insight-color: darkcyan;
 $announcement-color: crimson;
+$answer-color: #00203FFF;
 
 @mixin postColor () {
   
@@ -26,11 +27,11 @@ $announcement-color: crimson;
 }
 
 .post-identifier {
-  background-color: green;
   width: 1.5%;
   justify-self: flex-end;
   border-radius: 0 13px 0 0;
   //height: 2ch;
+  
 }
 
 
@@ -63,6 +64,10 @@ $announcement-color: crimson;
   border-color: $announcement-color;
 }
 
+.answer {
+  border-color: $answer-color;
+}
+
 #question {
  background-color: $question-color;
 }
@@ -81,4 +86,8 @@ $announcement-color: crimson;
 
 #announcement {
   background-color: $announcement-color;
+}
+
+#answer {
+  background-color: $answer-color;
 }

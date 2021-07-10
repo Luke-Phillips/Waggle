@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CustomButton from '../custom-button/custom-button.component';
 import './student-table.styles.scss';
 
 const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
@@ -55,25 +56,25 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
         {student.enrollmentStatus === enrollmentStatus.pending &&
           <>
             <span>pending</span>
-            <button
+            <CustomButton
               onClick={enrollmentHandler({
                   userId: student.userId,
                   newStatus: enrollmentStatus.enrolled
               })}>
               +
-            </button>
+            </CustomButton>
           </>
         }
         {student.enrollmentStatus === enrollmentStatus.enrolled &&
           <>
             <span>enrolled</span>
-            <button
+            <CustomButton
               onClick={enrollmentHandler({
                   userId: student.userId,
                   newStatus: enrollmentStatus.unenrolled
               })}>
               -
-            </button>
+            </CustomButton>
           </>
         }
         {student.enrollmentStatus === enrollmentStatus.unenrolled &&
@@ -84,23 +85,23 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
         {student.isModerator ?
           <>
             <span>moderator</span>
-            <button
+            <CustomButton
               onClick={roleHandler({
                   userId: student.userId,
                   newRole: 'student'
               })}>
               ⬇️
-            </button>
+            </CustomButton>
           </> :
           <>
             <span>student</span>
-            <button
+            <CustomButton
               onClick={roleHandler({
                   userId: student.userId,
                   newRole: 'moderator'
               })}>
                 ⬆️
-            </button>
+            </CustomButton>
           </>
         }
       </td>
@@ -108,6 +109,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   ));
 
   const studentTable = (
+    <div className='tableContainer'> 
     <table className='studentTable'>
       <tbody>
         <tr>
@@ -126,6 +128,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
         {studentTableData}
       </tbody>
     </table>
+    </div>
   );
 
   return studentTable;
