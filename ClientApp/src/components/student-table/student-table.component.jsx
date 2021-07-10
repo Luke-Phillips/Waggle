@@ -45,78 +45,118 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   const enrollmentStatus = {
     pending: 0,
     enrolled: 1,
-    unenrolled: 2
-  }
+    unenrolled: 2,
+  };
 
   const studentTableData = students.map(student => (
     <tr key={student.userId}>
       <td>{student.userName}</td>
       <td>{student.displayName}</td>
-      <td>
-        {student.enrollmentStatus === enrollmentStatus.pending &&
-          <>
-            <span>pending</span>
-            <CustomButton
+      {/* <td> */}
+      {student.enrollmentStatus === enrollmentStatus.pending && (
+        <>
+          <td>
+            <p>pending</p>
+          </td>
+          <td className='tableBtn'>
+            <CustomButton className='enrollBtn'
               onClick={enrollmentHandler({
-                  userId: student.userId,
-                  newStatus: enrollmentStatus.enrolled
-              })}>
+                userId: student.userId,
+                newStatus: enrollmentStatus.enrolled,
+              })}
+            >
               +
             </CustomButton>
-          </>
-        }
-        {student.enrollmentStatus === enrollmentStatus.enrolled &&
-          <>
-            <span>enrolled</span>
-            <CustomButton
+          </td>
+        </>
+      )}
+      {student.enrollmentStatus === enrollmentStatus.enrolled && (
+        <>
+          <td>
+            <p>enrolled</p>
+          </td>
+          <td className='tableBtn'>
+            <CustomButton className='enrollBtn'
               onClick={enrollmentHandler({
-                  userId: student.userId,
-                  newStatus: enrollmentStatus.unenrolled
-              })}>
+                userId: student.userId,
+                newStatus: enrollmentStatus.unenrolled,
+              })}
+            >
               -
             </CustomButton>
-          </>
-        }
-        {student.enrollmentStatus === enrollmentStatus.unenrolled &&
-          <span>unenrolled</span>
-        }
-      </td>
-      <td>
-        {student.isModerator ?
-          <>
-            <span>moderator</span>
-            <CustomButton
+          </td>
+        </>
+      )}
+      {student.enrollmentStatus === enrollmentStatus.unenrolled && (
+        <td colspan={2}>
+          <p>unenrolled</p>
+        </td>
+      )}
+      {/* </td> */}
+      {/* <td> */}
+      {student.isModerator ? (
+        <>
+          <td>
+            <p>moderator</p>
+          </td>
+          <td className='tableBtn'>
+            <CustomButton className='roleBtn'
               onClick={roleHandler({
-                  userId: student.userId,
-                  newRole: 'student'
-              })}>
+                userId: student.userId,
+                newRole: 'student',
+              })}
+            >
               ⬇️
             </CustomButton>
-          </> :
-          <>
-            <span>student</span>
-            <CustomButton
+          </td>
+          {/* <CustomButton
               onClick={roleHandler({
-                  userId: student.userId,
-                  newRole: 'moderator'
-              })}>
-                ⬆️
+                userId: student.userId,
+                newRole: 'student',
+              })}
+            >
+              ⬇️
+            </CustomButton> */}
+        </>
+      ) : (
+        <>
+          <td>
+            <p>student</p>
+          </td>
+          <td className='tableBtn'>
+            <CustomButton className='roleBtn'
+              onClick={roleHandler({
+                userId: student.userId,
+                newRole: 'moderator',
+              })}
+            >
+              ⬆️
             </CustomButton>
-          </>
-        }
-      </td>
+          </td>
+          {/* <CustomButton
+            onClick={roleHandler({
+              userId: student.userId,
+              newRole: 'moderator',
+            })}
+          >
+            ⬆️
+          </CustomButton> */}
+        </>
+      )}
+      {/* </td> */}
     </tr>
   ));
 
   const studentTable = (
-    <div className='tableContainer'> 
-    <table className='studentTable'>
-      <tbody>
-        <tr>
+    <div className='tableContainer'>
+      <table className='studentTable'>
+        <thead>
           <th>Username</th>
           <th>Display Name</th>
-          <th>Enrollment Status</th>
-          <th>Role</th>
+          <th colspan={2}>Enrollment Status</th>
+          <th colspan={2}>Role</th>
+        </thead>
+        <tbody>
           {/* <th></th>
           <th>
             <button onClick={nameSortClickHandler}>Name</button>
@@ -124,10 +164,10 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <th>
             <button onClick={roleSortClickHandler}>Role</button>
           </th> */}
-        </tr>
-        {studentTableData}
-      </tbody>
-    </table>
+
+          {studentTableData}
+        </tbody>
+      </table>
     </div>
   );
 

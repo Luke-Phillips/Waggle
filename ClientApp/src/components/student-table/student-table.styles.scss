@@ -1,23 +1,76 @@
+$primaryTableColor: rgb(174, 174, 174);
+$secondaryTableColor: rgb(1, 63, 63);
+
+@mixin btns($bgColor, $txtColor) {
+  background-color: $bgColor;
+  color: $txtColor;
+  height: 4ch;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  font-size: 18px;
+  box-shadow: none;
+}
+
 .tableContainer {
   width: 100%;
-  border: dotted 2px cornflowerblue;
+  
 }
 
 .studentTable {
   width: 100%;
   margin: 0 10% 0 auto;
+  border: solid 2px black;
+  border-radius: 15px;
+  
+  
 }
 
-tr {
+.enrollment {
+  
+}
+
+.roleBtn {
+  @include btns($primaryTableColor, $secondaryTableColor)
+}
+
+.enrollBtn{
+  @include btns($primaryTableColor, $secondaryTableColor)
+}
+
+table {
+  border: solid 2px black;
+  border-radius: 15px;
+}
+
+tbody {
+  width: 100%;
+  
+
+  tr:nth-child(odd) {
+    background-color: $secondaryTableColor;
+    color: $primaryTableColor;
+  }
+
+  tr:hover{
+    background-color: cadetblue;
+  }
+}
+
+th {
+  
+}
  
-  width: 100%
+tr {
+
+  width: 100%;
 }
 
 td {
-  
-  justify-content: space-between;
+  text-align: center;
+  height: 4ch;
+  border-collapse: collapse;
 }
 
-.studentTable > table, th, td {
+.studentTable > th, td {
   border: 1px solid black;
 }
