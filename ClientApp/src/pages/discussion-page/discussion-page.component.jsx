@@ -29,9 +29,7 @@ const DiscussionPage = () => {
     const newFilteredPostTypes = isFiltered ?
       [postType, ...filteredPostTypes] :
       filteredPostTypes.filter(pt => pt !== postType);
-    {console.log('new filters', newFilteredPostTypes)}
     setFilteredPostTypes(newFilteredPostTypes);
-    {console.log('state filters imm. after setting state', filteredPostTypes)}
   };
 
   const handleSortBy = sortBy => {
@@ -74,7 +72,6 @@ const DiscussionPage = () => {
 
   return (
     <div className='discussion-page'>
-    {console.log('filters', filteredPostTypes)}
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost handleCheckFilter={handleFilterPostTypes} />
