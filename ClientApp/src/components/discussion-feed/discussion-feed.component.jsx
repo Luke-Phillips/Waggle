@@ -37,7 +37,7 @@ const DiscussionFeed = ({
       authorId: 'Luke',
       content: 'I am here to Announce I am the avatar!!',
       time: '2021-06-17T20:59:26',
-      postType: 'comment',
+      postType: 'announcement',
       isRepliable: true,
       replyPosts: [0, 0],
     },
@@ -62,12 +62,12 @@ const DiscussionFeed = ({
 
   useEffect(() => {
     console.log('class id is', classId);
-    // classId &&
-    //   fetch(`posts/${classId}`)
-    //     .then(res => res.json())
-    //     .then(res => setPosts(res));
+    classId &&
+      fetch(`posts/${classId}`)
+        .then(res => res.json())
+        .then(res => setPosts(res));
 
-    setPosts(dummyData)
+    //setPosts(dummyData)
   }, [classId]);
 
   const toggleShowReplies = numReplies => {
