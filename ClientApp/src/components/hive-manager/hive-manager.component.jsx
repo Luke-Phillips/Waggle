@@ -5,12 +5,15 @@ import './hive-manager.styles.scss';
 
 const HiveManager = ({inviteCode, students, enrollmentHandler, roleHandler}) => (
     <div className='hiveManager'>
-      <p>Invite Code: {inviteCode}</p>
       <StudentTable
         students={students}
         enrollmentHandler = {enrollmentHandler}
         roleHandler = {roleHandler}
       />
+      <div className='inviteCodeContainer'>
+        <h4 className='inviteCodeHeader'>Class Invite Code: </h4> 
+        <h5 className='inviteCode'>{inviteCode}</h5>
+      </div>
     </div>
   );
 

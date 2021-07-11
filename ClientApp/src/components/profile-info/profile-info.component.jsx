@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
+import FormInput from '../form-input/form-input.component';
 import './profile-info.styles.scss';
 
 const ProfileInfo = ({ user, profileChangeHandler }) => {
@@ -15,10 +16,27 @@ const ProfileInfo = ({ user, profileChangeHandler }) => {
   const infoSaveHandler = e => {
     console.log('HTTP PUT request w/ fetch');
   };
-
+  console.log('USER: ', user);
   return (
     <div className='profileInfo'>
       <form className='profile-form'>
+        {/* <FormInput
+          value={'name'}
+          label='Name'
+          handleChange={nameChangeHandler}
+        />
+        <FormInput
+          value={displayName}
+          label='Display Name (Hive)'
+          handleChange={displayNameChangeHandler}
+        />
+        <FormInput
+          value={email}
+          label='Email'
+          handleChange={emailChangeHandler}
+        /> */}
+
+
       <input value={name} onChange={nameChangeHandler} placeholder='Name' />
       <input
         value={displayName}
@@ -26,10 +44,12 @@ const ProfileInfo = ({ user, profileChangeHandler }) => {
         placeholder='Display Name (Hive)'
       />
       <input value={email} onChange={emailChangeHandler} placeholder='Email' />
-      
-      <CustomButton addStyles='addStyles' onClick={infoSaveHandler}> Save </CustomButton>
+        <div className='btnBox'>
+          <CustomButton addStyles='addStyles' onClick={infoSaveHandler}>
+            Save
+          </CustomButton>
+        </div>
       </form>
-  
     </div>
   );
 };

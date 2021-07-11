@@ -1,5 +1,8 @@
 $primaryTableColor: rgb(174, 174, 174);
 $secondaryTableColor: rgb(1, 63, 63);
+$btnHoverColor: rgba(101, 101, 101, 0.81);
+$rowHoverColor: cadetblue;
+
 
 @mixin btns($bgColor, $txtColor) {
   background-color: $bgColor;
@@ -7,8 +10,12 @@ $secondaryTableColor: rgb(1, 63, 63);
   height: 4ch;
   width: 100%;
   margin: 0 auto 0 auto;
-  font-size: 18px;
+  padding-left: 0;
+  font-size: 2em;
   box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableContainer {
@@ -19,9 +26,6 @@ $secondaryTableColor: rgb(1, 63, 63);
 .studentTable {
   width: 100%;
   margin: 0 10% 0 auto;
-  border: solid 2px black;
-  border-radius: 15px;
-  
   
 }
 
@@ -33,13 +37,21 @@ $secondaryTableColor: rgb(1, 63, 63);
   @include btns($primaryTableColor, $secondaryTableColor)
 }
 
+.roleBtn:hover{
+  background-color: $btnHoverColor;
+}
+
 .enrollBtn{
   @include btns($primaryTableColor, $secondaryTableColor)
 }
 
+.enrollBtn:hover{
+  background-color: $btnHoverColor;
+}
+
 table {
-  border: solid 2px black;
-  border-radius: 15px;
+  
+  
 }
 
 tbody {
@@ -66,11 +78,12 @@ tr {
 }
 
 td {
-  text-align: center;
+  text-align: left;
   height: 4ch;
   border-collapse: collapse;
+  padding-left: 2ch;
 }
 
 .studentTable > th, td {
-  border: 1px solid black;
+  // border: 1px solid black;
 }

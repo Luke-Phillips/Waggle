@@ -59,7 +59,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
             <p>pending</p>
           </td>
           <td className='tableBtn'>
-            <CustomButton className='enrollBtn'
+            <CustomButton
+              className='enrollBtn'
               onClick={enrollmentHandler({
                 userId: student.userId,
                 newStatus: enrollmentStatus.enrolled,
@@ -76,7 +77,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
             <p>enrolled</p>
           </td>
           <td className='tableBtn'>
-            <CustomButton className='enrollBtn'
+            <CustomButton
+              className='enrollBtn'
               onClick={enrollmentHandler({
                 userId: student.userId,
                 newStatus: enrollmentStatus.unenrolled,
@@ -100,7 +102,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
             <p>moderator</p>
           </td>
           <td className='tableBtn'>
-            <CustomButton className='roleBtn'
+            <CustomButton
+              className='roleBtn'
               onClick={roleHandler({
                 userId: student.userId,
                 newRole: 'student',
@@ -124,7 +127,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
             <p>student</p>
           </td>
           <td className='tableBtn'>
-            <CustomButton className='roleBtn'
+            <CustomButton
+              className='roleBtn'
               onClick={roleHandler({
                 userId: student.userId,
                 newRole: 'moderator',
@@ -150,13 +154,12 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   const studentTable = (
     <div className='tableContainer'>
       <table className='studentTable'>
-        <thead>
+        <thead></thead>
+        <tbody>
           <th>Username</th>
           <th>Display Name</th>
-          <th colspan={2}>Enrollment Status</th>
-          <th colspan={2}>Role</th>
-        </thead>
-        <tbody>
+          <th colSpan={2}>Enrollment Status</th>
+          <th colSpan={2}>Role</th>
           {/* <th></th>
           <th>
             <button onClick={nameSortClickHandler}>Name</button>

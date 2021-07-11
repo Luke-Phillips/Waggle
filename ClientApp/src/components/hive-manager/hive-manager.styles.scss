@@ -2,3 +2,19 @@
   width: 50%;
   
 }
+.inviteCodeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  
+  .inviteCodeHeader {
+    margin-right: 5%;
+  }
+  
+  .inviteCode {
+    letter-spacing: 0.2rem;
+  }
+}
+
+

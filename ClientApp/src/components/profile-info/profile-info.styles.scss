@@ -10,8 +10,11 @@
     width: 100%;
   }
 
-  .button-box {
-    border: solid 2px darkcyan;
+  .btnBox {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-top: 2ch;
   }
 
   input {
