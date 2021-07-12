@@ -7,7 +7,6 @@ import { UserContext } from '../../components/user-context/user-context';
 
 const SignInAndSignUpPage = ({ handleSignInSignUp }) => {
   const userContext = useContext(UserContext);
-  console.log('token is ', userContext.token);
   return (
     userContext.token ?
     <Redirect to='/hive/discussion' /> :
