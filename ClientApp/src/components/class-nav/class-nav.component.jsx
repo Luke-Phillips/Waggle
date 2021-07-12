@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClassNavIcon from '../class-nav-icon/class-nav-icon.component';
-import { UserAndClassIds } from '../../components/user-and-class-context/user-and-class-context'
+import { UserContext } from '../user-context/user-context'
 import './class-nav.styles.scss';
 
 const ClassNav = props => {

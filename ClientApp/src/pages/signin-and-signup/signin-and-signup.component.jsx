@@ -1,14 +1,21 @@
-import React from 'react'
-import SignIn from '../../components/sign-in/sign-in.component'
-import SignUp from '../../components/sign-up/sign-up.component'
-import './signin-and-signup.styles.scss'
+import React, { useContext } from 'react';
+import SignIn from '../../components/sign-in/sign-in.component';
+import SignUp from '../../components/sign-up/sign-up.component';
+import './signin-and-signup.styles.scss';
+import { Redirect } from 'react-router';
+import { UserContext } from '../../components/user-context/user-context';
 
-const SignInAndSignUpPage = () => (
+const SignInAndSignUpPage = ({ handleSignInSignUp }) => {
+  const userContext = useContext(UserContext);
+  console.log('token is ', userContext.token);
+  return (
+    userContext.token ?
+    <Redirect to='/hive/discussion' /> :
     <div className='sign-in-and-sign-up'>
-        <SignIn className='sign-in'/>
-        <SignUp className='sign-up' />
+      <SignIn className='sign-in' handleSignIn={handleSignInSignUp} />
+      <SignUp className='sign-up' handleSignUp={handleSignInSignUp} />
     </div>
-    
-);
+  );
+};
 
 export default SignInAndSignUpPage;

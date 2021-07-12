@@ -18,7 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Waggle.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthManagementController : ControllerBase
     {
@@ -43,12 +43,17 @@ namespace Waggle.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto user)
         {
+            Console.WriteLine("email is " + user.Email);
+            Console.WriteLine("username is " + user.Username);
+            Console.WriteLine("password is " + user.Password);
+            Console.WriteLine("Register endpoint was hit");
             if (ModelState.IsValid)
             {
                 var existingUser = await _userManager.FindByEmailAsync(user.Email);
 
                 if (existingUser != null)
                 {
+                    Console.WriteLine("user exists already");
                     return BadRequest(new RegistrationResponse() {
                         Errors = new List<string>() {
                             "Email already in use"
@@ -62,10 +67,12 @@ namespace Waggle.Controllers
                 if (isCreated.Succeeded)
                 {
                     var jwt = await GenerateJwt(newUser);
+                    Console.WriteLine("Returning jwt" + jwt.Token + jwt.UserId);
                     return Ok(jwt);
                 }
                 else
                 {
+                    Console.WriteLine("whoops");
                     return BadRequest(new RegistrationResponse(){
                         Errors = isCreated.Errors.Select(x => x.Description).ToList(),                 
                         Success = false
@@ -177,7 +184,7 @@ namespace Waggle.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(30), //AddMinutes(5/10)
+                Expires = DateTime.UtcNow.AddMinutes(30), //AddSeconds(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
 
@@ -201,6 +208,7 @@ namespace Waggle.Controllers
             return new AuthResult()
             {
                 Token = jwt,
+                UserId = user.Id,
                 Success = true,
                 RefreshToken = refreshToken.Token
             };
@@ -214,8 +222,9 @@ namespace Waggle.Controllers
             {
                 // Validation 1 (token format)
                 SecurityToken validatedToken;
+                Console.WriteLine("about to validate token");
                 var tokenInVerification = jwtHandler.ValidateToken(tokenRequest.Token, _tokenValidationParams, out validatedToken);
-                
+                Console.WriteLine("completed validation with no issues");
                 // Validation 2 (encryption)
                 if(validatedToken is JwtSecurityToken jwtSecurityToken)
                 {
@@ -223,6 +232,7 @@ namespace Waggle.Controllers
                 
                     if (result == false)
                     {
+                        Console.WriteLine("about to return null which will result in invalid tokens message");
                         return null;
                     }
                 }
@@ -310,6 +320,7 @@ namespace Waggle.Controllers
             }
             catch(Exception ex)
             {
+                Console.WriteLine("we got caught " + ex.Message);
                 return null;
             }
         }
