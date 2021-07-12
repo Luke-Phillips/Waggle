@@ -11,7 +11,7 @@ const DiscussionPost = props => {
   if (!props.type) {
     return null;
   }
-  const handleFeebackType = type => {
+  const handleFeedbackType = type => {
     if(type === 'feedback') {
       return 'feedback request'
     } 
@@ -20,7 +20,7 @@ const DiscussionPost = props => {
   
   return (
   <div className={`discussion-post ${props.postWidth}`}>
-    <PostingAs className='posting-as' user={props.user} type={handleFeebackType(props.type)} />
+    <PostingAs className='posting-as' user={props.user} type={handleFeedbackType(props.type)} />
     <FormTextArea className='enter-text' placeholder='Enter text here...'/>
     <CustomButton className='post-button' showbtn={props.showbtn}>Post</CustomButton>
   </div>

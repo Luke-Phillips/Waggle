@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProfileInfo from '../../components/profile-info/profile-info.component';
 import HiveManager from '../../components/hive-manager/hive-manager.component';
-import { UserAndClassIds } from '../../components/user-and-class-context/user-and-class-context'
+import { UserContext } from '../../components/user-context/user-context'
 import './settings-page.styles.scss';
 import { Fragment } from 'react';
 
