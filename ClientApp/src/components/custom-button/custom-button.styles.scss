@@ -1,31 +1,38 @@
 $primary-color: black;
 $secondary-color: white;
 
-.custom-button {
-    min-width: 15%;
-    max-width: 45%;
-    width: auto;
-    height: 5.5ch;
-    min-height: 4ch;
-    letter-spacing: 0.5px;
-    line-height: 150%;
-    padding: 0 10% 0 10%;
-    font-size: 15px;
-    background-color: $primary-color;
-    color: $secondary-color;
-    //text-transform: uppercase;
-    font-family: 'Open Sans Condensed';
-    font-weight: bolder;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    justify-self: flex-end;
+@mixin styles ($primeColor, $secondColor) {
+  min-width: 15%;
+  max-width: 45%;
+  width: auto;
+  height: 5.5ch;
+  min-height: 4ch;
+  letter-spacing: 0.5px;
+  line-height: 150%;
+  padding: 0 10% 0 10%;
+  font-size: 15px;
+  background-color: $primary-color;
+  color: $secondary-color;
+  //text-transform: uppercase;
+  font-family: 'Open Sans Condensed';
+  font-weight: bolder;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  justify-self: flex-end;
+}
 
+.custom-button {
+    @include styles($primary-color, $secondary-color);
   
     &:hover {
       background-color: $secondary-color;
       color: $primary-color;
       border: 1px solid $primary-color;
     }
-  }
+
   
+  }
+  .disabled {
+    
+  }
