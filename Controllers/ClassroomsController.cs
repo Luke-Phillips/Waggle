@@ -41,7 +41,7 @@ namespace Waggle.Controllers
             {
                 OwnerId = ownerId,            
                 Name = classroomDto.Name,
-                Icon = classroomDto.Icon,
+                Icon = classroomDto?.Icon,
                 InviteCode = Guid.NewGuid().ToString()
             };
             await _context.Classrooms.AddAsync(classroom);

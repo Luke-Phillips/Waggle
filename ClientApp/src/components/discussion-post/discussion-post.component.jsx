@@ -25,6 +25,8 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
   };
 
   console.log('Reply type', props.type);
+
+  
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
     console.log('ReplyToPostId ', replyToPostId);
@@ -37,10 +39,6 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
       content: userText,
       time: new Date(),
       file: null,
-<<<<<<< HEAD
-
-=======
->>>>>>> dpworking
     };
 
     fetch('posts', {

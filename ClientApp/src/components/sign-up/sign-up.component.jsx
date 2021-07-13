@@ -46,7 +46,8 @@ const SignUp = ({handleSignUp}) => {
 
     const pw = name === 'password' ? value : password;
     const cpw = name === 'confirmPassword' ? value : confirmPassword;
-    setIsDisabled(pw.length > 8 && pw === cpw);
+
+    setIsDisabled(pw.length < 8 || pw !== cpw);
   };
 
   return (
