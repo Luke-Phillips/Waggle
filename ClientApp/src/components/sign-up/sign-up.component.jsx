@@ -47,11 +47,6 @@ const SignUp = ({handleSignUp}) => {
     const pw = name === 'password' ? value : password;
     const cpw = name === 'confirmPassword' ? value : confirmPassword;
 
-    console.log('password state: ', password);
-    console.log('confirm password state: ', confirmPassword);
-    console.log('pw: ', pw);
-    console.log('cpw: ', cpw);
-    console.log('disable?', pw.length <= 8 || pw !== cpw);
     setIsDisabled(pw.length < 8 || pw !== cpw);
   };
 
