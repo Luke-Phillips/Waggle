@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import './replies-column.styles.scss';
 
+
 const RepliesColumn = ({ children, posts, ...props }) => {
-  if (!props.show || (!children && !posts)) {
+  useEffect(()=>{console.log('Props.GetPosts: ', props.getPosts)}, [props.getPosts])
+  
+  if (!props.show ) {
     return null;
   }
 
+  
   const populateCol = posts => {
     {
       if (posts) {
@@ -34,6 +38,7 @@ const RepliesColumn = ({ children, posts, ...props }) => {
 
       {posts.map(post => (
           <DiscussionFeedItem
+            key={post.postId}
             user={post.authorId} // need a username
             type={post.postType}
             postWidth={props.postWidth}
