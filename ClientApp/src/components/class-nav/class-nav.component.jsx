@@ -12,8 +12,6 @@ const ClassNav = () => {
   useEffect(() => getHives(), [userContext.userId]);
 
   const getHives = () => {
-    console.log('getting hives');
-    console.log('jwt is ', userContext.token);
     fetch(`classrooms/${userContext.userId}`, {
       method: 'GET',
       headers: {
@@ -24,9 +22,10 @@ const ClassNav = () => {
       .then(res => res.json())
       .then(classes => {
         console.log('classrooms ', classes);
-        setClassrooms(classes);
+        setClassrooms(classes); 
       });
   }
+
   const handleAddHive = () => {
     const newClass = {
       ownerId: userContext.userId,
@@ -36,21 +35,19 @@ const ClassNav = () => {
     fetch('/classrooms', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userContext.token
       },
       body: JSON.stringify(newClass)
-    });
-    getHives();
+    }).then(getHives);
   }
-
-  const fakeClassrooms = [{name: 'apple'}, {name: 'blueberry'}];
 
   return (
     <div className='class-nav'>
-      {fakeClassrooms.map(classroom => (
+      {classrooms.map(classroom => (
         <ClassNavIcon
           className='icon'
-          key={classroom.name}
+          key={classroom.id}
           classroom={classroom}
         />
       ))}
