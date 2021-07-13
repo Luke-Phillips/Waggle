@@ -1,4 +1,4 @@
-import React, {useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import PostHeader from '../post-header/post-header.component';
 import PostingAs from '../posting-as/posting-as.component';
 import FormTextArea from '../form-text-area/form-text-area.component';
@@ -6,8 +6,8 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './discussion-post.styles.scss';
 
-const DiscussionPost = ({isReplyPost = false,...props}) => {
-  const [userText, setUserText] = useState('')
+const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
+  const [userText, setUserText] = useState('');
 
   if (!props.type) {
     return null;
@@ -21,41 +21,44 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
   };
 
   const handleIsReplyPost = (isReplyPost, replyToPostId) => {
-    return isReplyPost ? replyToPostId : null
-  }
+    return isReplyPost ? replyToPostId : null;
+  };
 
-  console.log('Reply type', props.type)
+  console.log('Reply type', props.type);
   const sendPost = () => {
-    const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId)
-    console.log('ReplyToPostId ', replyToPostId)
-    
+    const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
+    console.log('ReplyToPostId ', replyToPostId);
+
     let postData = {
       classroomId: 2, // context ClassId
       replyToPostId: replyToPostId,
       postType: props.type,
       authorId: '0006', // = context userId
-      content: userText, 
+      content: userText,
       time: new Date(),
       file: null,
+<<<<<<< HEAD
 
+=======
+>>>>>>> dpworking
     };
 
     fetch('posts', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(postData),
-    })
-      // .then(r => r.json())
-      // .then(res => {
-      //   if (res) {
-      //     console.log(res);
-      //   }
-      // });
-      
+    });
+    // .then(r => r.json())
+    // .then(res => {
+    //   if (res) {
+    //     console.log(res);
+    //   }
+    // });
+    //props.effectSubscriber(getPosts)
   };
 
   const handleTextChange = e => {
-    setUserText(e.target.value) // LOoke up react SpRiNg write this somewhere else
+    setUserText(e.target.value); // LOoke up react SpRiNg write this somewhere else
   };
 
   return (
@@ -70,7 +73,14 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
         placeholder='Enter text here...'
         onChange={handleTextChange}
       />
-      <CustomButton className='post-button' showbtn={props.showbtn} onClick={sendPost}>
+      <CustomButton
+        className='post-button'
+        showbtn={props.showbtn}
+        onClick={() => {
+          sendPost();
+          props.effectSubscriber(getPosts);
+        }}
+      >
         Post
       </CustomButton>
     </div>
@@ -100,4 +110,4 @@ export default DiscussionPost;
 //         ],
 //         "ratings": []
 
-// Some might say apprentice since he is still in his internship. How can we really justify adept? A certain number of projects, or error messages, or hour spent programming? Spells learned perhaps. 
+// Some might say apprentice since he is still in his internship. How can we really justify adept? A certain number of projects, or error messages, or hour spent programming? Spells learned perhaps.
