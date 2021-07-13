@@ -24,7 +24,7 @@ const DiscussionFeed = ({
   const [showRepliesCol, setShowRepliesCol] = useState(false);
   const [repliesColFeed, setRepliesColFeed] = useState([]);
   const [focusedPostId, setFocusedPostId] = useState(null);
-  
+  const [getPosts, setGetPosts] = useState(false);
 
   const dummyData = [
     {
@@ -69,16 +69,18 @@ const DiscussionFeed = ({
         .then(res => setPosts(res));
 
     //setPosts(dummyData)
-  }, [classId]);
+  }, [getPosts, classId]);
 
   const toggleShowReplies = numReplies => {
-    
     return numReplies === null ? 0 : setShowRepliesCol(!showRepliesCol);
   };
 
+  const effectSubscriber = getPosts => {
+    setGetPosts(() => !getPosts);
+  };
 
   const handlePostWidth = numReplies => {
-    if(numReplies === null) return 
+    if (numReplies === null) return;
 
     if (postWidth === 'normal') {
       setPostWidth('wide');
@@ -88,10 +90,9 @@ const DiscussionFeed = ({
   };
 
   const handleRepliesColRender = numReplies => {
-    handlePostWidth(numReplies)
-    toggleShowReplies(numReplies)
-
-  }
+    handlePostWidth(numReplies);
+    toggleShowReplies(numReplies);
+  };
 
   const handleReplyType = newReplyType => {
     setReplyType(newReplyType);
@@ -107,6 +108,10 @@ const DiscussionFeed = ({
       ? setRepliesColFeed([])
       : setRepliesColFeed(replyPosts);
   };
+
+  const popRepliesCol = (repPosts, parentId) => {
+    
+  }
 
   const timeCompare = isAscending => {
     return (post1, post2) => {
@@ -151,30 +156,33 @@ const DiscussionFeed = ({
         <DiscussionPost
           user='placeholder'
           type={discussionPostType}
-          postWidth={postWidth} 
+          postWidth={postWidth}
           currPostId={focusedPostId}
+          getPosts={getPosts}
+          effectSubscriber={effectSubscriber}
         />
 
         {sortedPosts.map(feedItem => (
           <DiscussionFeedItem
+            key={feedItem.postId}
             user={feedItem.authorId}
             type={feedItem.postType}
             postWidth={postWidth}
             onClick={() => {
-              handleRepliesColRender(feedItem.replyPosts)
+              handleRepliesColRender(feedItem.replyPosts);
               populateRepliesCol(feedItem.replyPosts);
-              setFocusedPostId(feedItem.postId)
+              setFocusedPostId(feedItem.postId);
             }}
             btnFunc={handleReplyType}
             replyClick={() => {
               handleReplyClick();
               populateRepliesCol(feedItem.replyPosts);
-              setFocusedPostId(feedItem.postId)
+              setFocusedPostId(feedItem.postId);
             }}
             time={feedItem.time}
           >
             {feedItem.content}
-          </DiscussionFeedItem>
+          </DiscussionFeedItem>  
         ))}
       </div>
       <RepliesColumn
@@ -183,17 +191,17 @@ const DiscussionFeed = ({
         posts={repliesColFeed}
         postWidth={postWidth}
         showbtn={false}
+        getPosts={getPosts}
       >
-        
         <DiscussionPost
           user='Placeholder'
           type={replyType}
           postWidth={postWidth}
           isReplyPost={true}
           currPostId={focusedPostId}
-          
+          getPosts={getPosts}
+          effectSubscriber={effectSubscriber}
         />
-
       </RepliesColumn>
     </div>
   );

@@ -51,7 +51,7 @@ const PostHeader = props => {
   const handleNullUser = authorId => {
     return authorId === null ? 'No User Name O:' : authorId
   }
-  console.log('PostHeader props.type: ', props.type)
+  // console.log('PostHeader props.type: ', props.type)
   return(
   <div className='post-header'>
 
