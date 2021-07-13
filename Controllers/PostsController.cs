@@ -90,7 +90,7 @@ namespace Waggle.Controllers
             var posts = await _context.Posts
                 .Where(
                     p => p.ClassroomId == classId &&
-                    p.ReplyToPostId == null)
+                         p.ReplyToPostId == null)
                 .Include(p => p.ReplyPosts)
                 .Include(p => p.Ratings)
                 .ToListAsync();
