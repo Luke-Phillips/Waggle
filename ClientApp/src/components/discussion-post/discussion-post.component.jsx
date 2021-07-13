@@ -12,7 +12,6 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
   if (!props.type) {
     return null;
   }
-<<<<<<< HEAD
 
   const handleFeebackType = type => {
     if (type === 'feedback') {
@@ -23,13 +22,6 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
 
   const handleIsReplyPost = (isReplyPost, replyToPostId) => {
     return isReplyPost ? replyToPostId : null
-=======
-  const handleFeedbackType = type => {
-    if(type === 'feedback') {
-      return 'feedback request'
-    } 
-    return type
->>>>>>> 656e2e097c3bc873faaea56c3a5e71a8655b347b
   }
 
   console.log('Reply type', props.type)
@@ -67,7 +59,6 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
   };
 
   return (
-<<<<<<< HEAD
     <div className={`discussion-post ${props.postWidth}`}>
       <PostingAs
         className='posting-as'
@@ -87,13 +78,6 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
 };
 
 export default DiscussionPost;
-=======
-  <div className={`discussion-post ${props.postWidth}`}>
-    <PostingAs className='posting-as' user={props.user} type={handleFeedbackType(props.type)} />
-    <FormTextArea className='enter-text' placeholder='Enter text here...'/>
-    <CustomButton className='post-button' showbtn={props.showbtn}>Post</CustomButton>
-  </div>
->>>>>>> 656e2e097c3bc873faaea56c3a5e71a8655b347b
 
 // "postId": 1,
 //         "postType": "question",
