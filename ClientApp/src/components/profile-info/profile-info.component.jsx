@@ -45,7 +45,7 @@ const ProfileInfo = ({ user, profileChangeHandler }) => {
       />
       <input value={email} onChange={emailChangeHandler} placeholder='Email' />
         <div className='btnBox'>
-          <CustomButton addStyles='addStyles' onClick={infoSaveHandler}>
+          <CustomButton onClick={infoSaveHandler}>
             Save
           </CustomButton>
         </div>

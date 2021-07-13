@@ -14,8 +14,6 @@ import './discussion-feed-item.style.scss';
 // feedbackReq --> response?? (essentially a comment)
 
 const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
-  
-
   const buttonLabeler = postType => {
     if (postType === 'question') {
       return 'Answer';
@@ -33,12 +31,19 @@ const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
     if (postType === 'feedback') {
       return 'Response';
     }
-
     return 'Comment';
+  }; 
+
+  const liftReplyType = postType => {
+    return postType === 'question'
+      ? 'answer'
+      : postType === 'feedback'
+      ? 'response'
+      : 'comment';
   };
 
   const replyBtnClickHandler = () => {
-    btnFunc(replyHeaderLabeler(props.type));
+    btnFunc(liftReplyType(props.type));
     props.replyClick();
   };
 
@@ -48,7 +53,12 @@ const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
       className={`discussion-feed-item ${props.postWidth} ${props.type}`}
     >
       <div onClick={props.onClick}>
-        <PostHeader className={`${props.type}`} type={props.type} user={props.user} date={props.time} />
+        <PostHeader
+          className={`${props.type}`}
+          type={props.type}
+          user={props.user}
+          date={props.time}
+        />
         <p className='content'>{children}</p>
       </div>
 
