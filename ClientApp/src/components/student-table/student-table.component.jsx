@@ -154,12 +154,16 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   const studentTable = (
     <div className='tableContainer'>
       <table className='studentTable'>
-        <thead></thead>
-        <tbody>
+        <thead>
+          <tr>
           <th>Username</th>
           <th>Display Name</th>
           <th colSpan={2}>Enrollment Status</th>
           <th colSpan={2}>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          
           {/* <th></th>
           <th>
             <button onClick={nameSortClickHandler}>Name</button>

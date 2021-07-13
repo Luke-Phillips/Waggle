@@ -3,7 +3,7 @@ import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.com
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import './replies-column.styles.scss';
 
-const ReviewsColumn = ({ children, posts, ...props }) => {
+const RepliesColumn = ({ children, posts, ...props }) => {
   if (!props.show || (!children && !posts)) {
     return null;
   }
@@ -26,19 +26,15 @@ const ReviewsColumn = ({ children, posts, ...props }) => {
     }
   };
 
-  console.log('Reply Type: ', props.replyType);
+  
   return (
     <div className='reviews-column'>
-      {/* <DiscussionPost
-        user='Placeholder'
-        type={props.replyType}
-        postWidth={props.postWidth}
-      /> */}
+      
       { children }
 
       {posts.map(post => (
           <DiscussionFeedItem
-            user={post.authorId}
+            user={post.authorId} // need a username
             type={post.postType}
             postWidth={props.postWidth}
             btnName={post.btnName}
@@ -52,4 +48,4 @@ const ReviewsColumn = ({ children, posts, ...props }) => {
   );
 };
 
-export default ReviewsColumn;
+export default RepliesColumn;

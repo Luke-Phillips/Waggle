@@ -23,6 +23,8 @@ const DiscussionFeed = ({
   const [replyType, setReplyType] = useState('');
   const [showRepliesCol, setShowRepliesCol] = useState(false);
   const [repliesColFeed, setRepliesColFeed] = useState([]);
+  const [focusedPostId, setFocusedPostId] = useState(null);
+  
 
   const dummyData = [
     {
@@ -73,6 +75,7 @@ const DiscussionFeed = ({
     
     return numReplies === null ? 0 : setShowRepliesCol(!showRepliesCol);
   };
+
 
   const handlePostWidth = numReplies => {
     if(numReplies === null) return 
@@ -148,7 +151,8 @@ const DiscussionFeed = ({
         <DiscussionPost
           user='placeholder'
           type={discussionPostType}
-          postWidth={postWidth}
+          postWidth={postWidth} 
+          currPostId={focusedPostId}
         />
 
         {sortedPosts.map(feedItem => (
@@ -159,11 +163,13 @@ const DiscussionFeed = ({
             onClick={() => {
               handleRepliesColRender(feedItem.replyPosts)
               populateRepliesCol(feedItem.replyPosts);
+              setFocusedPostId(feedItem.postId)
             }}
             btnFunc={handleReplyType}
             replyClick={() => {
               handleReplyClick();
               populateRepliesCol(feedItem.replyPosts);
+              setFocusedPostId(feedItem.postId)
             }}
             time={feedItem.time}
           >
@@ -175,9 +181,7 @@ const DiscussionFeed = ({
         className='visible'
         show={showRepliesCol}
         posts={repliesColFeed}
-        //onClick={toggleShowReplies}
         postWidth={postWidth}
-        //replyType={replyType}
         showbtn={false}
       >
         
@@ -185,6 +189,9 @@ const DiscussionFeed = ({
           user='Placeholder'
           type={replyType}
           postWidth={postWidth}
+          isReplyPost={true}
+          currPostId={focusedPostId}
+          
         />
 
       </RepliesColumn>

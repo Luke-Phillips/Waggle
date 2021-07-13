@@ -71,12 +71,12 @@ const SettingsPage = () => {
   return (
     <div className='settings-page'>
       <ProfileInfo
-        user={students.filter(s => s.UserId === userId)}
+        user={students.filter(s => s.userId === userId)}
         profileChangeHandler = {profileChangeHandler}
       />
       <HiveManager
         inviteCode={'XyKtaJ'}
-        students={students.filter(s => s.UserId !== userId)}
+        students={students.filter(s => s.userId !== userId)}
         enrollmentHandler={enrollmentHandler}
         roleHandler={roleHandler}
       />
