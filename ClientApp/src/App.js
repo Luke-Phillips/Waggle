@@ -15,6 +15,7 @@ const App = () => {
   const [userId, setUserId] = useState(null);
   const [classId, setClassId] = useState(null);
   const [isMod, setIsMod] = useState(false);
+  const [isEnrolled, setIsEnrolled] = useState(false);
 
   const handleAuth = (token, userId) => {
     setToken(token);
@@ -23,11 +24,18 @@ const App = () => {
 
   const handleClassSelect = (classId, isModerator) => {
     setClassId(classId);
-    setIsMod(isModerator)
+    setIsMod(isModerator);
+    setIsEnrolled(isEnrolled);
   }
   
   return (
     <div className='parent'>
+      {
+        console.log('token ', token),
+        console.log('userId ', userId),
+        console.log('classId ', classId),
+        console.log('isMod ', isMod)
+      }
       <UserContext.Provider value={{
         token: token,
         userId: userId,
