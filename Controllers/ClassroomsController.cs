@@ -99,11 +99,11 @@ namespace Waggle.Controllers
         }
 
         // GET: /classrooms/{userId}
-        [HttpGet("{userID}")]
-        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetUserClassrooms(string userID)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetUserClassrooms(string userId)
         {
             List<ApplicationUserClassroom> applicationUserClassrooms = await _context.ApplicationUserClassrooms
-                .Where(cu => cu.ApplicationUserId == userID)
+                .Where(cu => cu.ApplicationUserId == userId)
                 .Include(cu => cu.Classroom)
                 .ToListAsync();
 

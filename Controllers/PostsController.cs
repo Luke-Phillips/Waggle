@@ -38,7 +38,6 @@ namespace Waggle.Controllers
             "comment"
         };
 
-
         public PostsController(WaggleContext context, ILogger<PostsController> logger)
         {
             _context = context;

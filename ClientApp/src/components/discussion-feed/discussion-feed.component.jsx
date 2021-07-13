@@ -61,7 +61,6 @@ const DiscussionFeed = ({
   ];
 
   useEffect(() => {
-    console.log('class id is', classId);
     classId &&
       fetch(`posts/${classId}`)
         .then(res => res.json())

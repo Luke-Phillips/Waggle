@@ -28,8 +28,7 @@ const SignUp = ({handleSignUp}) => {
       body: JSON.stringify(registration)
     })
     .then(res => res.json())
-    .then(
-      ({token, userId}) => handleSignUp(token, userId))
+    .then(({token, userId}) => handleSignUp(token, userId))
     .catch(uhOh => console.log(uhOh));
   };
 

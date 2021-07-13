@@ -14,24 +14,25 @@ const App = () => {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [classId, setClassId] = useState(null);
+  const [isMod, setIsMod] = useState(false);
 
   const handleAuth = (token, userId) => {
     setToken(token);
     setUserId(userId);
   }
 
-  const handleClassSelect = classId => setClassId(classId);
-
+  const handleClassSelect = (classId, isModerator) => {
+    setClassId(classId);
+    setIsMod(isModerator)
+  }
+  
   return (
     <div className='parent'>
-      {
-        console.log('app.js token: ', token),
-        console.log('app.js userId: ', userId)
-      }
       <UserContext.Provider value={{
         token: token,
         userId: userId,
-        classId: classId
+        classId: classId,
+        isMod: isMod
       }}>
         <Navbar />
         <Route exact path='/'>
@@ -39,16 +40,17 @@ const App = () => {
         </Route>
         <Route path='/home' component={HomePage} />
         <Route path='/signin'>
-          <SignInAndSignUpPage handleSignInSignUp={handleAuth}/>
+          {token ? 
+            <Redirect to='/hive/discussion'/> :
+            <SignInAndSignUpPage handleSignInSignUp={handleAuth}/>
+          }
         </Route>
         <Route path='/hive'>
           <ClassNav
-            userId={'0006'}
             handleClassSelect={handleClassSelect}
           />
         </Route>
         <Route path='/hive/discussion' component={DiscussionPage} />
-        <Route path='/hive/profile' component={ProfilePage} />
         <Route path='/hive/settings' component={SettingsPage} />
       </UserContext.Provider>
     </div>

@@ -17,7 +17,6 @@ const SignIn = ({handleSignIn}) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const login = {
       email: email,
       password: password
@@ -31,7 +30,7 @@ const SignIn = ({handleSignIn}) => {
       body: JSON.stringify(login)
     })
     .then(res => res.json())
-    .then(({jwt, userId}) => handleSignIn(jwt, userId))
+    .then(({token, userId}) => handleSignIn(token, userId))
     .catch(uhOh => console.log(uhOh));
   };
 
@@ -39,7 +38,7 @@ const SignIn = ({handleSignIn}) => {
     <div className="sign-up">
       <h2>I have an account</h2>
       <span>Sign in with your email and password</span>
-      <form onSubmit={handleSignIn}>
+      <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
           type="email"
