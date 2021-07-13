@@ -43,10 +43,6 @@ namespace Waggle.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto user)
         {
-            Console.WriteLine("email is " + user.Email);
-            Console.WriteLine("username is " + user.Username);
-            Console.WriteLine("password is " + user.Password);
-            Console.WriteLine("Register endpoint was hit");
             if (ModelState.IsValid)
             {
                 var existingUser = await _userManager.FindByEmailAsync(user.Email);
@@ -72,9 +68,8 @@ namespace Waggle.Controllers
                 }
                 else
                 {
-                    Console.WriteLine("whoops");
                     return BadRequest(new RegistrationResponse(){
-                        Errors = isCreated.Errors.Select(x => x.Description).ToList(),                 
+                        Errors = isCreated.Errors.Select(x => x.Description).ToList(),   
                         Success = false
                     });
                 }
