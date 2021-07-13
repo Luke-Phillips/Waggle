@@ -4,7 +4,7 @@ import ClassNavIcon from '../class-nav-icon/class-nav-icon.component';
 import CustomButton from '../custom-button/custom-button.component'
 import './class-nav.styles.scss';
 
-const ClassNav = () => {
+const ClassNav = ({handleClassSelect}) => {
   const userContext = useContext(UserContext);
   const [classrooms, setClassrooms] = useState([]);
   const [hiveName, setHiveName] = useState('');
@@ -49,6 +49,7 @@ const ClassNav = () => {
           className='icon'
           key={classroom.id}
           classroom={classroom}
+          handleClassSelect={handleClassSelect}
         />
       ))}
       <input
