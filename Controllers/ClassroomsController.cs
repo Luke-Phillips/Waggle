@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Waggle.Data;
 using Waggle.Models;
 using Waggle.Models.DTOs.ClassroomDtos;
@@ -16,6 +18,7 @@ namespace Waggle.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClassroomsController : ControllerBase
     {
         private readonly WaggleContext _context;
@@ -96,11 +99,11 @@ namespace Waggle.Controllers
         }
 
         // GET: /classrooms/{userId}
-        [HttpGet("{userID}")]
-        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetUserClassrooms(string userID)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<List<ClassroomRetrievalDto>>> GetUserClassrooms(string userId)
         {
             List<ApplicationUserClassroom> applicationUserClassrooms = await _context.ApplicationUserClassrooms
-                .Where(cu => cu.ApplicationUserId == userID)
+                .Where(cu => cu.ApplicationUserId == userId)
                 .Include(cu => cu.Classroom)
                 .ToListAsync();
 

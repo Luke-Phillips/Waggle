@@ -16,7 +16,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Waggle.Models;
-
+// final senior project meeting 7/15 8:30
 namespace Waggle
 {
     public class Startup
@@ -45,7 +45,8 @@ namespace Waggle
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = true,
-                RequireExpirationTime = false
+                RequireExpirationTime = false,
+                ClockSkew = TimeSpan.Zero // allows us to use seconds for expiration of token (good for testing)
             };
 
             services.AddSingleton(tokenValidationParams);
@@ -64,14 +65,6 @@ namespace Waggle
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<WaggleContext>();
-            // For sessions
-            // services.AddDistributedMemoryCache();
-            /*services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            }); */
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -106,10 +99,8 @@ namespace Waggle
 
             app.UseRouting();
 
-            // authentication added while working on JWTs, may not need now
             app.UseAuthentication();
             app.UseAuthorization();
-            /*app.UseSession();*/
 
             app.UseEndpoints(endpoints =>
             {

@@ -3,7 +3,7 @@ import CreatePost from '../create-post/create-post.component';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import RepliesColumn from '../replies-column/replies-column.component';
-import { UserAndClassIds } from '../user-and-class-context/user-and-class-context';
+import { UserContext } from '../user-context/user-context';
 import './discussion-feed.styles.scss';
 
 const DiscussionFeed = ({
@@ -14,7 +14,7 @@ const DiscussionFeed = ({
   discussionPostType,
   showbtn,
 }) => {
-  const { userId, classId } = useContext(UserAndClassIds);
+  const { userId, classId } = useContext(UserContext);
 
   const [posts, setPosts] = useState([]);
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
@@ -63,7 +63,6 @@ const DiscussionFeed = ({
   ];
 
   useEffect(() => {
-    console.log('class id is', classId);
     classId &&
       fetch(`posts/${classId}`)
         .then(res => res.json())
@@ -175,7 +174,7 @@ const DiscussionFeed = ({
             time={feedItem.time}
           >
             {feedItem.content}
-          </DiscussionFeedItem>
+          </DiscussionFeedItem>  
         ))}
       </div>
       <RepliesColumn

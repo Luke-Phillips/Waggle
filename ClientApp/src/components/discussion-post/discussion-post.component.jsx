@@ -37,7 +37,7 @@ const DiscussionPost = ({isReplyPost = false,...props}) => {
       content: userText, 
       time: new Date(),
       file: null,
-      
+
     };
 
     fetch('posts', {
