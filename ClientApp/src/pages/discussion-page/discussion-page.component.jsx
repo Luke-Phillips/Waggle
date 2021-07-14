@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FilterPost from '../../components/filter-posts/filter-posts.component';
 import SortPosts from '../../components/sort-posts/sort-posts.component';
 import CreatePost from '../../components/create-post/create-post.component';
 import DiscussionFeed from '../../components/discussion-feed/discussion-feed.component';
-//import { UserContext } from '../../components/user-context/user-context'
+import { UserContext } from '../../components/user-context/user-context'
 
 import './discussion-page.styles.scss';
 
@@ -11,7 +11,7 @@ const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
 const DiscussionPage = () => {
   
-  //const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const [postInfo, setPostInfo] = useState({});
 
@@ -70,17 +70,15 @@ const DiscussionPage = () => {
   const postTypes = [announcement, question, insight, feedback];
 
   return (
+    userContext.classId ?
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost handleCheckFilter={handleFilterPostTypes} />
           <CreatePost postTypes={postTypes} showbtn={true}/>
         </div>
-
         <div className='post-feed'>
-          
           <SortPosts setSortByValue={handleSortBy} showbtn={true}/>
-          
           <DiscussionFeed
             filteredPostTypes={filteredPostTypes}
             sortPostsBy={sortBy}
@@ -92,6 +90,8 @@ const DiscussionPage = () => {
         </div>
       </div>
     </div>
+    :
+    <p>Create or Join a class on the left</p> 
   );
 };
 
