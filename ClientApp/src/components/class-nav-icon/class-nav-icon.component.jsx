@@ -4,7 +4,7 @@ import './class-nav-icon.styles.scss';
 
 const ClassNavIcon = ({ classroom, handleClassSelect }) => {
   const onClickHandler = () => {
-    handleClassSelect(classroom.id, classroom.isModerator, classroom.IsEnrolled);
+    handleClassSelect(classroom.id, classroom.name, classroom.isModerator, classroom.IsEnrolled);
   };
 
   return (

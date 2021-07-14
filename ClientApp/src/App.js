@@ -12,8 +12,9 @@ import './custom.css';
 const App = () => {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [classId, setClassId] = useState(null);
-  const [isMod, setIsMod] = useState(false);
+  const [classroomId, setClassroomId] = useState(null);
+  const [classroomName, setClassroomName] = useState('');
+  const [isModerator, setIsModerator] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
 
   const handleAuth = (token, userId) => {
@@ -21,9 +22,10 @@ const App = () => {
     setUserId(userId);
   }
 
-  const handleClassSelect = (classId, isModerator, isEnrolled) => {
-    setClassId(classId);
-    setIsMod(isModerator);
+  const handleClassSelect = (classroomId, classroomName, isModerator, isEnrolled) => {
+    setClassroomId(classroomId);
+    setClassroomName(classroomName);
+    setIsModerator(isModerator);
     setIsEnrolled(isEnrolled);
   }
   
@@ -32,14 +34,18 @@ const App = () => {
       {
         console.log('token ', token),
         console.log('userId ', userId),
-        console.log('classId ', classId),
-        console.log('isMod ', isMod)
+        console.log('classId ', classroomId),
+        console.log('className ', classroomName),
+        console.log('isModerator ', isModerator),
+        console.log('isEnrolled ', isEnrolled)
       }
       <UserContext.Provider value={{
         token: token,
         userId: userId,
-        classId: classId,
-        isMod: isMod
+        classroomId: classroomId,
+        classroomName: classroomName,
+        isModerator: isModerator,
+        isEnrolled: isEnrolled
       }}>
         <Navbar />
         <Route exact path='/'>

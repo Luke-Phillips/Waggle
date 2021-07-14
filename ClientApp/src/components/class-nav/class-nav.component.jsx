@@ -28,7 +28,7 @@ const ClassNav = ({handleClassSelect}) => {
       setClassrooms(classes);
       if (classes.length > 0) {
         const classroom = classes[0];
-        handleClassSelect(classroom.id, classroom.isModerator, classroom.isEnrolled);
+        handleClassSelect(classroom.id, classroom.name, classroom.isModerator, classroom.isEnrolled);
       }
       return classes;
     });

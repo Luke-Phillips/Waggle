@@ -70,7 +70,7 @@ const DiscussionPage = () => {
   const postTypes = [announcement, question, insight, feedback];
 
   return (
-    userContext.classId ?
+    userContext.classroomId ?
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>

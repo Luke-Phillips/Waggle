@@ -9,12 +9,12 @@ const SettingsPage = () => {
   const [inviteCode, setInviteCode] = useState('');
   const [students, setStudents] = useState([]);
 
-  useEffect(() => getInviteCode(), [userContext.classId]);
+  useEffect(() => getInviteCode(), [userContext.classroomId]);
 
-  useEffect(() => getStudents(), [userContext.classId]);
+  useEffect(() => getStudents(), [userContext.classroomId]);
 
   const getInviteCode = () => {
-    fetch(`classrooms/invite-code/${userContext.classId}`, {
+    fetch(`classrooms/invite-code/${userContext.classroomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const SettingsPage = () => {
   };
 
   const getStudents = () => {
-    fetch(`users/${userContext.classId}`)
+    fetch(`users/${userContext.classroomId}`)
       .then(res => res.json())
       .then(students => {
         setStudents(students);
@@ -39,7 +39,7 @@ const SettingsPage = () => {
     ({ userId, newStatus }) =>
     () => {
       const studentUpdate = { enrollmentStatus: newStatus };
-      fetch(`users/${userId}/class/${userContext.classId}`, {
+      fetch(`users/${userId}/class/${userContext.classroomId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const SettingsPage = () => {
     ({ userId, newRole }) =>
     () => {
       const studentUpdate = { isModerator: newRole === 'moderator' };
-      fetch(`users/${userId}/class/${userContext.classId}`, {
+      fetch(`users/${userId}/class/${userContext.classroomId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const SettingsPage = () => {
   console.log('filtered students ', filteredStudents);
   console.log('filtered student', filteredStudent);
 
-  return userContext.classId ? (
+  return userContext.classroomId ? (
     <div className='settings-page'>
       <ProfileInfo
         user={filteredStudent}
