@@ -24,15 +24,15 @@ const MainFeed = ({
   showbtn,
   ...props
 }) => {
-  const { userId, classId, token } = useContext(UserContext);
+  const { userId, classroomId, token } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
 
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const postsGetReq = () => {
     console.log('Token in New Post', token)
-    classId &&
-    fetch(`posts/${classId}`, {
+    classroomId &&
+    fetch(`posts/${classroomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const MainFeed = ({
 
   useEffect(() => {
     postsGetReq();
-  }, [classId]);
+  }, [classroomId]);
 
   const timeCompare = isAscending => {
     return (post1, post2) => {
