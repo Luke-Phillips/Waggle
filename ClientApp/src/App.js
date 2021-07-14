@@ -5,7 +5,6 @@ import SignInAndSignUpPage from './pages/signin-and-signup/signin-and-signup.com
 import HomePage from './pages/homepage/homepage.component';
 import ClassNav from './components/class-nav/class-nav.component';
 import DiscussionPage from './pages/discussion-page/discussion-page.component';
-import ProfilePage from './pages/profile-page/profile-page.component';
 import SettingsPage from './pages/settings-page/settings-page.component';
 import { UserContext } from './components/user-context/user-context';
 import './custom.css';
@@ -22,7 +21,7 @@ const App = () => {
     setUserId(userId);
   }
 
-  const handleClassSelect = (classId, isModerator) => {
+  const handleClassSelect = (classId, isModerator, isEnrolled) => {
     setClassId(classId);
     setIsMod(isModerator);
     setIsEnrolled(isEnrolled);
