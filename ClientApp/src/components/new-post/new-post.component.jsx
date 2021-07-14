@@ -30,7 +30,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
 
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
-  
+    console.log('send post type: ', props.type)
     let postData = {
       classroomId: classroomId, // context ClassId
       replyToPostId: replyToPostId,
@@ -45,7 +45,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + token,
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(postData),
     })

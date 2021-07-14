@@ -5,14 +5,19 @@ import { UserContext } from '../user-context/user-context';
 import './reply-feed.styles.scss';
 
 const ReplyFeed = ({ children, focusedPostId, showNewReply, ...props }) => {
-  const { userId, classId } = useContext(UserContext);
+  const { userId, classId, token } = useContext(UserContext);
   const [replyPosts, setReplyPosts] = useState([]);
   
   const replyGetReq = parentPostId => {
     console.log('reply feed get posts');
     classId &&
       parentPostId &&
-      fetch(`posts/${classId}/${parentPostId}`)
+      fetch(`posts/${classId}/${parentPostId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }})
         .then(res => res.json())
         .then(res => setReplyPosts(res));
   };
