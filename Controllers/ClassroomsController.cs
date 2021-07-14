@@ -78,6 +78,7 @@ namespace Waggle.Controllers
         [HttpPost("{userId}/{inviteCode}")]
         public async Task<ActionResult> JoinClassroom(string userId, string inviteCode)
         {
+            Console.WriteLine("join endpoint");
             var classId = (await _context.Classrooms.FirstOrDefaultAsync(c => c.InviteCode == inviteCode))?.ClassroomId;
             if (classId is null) return BadRequest("Invalid Invite Code");
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);

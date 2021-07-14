@@ -7,7 +7,8 @@ import './class-nav.styles.scss';
 const ClassNav = ({handleClassSelect}) => {
   const userContext = useContext(UserContext);
   const [classrooms, setClassrooms] = useState([]);
-  const [hiveName, setHiveName] = useState('');
+  const [classroomName, setClassroomName] = useState('');
+  const [inviteCode, setInviteCode] = useState('');
 
   useEffect(() => {
     getClassrooms();
@@ -33,10 +34,10 @@ const ClassNav = ({handleClassSelect}) => {
     });
   }
 
-  const handleAddHive = () => {
+  const handleAddClassroom = () => {
     const newClass = {
       ownerId: userContext.userId,
-      name: hiveName
+      name: classroomName
     };
 
     fetch('/classrooms', {
@@ -47,10 +48,34 @@ const ClassNav = ({handleClassSelect}) => {
       },
       body: JSON.stringify(newClass)
     }).then(getClassrooms);
+    setClassroomName('');
+  }
+
+  const handleJoinClassroom = () => {
+    fetch(`/classrooms/${userContext.userId}/${inviteCode}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userContext.token
+      }
+    });
+    setInviteCode('');
   }
 
   return (
     <div className='class-nav'>
+    <input
+        type='text'
+        value={classroomName}
+        onChange={e => setClassroomName(e.target.value)}
+      />
+      <CustomButton onClick={handleAddClassroom}>Create New Hive</CustomButton>
+      <input
+        type='text'
+        value={inviteCode}
+        onChange={e => setInviteCode(e.target.value)}
+      />
+      <CustomButton onClick={handleJoinClassroom}>Join Hive</CustomButton>
       {classrooms.map(classroom => (
         <ClassNavIcon
           className='icon'
@@ -59,12 +84,6 @@ const ClassNav = ({handleClassSelect}) => {
           handleClassSelect={handleClassSelect}
         />
       ))}
-      <input
-        type='text'
-        value={hiveName}
-        onChange={e => setHiveName(e.target.value)}
-      />
-      <CustomButton onClick={handleAddHive}>Add New Hive</CustomButton>
     </div>
   );
 };
