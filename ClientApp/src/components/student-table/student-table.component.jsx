@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../components/user-context/user-context';
 import CustomButton from '../custom-button/custom-button.component';
 import './student-table.styles.scss';
 
 const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
+  const userContext = useContext(UserContext);
   // const [nameSortToggle, setNameSortToggle] = useState(1); // 1 = sort ascending
   // const [roleSortToggle, setRoleSortToggle] = useState(-1); // -1 = sort descending
   // const [nameSortFirst, setNameSortFirst] = useState(true);
@@ -52,7 +54,6 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
     <tr key={student.userId}>
       <td>{student.userName}</td>
       <td>{student.displayName}</td>
-      {/* <td> */}
       {student.enrollmentStatus === enrollmentStatus.pending && (
         <>
           <td>
@@ -76,17 +77,19 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>enrolled</p>
           </td>
-          <td className='tableBtn'>
-            <CustomButton
-              className='enrollBtn'
-              onClick={enrollmentHandler({
-                userId: student.userId,
-                newStatus: enrollmentStatus.unenrolled,
-              })}
-            >
-              -
-            </CustomButton>
-          </td>
+          {userContext.isModerator &&
+            <td className='tableBtn'>
+              <CustomButton
+                className='enrollBtn'
+                onClick={enrollmentHandler({
+                  userId: student.userId,
+                  newStatus: enrollmentStatus.unenrolled,
+                })}
+              >
+                -
+              </CustomButton>
+            </td>
+          }
         </>
       )}
       {student.enrollmentStatus === enrollmentStatus.unenrolled && (
@@ -94,60 +97,45 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <p>unenrolled</p>
         </td>
       )}
-      {/* </td> */}
-      {/* <td> */}
       {student.isModerator ? (
         <>
           <td>
             <p>moderator</p>
           </td>
-          <td className='tableBtn'>
-            <CustomButton
-              className='roleBtn'
-              onClick={roleHandler({
-                userId: student.userId,
-                newRole: 'student',
-              })}
-            >
-              ⬇️
-            </CustomButton>
-          </td>
-          {/* <CustomButton
-              onClick={roleHandler({
-                userId: student.userId,
-                newRole: 'student',
-              })}
-            >
-              ⬇️
-            </CustomButton> */}
+          {userContext.isModerator &&
+            <td className='tableBtn'>
+              <CustomButton
+                className='roleBtn'
+                onClick={roleHandler({
+                  userId: student.userId,
+                  newRole: 'student',
+                })}
+              >
+                ⬇️
+              </CustomButton>
+            </td>
+          }
         </>
       ) : (
         <>
           <td>
             <p>student</p>
           </td>
-          <td className='tableBtn'>
-            <CustomButton
-              className='roleBtn'
-              onClick={roleHandler({
-                userId: student.userId,
-                newRole: 'moderator',
-              })}
-            >
-              ⬆️
-            </CustomButton>
-          </td>
-          {/* <CustomButton
-            onClick={roleHandler({
-              userId: student.userId,
-              newRole: 'moderator',
-            })}
-          >
-            ⬆️
-          </CustomButton> */}
+          {userContext.isModerator &&
+            <td className='tableBtn'>
+              <CustomButton
+                className='roleBtn'
+                onClick={roleHandler({
+                  userId: student.userId,
+                  newRole: 'moderator',
+                })}
+              >
+                ⬆️
+              </CustomButton>
+            </td>
+          }
         </>
       )}
-      {/* </td> */}
     </tr>
   ));
 
@@ -158,8 +146,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <tr>
           <th>Username</th>
           <th>Display Name</th>
-          <th colSpan={2}>Enrollment Status</th>
-          <th colSpan={2}>Role</th>
+          <th colSpan={userContext.isModerator ? 2 : 1}>Enrollment Status</th>
+          <th colSpan={userContext.isModerator ? 2 : 1}>Role</th>
           </tr>
         </thead>
         <tbody>
