@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import FileUpload from '../file-upload/file-upload.component';
 import PostHeader from '../post-header/post-header.component';
@@ -13,7 +13,12 @@ import './discussion-feed-item.style.scss';
 // insight --> comment
 // feedbackReq --> response?? (essentially a comment)
 
-const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
+const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, onDblClick = () => {},children, ...props }) => {
+  
+  const handleNullReplies = (replies = 0) => {
+    return replies === null ? 0 : replies.length
+  }
+
   const buttonLabeler = postType => {
     if (postType === 'question') {
       return 'Answer';
@@ -32,7 +37,7 @@ const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
       return 'Response';
     }
     return 'Comment';
-  }; 
+  };
 
   const liftReplyType = postType => {
     return postType === 'question'
@@ -48,13 +53,11 @@ const DiscussionFeedItem = ({ btnFunc = () => {}, children, ...props }) => {
   };
 
   return (
-    <div
-      className={`discussion-feed-item ${props.postWidth} ${props.type}`}
-    >
-      <div onClick={props.onClick}>
+    <div className={`discussion-feed-item ${props.postWidth} ${props.type}`}>
+      <div onClick={props.onClick} onDoubleClick={onDblClick}>
         <PostHeader
           className={`${props.type}`}
-          type={props.type} 
+          type={props.type}
           user={props.user}
           date={props.time}
         />

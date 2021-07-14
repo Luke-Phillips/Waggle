@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import CreatePost from '../create-post/create-post.component';
-import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
-import DiscussionPost from '../discussion-post/discussion-post.component';
-import RepliesColumn from '../replies-column/replies-column.component';
+import MainFeed from '../main-feed/main-feed.component'
+import ReplyFeed from '../reply-feed/reply-feed.component';
 import { UserContext } from '../user-context/user-context';
 import './discussion-feed.styles.scss';
 
@@ -14,17 +12,16 @@ const DiscussionFeed = ({
   discussionPostType,
   showbtn,
 }) => {
-  const { userId, classId } = useContext(UserContext);
+  // const { userId, classId } = useContext(UserContext);
 
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const [postWidth, setPostWidth] = useState('normal');
   const [replyType, setReplyType] = useState('');
   const [showRepliesCol, setShowRepliesCol] = useState(false);
-  const [repliesColFeed, setRepliesColFeed] = useState([]);
   const [focusedPostId, setFocusedPostId] = useState(null);
-  const [getPosts, setGetPosts] = useState(false);
+  // const [repliesColFeed, setRepliesColFeed] = useState([]); should be unneeded now
 
   const dummyData = [
     {
@@ -61,23 +58,21 @@ const DiscussionFeed = ({
       replyPosts: [0, 0, 0],
     },
   ];
+  // const postsGetReq = () => {
+  //   classId &&
+  //     fetch(`posts/${classId}`)
+  //       .then(res => res.json())
+  //       .then(res => setPosts(res));
+  // }
 
-  useEffect(() => {
-    classId &&
-      fetch(`posts/${classId}`)
-        .then(res => res.json())
-        .then(res => setPosts(res));
+  // useEffect(() => {
+  //   postsGetReq()
 
-    //setPosts(dummyData)
-  }, [getPosts, classId]);
+  // }, [classId]);
 
-  const toggleShowReplies = numReplies => {
-    return numReplies === null ? 0 : setShowRepliesCol(!showRepliesCol);
-  };
-
-  const effectSubscriber = getPosts => {
-    setGetPosts(() => !getPosts);
-  };
+  // const toggleShowReplies = numReplies => {
+  //   return numReplies === null ? 0 : setShowRepliesFeed(!showRepliesFeed); 
+  // };
 
   const handlePostWidth = numReplies => {
     if (numReplies === null) return;
@@ -89,10 +84,10 @@ const DiscussionFeed = ({
     }
   };
 
-  const handleRepliesColRender = numReplies => {
-    handlePostWidth(numReplies);
-    toggleShowReplies(numReplies);
-  };
+  // const handleRepliesFeedRender = numReplies => {
+  //   handlePostWidth(numReplies);
+  //   toggleShowReplies(numReplies);
+  // };
 
   const handleReplyType = newReplyType => {
     setReplyType(newReplyType);
@@ -103,71 +98,69 @@ const DiscussionFeed = ({
     setPostWidth('wide');
   };
 
-  const populateRepliesCol = replyPosts => {
-    return replyPosts === null
-      ? setRepliesColFeed([])
-      : setRepliesColFeed(replyPosts);
-  };
+  // const populateRepliesCol = replyPosts => {
+  //   return replyPosts === null
+  //     ? setRepliesColFeed([])
+  //     : setRepliesColFeed(replyPosts);
+  // };
 
-  const popRepliesCol = (repPosts, parentId) => {
-    
-  }
+  // const timeCompare = isAscending => {
+  //   return (post1, post2) => {
+  //     if (post1.time > post2.time) return isAscending ? 1 : -1;
+  //     if (post1.time < post2.time) return -(isAscending ? 1 : -1);
+  //     return 0;
+  //   };
+  // };
 
-  const timeCompare = isAscending => {
-    return (post1, post2) => {
-      if (post1.time > post2.time) return isAscending ? 1 : -1;
-      if (post1.time < post2.time) return -(isAscending ? 1 : -1);
-      return 0;
-    };
-  };
+  // const popularityCompare = isAscending => {
+  //   return (post1, post2) => {
+  //     const postOneLength =
+  //       post1.replyPosts === null ? 0 : post1.replyPosts.length;
 
-  const popularityCompare = isAscending => {
-    return (post1, post2) => {
-      const postOneLength =
-        post1.replyPosts === null ? 0 : post1.replyPosts.length;
+  //     const postTwoLength =
+  //       post2.replyPosts === null ? 0 : post2.replyPosts.length;
 
-      const postTwoLength =
-        post2.replyPosts === null ? 0 : post2.replyPosts.length;
+  //     if (postOneLength > postTwoLength) return isAscending ? 1 : -1;
+  //     if (postOneLength < postTwoLength) return -(isAscending ? 1 : -1);
+  //     return 0;
+  //   };
+  // };
 
-      if (postOneLength > postTwoLength) return isAscending ? 1 : -1;
-      if (postOneLength < postTwoLength) return -(isAscending ? 1 : -1);
-      return 0;
-    };
-  };
+  // const filteredPosts =
+  //   filteredPostTypes.length === 0
+  //     ? posts.slice()
+  //     : posts.slice().filter(post => filteredPostTypes.includes(post.postType));
 
-  const filteredPosts =
-    filteredPostTypes.length === 0
-      ? posts.slice()
-      : posts.slice().filter(post => filteredPostTypes.includes(post.postType));
-
-  const sortedPosts = timeSortIsFirst
-    ? filteredPosts
-        .slice()
-        .sort(timeCompare(timeAscending))
-        .sort(popularityCompare(popularityAscending))
-    : filteredPosts
-        .slice()
-        .sort(popularityCompare(popularityAscending))
-        .sort(timeCompare(timeAscending));
+  // const sortedPosts = timeSortIsFirst
+  //   ? filteredPosts
+  //       .slice()
+  //       .sort(timeCompare(timeAscending))
+  //       .sort(popularityCompare(popularityAscending))
+  //   : filteredPosts
+  //       .slice()
+  //       .sort(popularityCompare(popularityAscending))
+  //       .sort(timeCompare(timeAscending));
 
   return (
     <div className='discussion-feed'>
-      <div className='main-thread'>
-        <DiscussionPost
+      {/* <DiscussionPost
           user='placeholder'
           type={discussionPostType}
           postWidth={postWidth}
           currPostId={focusedPostId}
-          getPosts={getPosts}
-          effectSubscriber={effectSubscriber}
-        />
+          postsGetReq={postsGetReq}
+        /> */}
 
-        {sortedPosts.map(feedItem => (
+      {/* {sortedPosts.map(feedItem => (
           <DiscussionFeedItem
             key={feedItem.postId}
             user={feedItem.authorId}
             type={feedItem.postType}
-            postWidth={postWidth}
+            postWidth={postWidth} 
+            repliesCol={repliesColFeed}
+            postReplies={feedItem.replyPosts}
+            populateReplies={populateRepliesCol}
+            refreshFeed={postsGetReq}
             onClick={() => {
               handleRepliesColRender(feedItem.replyPosts);
               populateRepliesCol(feedItem.replyPosts);
@@ -183,27 +176,41 @@ const DiscussionFeed = ({
           >
             {feedItem.content}
           </DiscussionFeedItem>  
-        ))}
-      </div>
-      <RepliesColumn
+        ))} */}
+      {/* <MainFeed
+        filteredPostTypes={filteredPostTypes}
+        sortPostsBy={sortBy}
+        timeAscending={sortByTimeAscending}
+        popularityAscending={sortByPopularityAscending}
+        discussionPostType={postInfo.postType}
+        showbtn={true}
+        postWidth={postWidth}
+        handleReplyType={handleReplyType}
+        handleReplyClick={handleReplyClick}
+        handlePostWidth={handlePostWidth}
+      />
+
+      <ReplyFeed
         className='visible'
         show={showRepliesCol}
         posts={repliesColFeed}
         postWidth={postWidth}
         showbtn={false}
         getPosts={getPosts}
+        type={replyType}
+        currPostId={focusedPostId}
+        postsGetReq={postsGetReq}
       >
-        <DiscussionPost
+        {/* <DiscussionPost
           user='Placeholder'
-          type={replyType}
-          postWidth={postWidth}
           isReplyPost={true}
+          postWidth={postWidth}
+          type={replyType}
           currPostId={focusedPostId}
-          getPosts={getPosts}
-          effectSubscriber={effectSubscriber}
-        />
-      </RepliesColumn>
-    </div>
+          postsGetReq={postsGetReq}
+        /> */}
+      {/* </ReplyFeed> */}
+    </div> 
   );
 };
 
