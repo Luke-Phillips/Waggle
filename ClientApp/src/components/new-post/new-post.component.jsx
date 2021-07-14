@@ -8,7 +8,7 @@ import { UserContext } from '../user-context/user-context';
 import './new-post.styles.scss';
 
 const NewPost = ({isReplyPost = false, ...props }) => {
-  const { token, userId, classId } = useContext(UserContext);
+  const { token, userId, classroomId } = useContext(UserContext);
   const [userText, setUserText] = useState('');
 
   if (!props.type) {
@@ -32,7 +32,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
   
     let postData = {
-      classroomId: classId, // context ClassId
+      classroomId: classroomId, // context ClassId
       replyToPostId: replyToPostId,
       postType: props.type,
       authorId: userId, // = context userId
