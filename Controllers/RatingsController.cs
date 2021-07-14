@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Waggle.Data;
 using Waggle.Models;
 using Waggle.Models.DTOs.RatingDtos;
@@ -12,6 +14,7 @@ using Waggle.Models.DTOs.RatingDtos;
 namespace Waggle.Controllers
 {
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class RatingsController : ControllerBase
     {

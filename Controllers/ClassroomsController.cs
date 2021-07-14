@@ -17,8 +17,8 @@ using Waggle.Models.DTOs.ClassroomDtos;
 namespace Waggle.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiController]
     public class ClassroomsController : ControllerBase
     {
         private readonly WaggleContext _context;
