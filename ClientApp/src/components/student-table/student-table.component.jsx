@@ -59,6 +59,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>pending</p>
           </td>
+          {userContext.isModerator &&
           <td className='tableBtn'>
             <CustomButton
               className='enrollBtn'
@@ -70,6 +71,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
               +
             </CustomButton>
           </td>
+          }
         </>
       )}
       {student.enrollmentStatus === enrollmentStatus.enrolled && (

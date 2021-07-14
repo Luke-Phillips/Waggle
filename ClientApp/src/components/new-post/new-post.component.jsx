@@ -8,7 +8,7 @@ import { UserContext } from '../user-context/user-context';
 import './new-post.styles.scss';
 
 const NewPost = ({isReplyPost = false, ...props }) => {
-  const { userId, classId, token } = useContext(UserContext);
+  const { token, userId, classId } = useContext(UserContext);
   const [userText, setUserText] = useState('');
 
   if (!props.type) {
