@@ -18,7 +18,7 @@ const SettingsPage = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userContext.token,
+        'Authorization': 'Bearer ' + userContext.token,
       },
     })
       .then(res => res.json())
@@ -26,7 +26,13 @@ const SettingsPage = () => {
   };
 
   const getStudents = () => {
-    fetch(`users/${userContext.classroomId}`)
+    fetch(`users/${userContext.classroomId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userContext.token,
+      },
+    })
       .then(res => res.json())
       .then(students => {
         setStudents(students);
@@ -43,6 +49,7 @@ const SettingsPage = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + userContext.token,
         },
         body: JSON.stringify(studentUpdate),
       })
@@ -60,6 +67,7 @@ const SettingsPage = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + userContext.token,
         },
         body: JSON.stringify(studentUpdate),
       })

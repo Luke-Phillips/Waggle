@@ -58,7 +58,7 @@ const ClassNav = ({handleClassSelect}) => {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + userContext.token
       }
-    });
+    }).then(getClassrooms);
     setInviteCode('');
   }
 
