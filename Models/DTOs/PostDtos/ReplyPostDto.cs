@@ -8,6 +8,7 @@ namespace Waggle.Models.DTOs.PostDtos
     public class ReplyPostDto : IPostDto
     {
         public int PostId { get; set; }
+        public string AuthorName { get; set; }
         public string PostType { get; set; }
         public DateTime Time { get; set; }
         public string Content { get; set; }

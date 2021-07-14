@@ -90,13 +90,20 @@ namespace Waggle.Controllers
                 .Where(p =>
                     p.ClassroomId == classId && p.ReplyToPostId == null
                 )
+                .Include(p => p.Author)
+                    .ThenInclude(a => a.ApplicationUserClassrooms)
                 .Include(p => p.Ratings)
                 .Select(p =>
                     new MainPostDto
                     {
                         PostId = p.PostId,
                         PostType = p.PostType,
-                        // Author Name ??
+                        AuthorName =
+                            p.Author.ApplicationUserClassrooms.FirstOrDefault
+                            (
+                                auc => auc.ClassroomId == classId
+                            )
+                            .DisplayName,
                         Time = p.Time,
                         Content = p.Content,
                         IsRepliable = p.IsRepliable,
@@ -125,7 +132,12 @@ namespace Waggle.Controllers
                     {
                         PostId = p.PostId,
                         PostType = p.PostType,
-                        // AuthorName = p.AuthorName,
+                        AuthorName =
+                            p.Author.ApplicationUserClassrooms.FirstOrDefault
+                            (
+                                auc => auc.ClassroomId == classId
+                            )
+                            .DisplayName,
                         Time = p.Time,
                         Content = p.Content,
                         IsRepliable = p.IsRepliable,
