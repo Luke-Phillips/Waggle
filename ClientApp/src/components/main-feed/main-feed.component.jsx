@@ -30,10 +30,11 @@ const MainFeed = ({
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const postsGetReq = () => {
-    classId &&
-      fetch(`posts/${classId}`)
-        .then(res => res.json())
-        .then(res => setPosts(res));
+    //classId &&
+    console.log('main feed get posts');
+    fetch(`posts/${classId}`)
+      .then(res => res.json())
+      .then(res => setPosts(res));
   };
 
   useEffect(() => {

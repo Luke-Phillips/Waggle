@@ -48,13 +48,8 @@ const NewPost = ({isReplyPost = false, ...props }) => {
         // Authorization: 'Bearer ' + userContext.token,
       },
       body: JSON.stringify(postData),
-    });
-    // .then(r => r.json())
-    // .then(res => {
-    //   if (res) {
-    //     console.log(res);
-    //   }
-    // });
+    })
+    .then(props.getRequest);
   };
 
   const handleTextChange = e => {
