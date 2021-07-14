@@ -13,6 +13,7 @@ namespace Waggle.Models.DTOs.PostDtos
         public DateTime Time { get; set; }
         public string Content { get; set; }
         public bool IsRepliable { get; set; }
+        public int NumReplies { get; set; }
         public string File { get; set; }
         public ICollection<Rating> Ratings { get; set; }
     }

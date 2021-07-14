@@ -92,6 +92,7 @@ namespace Waggle.Controllers
                 )
                 .Include(p => p.Author)
                     .ThenInclude(a => a.ApplicationUserClassrooms)
+                .Include(p => p.ReplyPosts)
                 .Include(p => p.Ratings)
                 .Select(p =>
                     new MainPostDto
@@ -107,6 +108,7 @@ namespace Waggle.Controllers
                         Time = p.Time,
                         Content = p.Content,
                         IsRepliable = p.IsRepliable,
+                        NumReplies = p.ReplyPosts.Count(),
                         File = p.File,
                         Ratings = p.Ratings
                     }
