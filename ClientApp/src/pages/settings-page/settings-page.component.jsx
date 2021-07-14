@@ -8,9 +8,7 @@ const SettingsPage = () => {
   const userContext = useContext(UserContext);
   const [inviteCode, setInviteCode] = useState('');
   const [students, setStudents] = useState([]);
-  const [effectSubscriber, setEffectSubscriber] = useState(1); // change value to force useEffect to run
-  // ...definitely open to better ideas
-  // better idea is to make reusable function
+
   useEffect(() => getInviteCode(), [userContext.classId]);
 
   useEffect(() => getStudents(), [userContext.classId]);
