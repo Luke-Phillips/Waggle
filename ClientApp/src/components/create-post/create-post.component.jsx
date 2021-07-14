@@ -1,7 +1,5 @@
 import React from 'react';
 import ButtonSelector from '../button-selector/button-selector.component';
-import DiscussionPost from '../discussion-post/discussion-post.component';
-import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import './create-post.styles.scss';
 
 const CreatePost = props => {
@@ -15,6 +13,7 @@ const CreatePost = props => {
         labels={labels}
         clickFuncs={props.postTypes}
         showbtn={props.showbtn}
+        handleShowNewPost={props.handleShowNewPost}
       />
     </div>
   );

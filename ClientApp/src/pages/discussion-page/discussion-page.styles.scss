@@ -6,6 +6,11 @@
 
   .post-feed {
     width: 100%;
+
+    .feed-columns {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   .options{

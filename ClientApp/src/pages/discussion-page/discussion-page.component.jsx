@@ -2,46 +2,92 @@ import React, { useContext, useState } from 'react';
 import FilterPost from '../../components/filter-posts/filter-posts.component';
 import SortPosts from '../../components/sort-posts/sort-posts.component';
 import CreatePost from '../../components/create-post/create-post.component';
-import DiscussionFeed from '../../components/discussion-feed/discussion-feed.component';
-import { UserContext } from '../../components/user-context/user-context'
+import MainFeed from '../../components/main-feed/main-feed.component';
+import ReplyFeed from '../../components/reply-feed/reply-feed.component';
+import { UserContext } from '../../components/user-context/user-context';
 
 import './discussion-page.styles.scss';
 
 const modules = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
 const DiscussionPage = () => {
-  
   const userContext = useContext(UserContext);
 
   const [postInfo, setPostInfo] = useState({});
 
-  const [sortBy, setSortBy] = useState('newest')
-  const [sortByTimeAscending, setSortByTimeAscending] = useState(false) // newest posts
-  const [sortByPopularityAscending, setSortByPopularityAscending] = useState(true) // least replies
-  
+  const [sortBy, setSortBy] = useState('newest');
+  const [sortByTimeAscending, setSortByTimeAscending] = useState(false); // newest posts
+  const [sortByPopularityAscending, setSortByPopularityAscending] =
+    useState(true); // least replies
+
   const [filteredPostTypes, setFilteredPostTypes] = useState([]);
+
+  const [postWidth, setPostWidth] = useState('normal');
+  const [replyType, setReplyType] = useState('');
+  const [showRepliesFeed, setShowRepliesFeed] = useState(false);
+  const [focusedPostId, setFocusedPostId] = useState(0);
+  const [showNewPost, setShowNewPost] = useState(false);
+  const [showNewReply, setShowNewReply] = useState(false); 
+
+  const handleShowNewPost = newValue => {
+    setShowNewPost(newValue)
+  }
+
+  const handleShowNewReply = newValue => {
+    setShowNewReply(newValue)
+  }
+  
 
   const handleFilterPostTypes = e => {
     const postType = e.target.value;
     const isFiltered = e.target.checked;
 
-    const newFilteredPostTypes = isFiltered ?
-      [postType, ...filteredPostTypes] :
-      filteredPostTypes.filter(pt => pt !== postType);
+    const newFilteredPostTypes = isFiltered
+      ? [postType, ...filteredPostTypes]
+      : filteredPostTypes.filter(pt => pt !== postType);
     setFilteredPostTypes(newFilteredPostTypes);
   };
 
   const handleSortBy = sortBy => {
     setSortBy(sortBy);
-    if (sortBy === 'newest' || sortBy === 'oldest')
-    {
-      setSortByTimeAscending(sortBy === 'oldest')
+    if (sortBy === 'newest' || sortBy === 'oldest') {
+      setSortByTimeAscending(sortBy === 'oldest');
+    } else {
+      setSortByPopularityAscending(sortBy === 'least');
     }
-    else 
-    {
-      setSortByPopularityAscending(sortBy === 'least')
-    }
+  };
+
+  const handleFocusId = newFocusId => {
+    setFocusedPostId(newFocusId)
   }
+
+  const normalPostWidth = () => {
+      setPostWidth('normal');
+    }
+  
+
+  const widePostWidth = () => {
+    setPostWidth('wide');
+  }
+
+  const handleReplyType = newReplyType => {
+    setReplyType(newReplyType);
+  };
+
+  const handleReplyClick = () => {
+    setShowRepliesFeed(true);
+    setPostWidth('wide');
+  };
+
+  const showReplies = () => {
+    setShowRepliesFeed(true)
+      // return hasReplies === null ? 0 : setShowRepliesFeed(!showRepliesFeed);
+    };
+
+    const hideReplies = () => {
+      setShowRepliesFeed(false)
+        
+      };
 
   const announcement = () => {
     setPostInfo({
@@ -69,28 +115,60 @@ const DiscussionPage = () => {
 
   const postTypes = [announcement, question, insight, feedback];
 
-  return (
-    userContext.classId ?
+  return userContext.classId ? (
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost handleCheckFilter={handleFilterPostTypes} />
-          <CreatePost postTypes={postTypes} showbtn={true}/>
+          <CreatePost postTypes={postTypes} showbtn={true} handleShowNewPost={handleShowNewPost} />
         </div>
         <div className='post-feed'>
-          <SortPosts setSortByValue={handleSortBy} showbtn={true}/>
-          <DiscussionFeed
-            filteredPostTypes={filteredPostTypes}
-            sortPostsBy={sortBy}
-            timeAscending={sortByTimeAscending}
-            popularityAscending={sortByPopularityAscending}
-            discussionPostType={postInfo.postType}
-            showbtn={true}
-          />
+          <SortPosts setSortByValue={handleSortBy} showbtn={true} />
+          <div className='feed-columns'>
+            <MainFeed
+              filteredPostTypes={filteredPostTypes}
+              sortPostsBy={sortBy}
+              timeAscending={sortByTimeAscending}
+              popularityAscending={sortByPopularityAscending}
+              discussionPostType={postInfo.postType}
+              showbtn={true}
+              postWidth={postWidth}
+              handleReplyType={handleReplyType}
+              handleReplyClick={handleReplyClick}
+              widePostWidth={widePostWidth}
+              normalPostWidth={normalPostWidth}
+              handleFocusId={handleFocusId}
+              hideReplies={hideReplies}
+              showReplies={showReplies}
+              showNewPost={showNewPost}
+              handleShowNewPost={handleShowNewPost}
+              handleShowNewReply={handleShowNewReply}
+            />
+
+            <ReplyFeed
+              className='visible'
+              show={showRepliesFeed}
+              postWidth={postWidth}
+              showbtn={false}
+              type={replyType}
+              focusedPostId={focusedPostId}
+              showNewReply={showNewReply}
+              handleShowNewReply={handleShowNewReply}
+            >
+              {/* <DiscussionPost
+          user='Placeholder'
+          isReplyPost={true}
+          postWidth={postWidth}
+          type={replyType}
+          currPostId={focusedPostId}
+          postsGetReq={postsGetReq}
+        /> */}
+            </ReplyFeed>
+          </div>
         </div>
       </div>
     </div>
-    :
+  ) : (
     <p>Create or join a class before contributing to a discussion</p>
   );
 };

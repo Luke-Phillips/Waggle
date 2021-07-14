@@ -5,10 +5,10 @@ import FormTextArea from '../form-text-area/form-text-area.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { UserContext } from '../user-context/user-context';
 
-import './discussion-post.styles.scss';
+import './new-post.styles.scss';
 
-const DiscussionPost = ({ isReplyPost = false, ...props }) => {
-  const userContext = useContext(UserContext);
+const NewPost = ({isReplyPost = false, ...props }) => {
+  const { userId, classId } = useContext(UserContext);
   const [userText, setUserText] = useState('');
 
   if (!props.type) {
@@ -26,18 +26,16 @@ const DiscussionPost = ({ isReplyPost = false, ...props }) => {
     return isReplyPost ? replyToPostId : null;
   };
 
-  console.log('Reply type', props.type);
+  //console.log('Reply type', props.type);
 
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
-    console.log('ReplyToPostId ', replyToPostId);
-    console.log('ClassId', userContext.classId)
-    console.log('UserId', userContext.userId)
+  
     let postData = {
-      classroomId: userContext.classId, // context ClassId
+      classroomId: classId, // context ClassId
       replyToPostId: replyToPostId,
       postType: props.type,
-      authorId: userContext.userId, // = context userId
+      authorId: userId, // = context userId
       content: userText,
       time: new Date(),
       file: null,
@@ -80,7 +78,8 @@ const DiscussionPost = ({ isReplyPost = false, ...props }) => {
         showbtn={props.showbtn}
         onClick={() => {
           sendPost();
-          props.postsGetReq()
+          props.getRequest();
+          props.handleShowPost(false)
         }}
       >
         Post
@@ -89,7 +88,7 @@ const DiscussionPost = ({ isReplyPost = false, ...props }) => {
   );
 };
 
-export default DiscussionPost;
+export default NewPost;
 
 // "postId": 1,
 //         "postType": "question",

@@ -13,18 +13,8 @@ import './discussion-feed-item.style.scss';
 // insight --> comment
 // feedbackReq --> response?? (essentially a comment)
 
-const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, children, ...props }) => {
+const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, onDblClick = () => {},children, ...props }) => {
   
-  // useEffect(() => {
-  //   const numReplies = handleNullReplies(props.postReplies)
-  //   props.refreshFeed();
-  //   props.populateReplies(props.postReplies);
-  // }, []);
-
-  // props.refreshFeed();
-  // props.populateReplies(props.postReplies);
-  
-
   const handleNullReplies = (replies = 0) => {
     return replies === null ? 0 : replies.length
   }
@@ -64,7 +54,7 @@ const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, ch
 
   return (
     <div className={`discussion-feed-item ${props.postWidth} ${props.type}`}>
-      <div onClick={props.onClick}>
+      <div onClick={props.onClick} onDoubleClick={onDblClick}>
         <PostHeader
           className={`${props.type}`}
           type={props.type}
