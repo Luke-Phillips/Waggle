@@ -9,44 +9,50 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
   console.log('student name ', user.userName);
   console.log('student display name ', user.displayName);
   console.log('student email ', user.email);
-  const [name, setName] = useState(user.userName);
-  const [displayName, setDisplayName] = useState(user.displayName);
-  const [email, setEmail] = useState(user.email);
+  const [profilePic , setProfilePic] = useState(user.profilePic || null);
+  const [name, setName] = useState(user.userName || '');
+  const [displayName, setDisplayName] = useState(user.displayName || user.userName || '');
+  //const [email, setEmail] = useState(user.email || '');
 
-  const nameChangeHandler = e => setName(e.target.value);
-  const displayNameChangeHandler = e => setDisplayName(e.target.value);
-  const emailChangeHandler = e => setEmail(e.target.value);
+  const handleChooseFile = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setProfilePic(reader.result);
+  }
+
   const infoSaveHandler = e => {
     console.log('HTTP PUT request w/ fetch');
   };
   console.log('USER: ', user);
+
   return (
     <div className='profileInfo'>
       <form className='profile-form'>
-        {/* <FormInput
+        {profilePic && <img src={profilePic}/>}
+        <input
+          className='upload'
+          type='file'
+          accept='image/png, image/jpeg'
+          onChange={handleChooseFile}
+          />
+        <p>{user.email}</p>
+        <FormInput
           value={name}
           label='Name'
-          handleChange={nameChangeHandler}
+          handleChange={e => setName(e.target.value)}
         />
         <FormInput
           value={displayName}
-          label='Display Name (Hive)'
-          handleChange={displayNameChangeHandler}
+          label='Display Name'
+          handleChange={e => setDisplayName(e.target.value)}
         />
-        <FormInput
+        {/* <FormInput
           value={email}
           label='Email'
+          placeholder='Email'
           handleChange={emailChangeHandler}
         /> */}
-
-
-      <input value={name} onChange={nameChangeHandler} placeholder='Name' />
-      <input
-        value={displayName}
-        onChange={displayNameChangeHandler}
-        placeholder='Display Name (Hive)'
-      />
-      <input value={email} onChange={emailChangeHandler} placeholder='Email' />
         <div className='btnBox'>
           <CustomButton onClick={infoSaveHandler}>
             Save

@@ -73,6 +73,7 @@ const SettingsPage = () => {
     s => s.UserId !== userContext.userId
   );
   const filteredStudent = students.filter(s => s.userId === userContext.userId);
+  
   console.log('students', students);
   console.log('filtered students ', filteredStudents);
   console.log('filtered student', filteredStudent);
