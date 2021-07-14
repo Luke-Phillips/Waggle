@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PostHeader from '../post-header/post-header.component';
 import PostingAs from '../posting-as/posting-as.component';
 import FormTextArea from '../form-text-area/form-text-area.component';
 import CustomButton from '../custom-button/custom-button.component';
+import { UserContext } from '../user-context/user-context';
 
 import './discussion-post.styles.scss';
 
-const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
+const DiscussionPost = ({ isReplyPost = false, ...props }) => {
+  const userContext = useContext(UserContext);
   const [userText, setUserText] = useState('');
 
   if (!props.type) {
@@ -26,16 +28,16 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
 
   console.log('Reply type', props.type);
 
-  
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
     console.log('ReplyToPostId ', replyToPostId);
-
+    console.log('ClassId', userContext.classId)
+    console.log('UserId', userContext.userId)
     let postData = {
-      classroomId: 2, // context ClassId
+      classroomId: userContext.classId, // context ClassId
       replyToPostId: replyToPostId,
       postType: props.type,
-      authorId: '0006', // = context userId
+      authorId: userContext.userId, // = context userId
       content: userText,
       time: new Date(),
       file: null,
@@ -43,7 +45,10 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
 
     fetch('posts', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: {
+        'Content-type': 'application/json'
+        // Authorization: 'Bearer ' + userContext.token,
+      },
       body: JSON.stringify(postData),
     });
     // .then(r => r.json())
@@ -52,7 +57,6 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
     //     console.log(res);
     //   }
     // });
-    //props.effectSubscriber(getPosts)
   };
 
   const handleTextChange = e => {
@@ -76,7 +80,7 @@ const DiscussionPost = ({ getPosts, isReplyPost = false, ...props }) => {
         showbtn={props.showbtn}
         onClick={() => {
           sendPost();
-          props.effectSubscriber(getPosts);
+          props.postsGetReq()
         }}
       >
         Post

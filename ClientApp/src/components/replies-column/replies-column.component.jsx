@@ -1,12 +1,16 @@
-import React, { useEffect }from 'react';
+import React, {useState, useEffect }from 'react';
 import DiscussionFeedItem from '../discussion-feed-item/discussion-feed-item.component';
 import DiscussionPost from '../discussion-post/discussion-post.component';
 import './replies-column.styles.scss';
 
 
 const RepliesColumn = ({ children, posts, ...props }) => {
-  useEffect(()=>{console.log('Props.GetPosts: ', props.getPosts)}, [props.getPosts])
-  
+  // useEffect(()=>{}, [posts])
+  const [replyPosts, setReplyPosts] = useState(posts)
+
+  useEffect(()=>{
+    setReplyPosts(posts)
+  }, [posts])
   if (!props.show ) {
     return null;
   }
@@ -30,13 +34,22 @@ const RepliesColumn = ({ children, posts, ...props }) => {
     }
   };
 
-  
+  console.log('replies type ',props.type)
   return (
     <div className='reviews-column'>
       
-      { children }
+      <DiscussionPost
+          user='Placeholder'
+          type={props.type}
+          postWidth={props.postWidth}
+          isReplyPost={true}
+          currPostId={props.currPostId}
+          postsGetReq={props.postsGetReq}
+        />
 
-      {posts.map(post => (
+      {/* { children } */}
+
+      {replyPosts.map(post => (
           <DiscussionFeedItem
             key={post.postId}
             user={post.authorId} // need a username

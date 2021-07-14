@@ -10,7 +10,7 @@ const ClassNavIcon = ({ classroom, handleClassSelect }) => {
   return (
     <div className='class-nav-icon' onClick={onClickHandler}>
       <Icon className='icon' />
-      <img src='../../assets/honey-jar.svg' alt=''></img>
+      {/* <img src='../../assets/honey-jar.svg' alt=''></img> */}
       <p>{classroom.name}</p>
     </div>
   );

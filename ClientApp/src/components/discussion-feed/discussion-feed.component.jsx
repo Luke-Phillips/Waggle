@@ -61,15 +61,17 @@ const DiscussionFeed = ({
       replyPosts: [0, 0, 0],
     },
   ];
-
-  useEffect(() => {
+  const postsGetReq = () => {
     classId &&
       fetch(`posts/${classId}`)
         .then(res => res.json())
         .then(res => setPosts(res));
+  }
 
-    //setPosts(dummyData)
-  }, [getPosts, classId]);
+  useEffect(() => {
+    postsGetReq()
+
+  }, [classId]);
 
   const toggleShowReplies = numReplies => {
     return numReplies === null ? 0 : setShowRepliesCol(!showRepliesCol);
@@ -158,8 +160,7 @@ const DiscussionFeed = ({
           type={discussionPostType}
           postWidth={postWidth}
           currPostId={focusedPostId}
-          getPosts={getPosts}
-          effectSubscriber={effectSubscriber}
+          postsGetReq={postsGetReq}
         />
 
         {sortedPosts.map(feedItem => (
@@ -167,7 +168,11 @@ const DiscussionFeed = ({
             key={feedItem.postId}
             user={feedItem.authorId}
             type={feedItem.postType}
-            postWidth={postWidth}
+            postWidth={postWidth} 
+            repliesCol={repliesColFeed}
+            postReplies={feedItem.replyPosts}
+            populateReplies={populateRepliesCol}
+            refreshFeed={postsGetReq}
             onClick={() => {
               handleRepliesColRender(feedItem.replyPosts);
               populateRepliesCol(feedItem.replyPosts);
@@ -192,16 +197,18 @@ const DiscussionFeed = ({
         postWidth={postWidth}
         showbtn={false}
         getPosts={getPosts}
+        type={replyType}
+        currPostId={focusedPostId}
+        postsGetReq={postsGetReq}
       >
-        <DiscussionPost
+        {/* <DiscussionPost
           user='Placeholder'
-          type={replyType}
-          postWidth={postWidth}
           isReplyPost={true}
+          postWidth={postWidth}
+          type={replyType}
           currPostId={focusedPostId}
-          getPosts={getPosts}
-          effectSubscriber={effectSubscriber}
-        />
+          postsGetReq={postsGetReq}
+        /> */}
       </RepliesColumn>
     </div>
   );
