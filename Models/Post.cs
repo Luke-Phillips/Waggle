@@ -11,13 +11,12 @@ namespace Waggle.Models
     {
         // Key Properties
         public int PostId { get; set; }
-        public int ClassroomId { get; set; }
         public int? ReplyToPostId { get; set; }
+        public string AuthorId { get; set; } // Author Id
+        public int ClassroomId { get; set; }
 
         // Regular Properties
         public string PostType { get; set; }
-        public string AuthorId { get; set; }
-        //[DataType(DataType.Date)]
         public DateTime Time { get; set; }
         public string Content { get; set; }
         public bool IsRepliable { get; set; }
@@ -27,6 +26,8 @@ namespace Waggle.Models
         [ForeignKey("ReplyToPostId")]
         public Post ReplyToPost { get; set; }
         public ICollection<Post> ReplyPosts { get; set; }
+        [ForeignKey("AuthorId")]
+        public ApplicationUser Author { get; set; }
         public ICollection<Rating> Ratings { get; set; }
     }
 }

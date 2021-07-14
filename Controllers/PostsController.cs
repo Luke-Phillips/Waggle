@@ -80,40 +80,98 @@ namespace Waggle.Controllers
             return StatusCode(201);
         }
 
-        // GET /posts/{classId}
+        // GET /posts/classId
         [HttpGet("{classId}")]
-        public async Task<ActionResult<IEnumerable<IPostDto>>> GetClassroomPosts(int classId)
+        public async Task<ActionResult<IEnumerable<MainPostDto>>> GetClassroomMainPosts(int classId)
         {
             // TODO verify user is enrolled in class
 
             var posts = await _context.Posts
-                .Where(
-                    p => p.ClassroomId == classId &&
-                         p.ReplyToPostId == null)
-                .Include(p => p.ReplyPosts)
+                .Where(p =>
+                    p.ClassroomId == classId && p.ReplyToPostId == null
+                )
+                .Include(p => p.Author)
+                    .ThenInclude(a => a.ApplicationUserClassrooms)
                 .Include(p => p.Ratings)
+                .Select(p =>
+                    new MainPostDto
+                    {
+                        PostId = p.PostId,
+                        PostType = p.PostType,
+                        AuthorName =
+                            p.Author.ApplicationUserClassrooms.FirstOrDefault
+                            (
+                                auc => auc.ClassroomId == classId
+                            )
+                            .DisplayName,
+                        Time = p.Time,
+                        Content = p.Content,
+                        IsRepliable = p.IsRepliable,
+                        File = p.File,
+                        Ratings = p.Ratings
+                    }
+                )
                 .ToListAsync();
 
-            var postResponse = new List<IPostDto>();
-            foreach (Post post in posts)
-            {
-                postResponse.Add(ToPostDto(post)); // at some point we may want a rating dto to hide other user's ids
-            }
-
-            return postResponse;
+            return posts;
         }
 
-        /* [HttpDelete("{postId}")]
-         public async Task<ActionResult> DeletePost(int postId)
-         {
-
-         }*/
-
-        /* [HttpPut("{postId}")]
-        public async Task<ActionResult> EditPost(int postId)
+        // GET /posts/classId/postId
+        [HttpGet("{classId}/{postId}")]
+        public async Task<ActionResult<IEnumerable<ReplyPostDto>>> GetClassroomReplyPosts(int classId, int postId)
         {
-            
-        }*/
+            // TODO verify user is enrolled in class
+
+            var posts = await _context.Posts
+                .Where(p =>
+                    p.ClassroomId == classId && p.ReplyToPostId == postId
+                )
+                .Include(p => p.Ratings)
+                .Select(p =>
+                    new ReplyPostDto
+                    {
+                        PostId = p.PostId,
+                        PostType = p.PostType,
+                        AuthorName =
+                            p.Author.ApplicationUserClassrooms.FirstOrDefault
+                            (
+                                auc => auc.ClassroomId == classId
+                            )
+                            .DisplayName,
+                        Time = p.Time,
+                        Content = p.Content,
+                        IsRepliable = p.IsRepliable,
+                        File = p.File,
+                        Ratings = p.Ratings
+                    }
+                )
+                .ToListAsync();
+
+            return posts;
+        }
+
+        // GET /posts/{classId}
+        // [HttpGet("{classId}")]
+        // public async Task<ActionResult<IEnumerable<IPostDto>>> GetClassroomPosts(int classId)
+        // {
+        //     // TODO verify user is enrolled in class
+
+        //     var posts = await _context.Posts
+        //         .Where(
+        //             p => p.ClassroomId == classId &&
+        //                  p.ReplyToPostId == null)
+        //         .Include(p => p.ReplyPosts)
+        //         .Include(p => p.Ratings)
+        //         .ToListAsync();
+
+        //     var postResponse = new List<IPostDto>();
+        //     foreach (Post post in posts)
+        //     {
+        //         postResponse.Add(ToPostDto(post)); // at some point we may want a rating dto to hide other user's ids
+        //     }
+
+        //     return postResponse;
+        // }
 
         private bool IsRepliable(NewPostDto post)
         {
@@ -158,7 +216,7 @@ namespace Waggle.Controllers
             {
                 PostId = post.PostId,
                 PostType = post.PostType,
-                AuthorId = post.AuthorId,
+                //AuthorId = post.AuthorId,
                 Time = post.Time,
                 Content = post.Content,
                 IsRepliable = post.IsRepliable,

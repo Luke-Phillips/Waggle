@@ -9,9 +9,11 @@ const ClassNav = ({handleClassSelect}) => {
   const [classrooms, setClassrooms] = useState([]);
   const [hiveName, setHiveName] = useState('');
 
-  useEffect(() => getHives(), [userContext.userId]);
+  useEffect(() => {
+    getClassrooms();
+  }, [userContext.userId]);
 
-  const getHives = () => {
+  const getClassrooms = () => {
     fetch(`classrooms/${userContext.userId}`, {
       method: 'GET',
       headers: {
@@ -19,11 +21,16 @@ const ClassNav = ({handleClassSelect}) => {
         'Authorization': 'Bearer ' + userContext.token
       }
     })
-      .then(res => res.json())
-      .then(classes => {
-        console.log('classrooms ', classes);
-        setClassrooms(classes); 
-      });
+    .then(res => res.json())
+    .then(classes => {
+      console.log('classrooms ', classes);
+      setClassrooms(classes);
+      if (classes.length > 0) {
+        const classroom = classes[0];
+        handleClassSelect(classroom.id, classroom.isModerator, classroom.isEnrolled);
+      }
+      return classes;
+    });
   }
 
   const handleAddHive = () => {
@@ -39,7 +46,7 @@ const ClassNav = ({handleClassSelect}) => {
         'Authorization': 'Bearer ' + userContext.token
       },
       body: JSON.stringify(newClass)
-    }).then(getHives);
+    }).then(getClassrooms);
   }
 
   return (
