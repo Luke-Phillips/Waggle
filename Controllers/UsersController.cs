@@ -42,7 +42,7 @@ namespace Waggle.Controllers
             return users;
         }
 
-        [HttpGet("class/{classId}")]
+        [HttpGet("{classId}")]
         public async Task<ActionResult<List<ClassroomUsersDto>>> GetClassroomUsers(int classId)
         {
             var users = await _context.ApplicationUserClassrooms

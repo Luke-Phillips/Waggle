@@ -71,7 +71,7 @@ namespace Waggle.Controllers
             
             if (classroom is null) return BadRequest("classroom does not exist");
             
-            return Ok(classroom.InviteCode);
+            return Ok(new { InviteCode = classroom.InviteCode});
         }
 
         // POST /classrooms/{userId}/{inviteCode}

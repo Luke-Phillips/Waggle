@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../components/user-context/user-context'
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 import './profile-info.styles.scss';
 
-const ProfileInfo = ({ user, profileChangeHandler }) => {
-  // not sure if fetch call will be done in the card or if user info will be passed as props yet
-  // for now, it's hardcoded
+const ProfileInfo = ({user, profileChangeHandler}) => {
+  const userContext = useContext(UserContext);
+  console.log('student name ', user.userName);
+  console.log('student display name ', user.displayName);
+  console.log('student email ', user.email);
   const [name, setName] = useState(user.userName);
   const [displayName, setDisplayName] = useState(user.displayName);
   const [email, setEmail] = useState(user.email);
@@ -21,7 +24,7 @@ const ProfileInfo = ({ user, profileChangeHandler }) => {
     <div className='profileInfo'>
       <form className='profile-form'>
         {/* <FormInput
-          value={'name'}
+          value={name}
           label='Name'
           handleChange={nameChangeHandler}
         />
