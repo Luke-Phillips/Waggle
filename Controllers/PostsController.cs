@@ -54,22 +54,18 @@ namespace Waggle.Controllers
         {
             if (await _context.Classrooms.AsNoTracking().FirstOrDefaultAsync(c => c.ClassroomId == newPost.ClassroomId) is null)
             {
-                Console.WriteLine("Classroom does not exist");
                 return BadRequest("Classroom does not exist");
             }
             if (newPost.ReplyToPostId is not null &&
                 await _context.Posts.AsNoTracking().FirstOrDefaultAsync(p => p.PostId == newPost.ReplyToPostId) is null)
             {
-                Console.WriteLine("Post being replied to does not exist");
                 return BadRequest("Post being replied to does not exist");
             }
             if (await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == newPost.AuthorId) is null)
             {
-                Console.WriteLine("User does not exist");
                 return BadRequest("User does not exist");
             }
             if (!postTypes.Contains<string>(newPost.PostType)) {     
-                Console.WriteLine("Invalide Post Type");
                 return BadRequest("invalid post type");
             }
 
