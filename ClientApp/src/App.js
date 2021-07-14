@@ -28,6 +28,15 @@ const App = () => {
     setIsModerator(isModerator);
     setIsEnrolled(isEnrolled);
   }
+
+  const handleSignOut = () => {
+    setToken(null);
+    setUserId(null);
+    setClassroomId(null);
+    setClassroomName('');
+    setIsModerator(false);
+    setIsEnrolled(false);
+  }
   
   return (
     <div className='parent'>
@@ -47,7 +56,7 @@ const App = () => {
         isModerator: isModerator,
         isEnrolled: isEnrolled
       }}>
-        <Navbar />
+        <Navbar handleSignOut={handleSignOut}/>
         <Route exact path='/'>
           <Redirect to='/home' />
         </Route>

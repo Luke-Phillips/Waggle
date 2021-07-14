@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/beehive-logo.svg';
 import { UserContext } from '../../components/user-context/user-context';
 
-const Navbar = () => {
+const Navbar = ({handleSignOut}) => {
   const userContext = useContext(UserContext);
   return (
     <div className='navbar'>
@@ -20,6 +20,9 @@ const Navbar = () => {
             <Link className='option' to='/hive/settings'>
               SETTINGS
             </Link>
+            <Link className='option' to='/signin' onClick={handleSignOut}>
+            SIGN OUT
+          </Link>
           </>
         ) : (
           <Link className='option' to='/signin'>
