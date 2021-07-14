@@ -91,7 +91,7 @@ const DiscussionPage = () => {
       </div>
     </div>
     :
-    <p>Create or Join a class on the left</p> 
+    <p>Create or join a class before contributing to a discussion</p>
   );
 };
 

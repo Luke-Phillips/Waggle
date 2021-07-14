@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import ProfileInfo from '../../components/profile-info/profile-info.component';
 import HiveManager from '../../components/hive-manager/hive-manager.component';
 import { UserContext } from '../../components/user-context/user-context'
@@ -6,6 +6,7 @@ import './settings-page.styles.scss';
 import { Fragment } from 'react';
 
 const SettingsPage = () => {
+  const userContext = useContext(UserContext);
   const userId = '0006'; // hardcoded for now, use context later
   const classId = 2; // hardcoded for now, use context later
   const [inviteCode, setInviteCode] = useState('');
@@ -69,6 +70,7 @@ const SettingsPage = () => {
   console.log(filteredStudents);
 
   return (
+    userContext.classId ?
     <div className='settings-page'>
       <ProfileInfo
         user={students.filter(s => s.userId === userId)}
@@ -81,6 +83,8 @@ const SettingsPage = () => {
         roleHandler={roleHandler}
       />
     </div>
+    :
+    <p>Create or join a class before editing your class settings</p>
   )
 };
 

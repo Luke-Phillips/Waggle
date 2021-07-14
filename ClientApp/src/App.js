@@ -53,9 +53,12 @@ const App = () => {
           }
         </Route>
         <Route path='/hive'>
-          <ClassNav
-            handleClassSelect={handleClassSelect}
-          />
+          {!token ?
+            <Redirect to='/signin'/> :
+            <ClassNav
+              handleClassSelect={handleClassSelect}
+            />
+          }
         </Route>
         <Route path='/hive/discussion' component={DiscussionPage} />
         <Route path='/hive/settings' component={SettingsPage} />
