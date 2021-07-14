@@ -24,14 +24,20 @@ const MainFeed = ({
   showbtn,
   ...props
 }) => {
-  const { userId, classId } = useContext(UserContext);
+  const { userId, classId, token } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
 
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const postsGetReq = () => {
+    console.log('Token in New Post', token)
     classId &&
-    fetch(`posts/${classId}`)
+    fetch(`posts/${classId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }})
       .then(res => res.json())
       .then(res => setPosts(res));
   };

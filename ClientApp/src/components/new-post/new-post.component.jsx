@@ -8,7 +8,7 @@ import { UserContext } from '../user-context/user-context';
 import './new-post.styles.scss';
 
 const NewPost = ({isReplyPost = false, ...props }) => {
-  const { userId, classId } = useContext(UserContext);
+  const { userId, classId, token } = useContext(UserContext);
   const [userText, setUserText] = useState('');
 
   if (!props.type) {
@@ -30,7 +30,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
 
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
-  
+    console.log('send post type: ', props.type)
     let postData = {
       classroomId: classId, // context ClassId
       replyToPostId: replyToPostId,
@@ -44,8 +44,8 @@ const NewPost = ({isReplyPost = false, ...props }) => {
     fetch('posts', {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
-        // Authorization: 'Bearer ' + userContext.token,
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(postData),
     })
@@ -73,7 +73,6 @@ const NewPost = ({isReplyPost = false, ...props }) => {
         showbtn={props.showbtn}
         onClick={() => {
           sendPost();
-          props.getRequest();
           props.handleShowPost(false)
         }}
       >
