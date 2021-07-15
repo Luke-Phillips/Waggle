@@ -124,6 +124,7 @@ const SettingsPage = ({handleModChange, handleEnrollChange}) => {
         profileChangeHandler={profileChangeHandler}
       />
       <HiveManager
+        isMod={userContext.isModerator}
         inviteCode={inviteCode}
         students={filteredStudents}
         enrollmentHandler={enrollmentHandler}
