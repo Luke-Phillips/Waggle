@@ -15,18 +15,18 @@ const App = () => {
   const [classroomId, setClassroomId] = useState(null);
   const [classroomName, setClassroomName] = useState('');
   const [isModerator, setIsModerator] = useState(false);
-  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [enrollmentStatus, setEnrollmentStatus] = useState('pending');
 
   const handleAuth = (token, userId) => {
     setToken(token);
     setUserId(userId);
   }
 
-  const handleClassSelect = (classroomId, classroomName, isModerator, isEnrolled) => {
+  const handleClassSelect = (classroomId, classroomName, isModerator, enrollmentStatus) => {
     setClassroomId(classroomId);
     setClassroomName(classroomName);
     setIsModerator(isModerator);
-    setIsEnrolled(isEnrolled);
+    setEnrollmentStatus(enrollmentStatus);
   }
 
   const handleSignOut = () => {
@@ -35,7 +35,7 @@ const App = () => {
     setClassroomId(null);
     setClassroomName('');
     setIsModerator(false);
-    setIsEnrolled(false);
+    setEnrollmentStatus('pending');
   }
   
   return (
@@ -46,7 +46,7 @@ const App = () => {
         console.log('classId ', classroomId),
         console.log('className ', classroomName),
         console.log('isModerator ', isModerator),
-        console.log('isEnrolled ', isEnrolled)
+        console.log('enrollmentStatus ', enrollmentStatus)
       }
       <UserContext.Provider value={{
         token: token,
@@ -54,7 +54,7 @@ const App = () => {
         classroomId: classroomId,
         classroomName: classroomName,
         isModerator: isModerator,
-        isEnrolled: isEnrolled
+        enrollmentStatus: enrollmentStatus
       }}>
         <Navbar handleSignOut={handleSignOut}/>
         <Route exact path='/'>

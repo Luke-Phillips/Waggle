@@ -115,7 +115,10 @@ const DiscussionPage = () => {
 
   const postTypes = [announcement, question, insight, feedback];
 
-  return ( userContext.classroomId ?
+  return ( !userContext.classroomId ?
+    <p>Create or join a class before contributing to a discussion</p> :
+    userContext.enrollmentStatus !== 'enrolled' ?
+    <p>Your enrollment is pending</p> :
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>
@@ -168,8 +171,6 @@ const DiscussionPage = () => {
         </div>
       </div>
     </div>
-    :
-    <p>Create or join a class before contributing to a discussion</p>
   );
 };
 

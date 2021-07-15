@@ -39,10 +39,23 @@ const SettingsPage = () => {
       });
   };
 
-  const profileChangeHandler = () => {};
+   const profileChangeHandler = () => {}
+  //   const studentUpdate = {  };
+  //   fetch(`users/${userId}/class/${userContext.classroomId}`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer ' + userContext.token,
+  //     },
+  //     body: JSON.stringify(studentUpdate),
+  //   })
+  //     .then(getStudents())
+  //     .catch(error => {
+  //       console.log(error.response.data);
+  //     });
+  // };
 
-  const enrollmentHandler =
-    ({ userId, newStatus }) =>
+  const enrollmentHandler = ({ userId, newStatus }) =>
     () => {
       const studentUpdate = { enrollmentStatus: newStatus };
       fetch(`users/${userId}/class/${userContext.classroomId}`, {
@@ -59,8 +72,7 @@ const SettingsPage = () => {
         });
     };
 
-  const roleHandler =
-    ({ userId, newRole }) =>
+  const roleHandler = ({ userId, newRole }) =>
     () => {
       const studentUpdate = { isModerator: newRole === 'moderator' };
       fetch(`users/${userId}/class/${userContext.classroomId}`, {
@@ -86,7 +98,10 @@ const SettingsPage = () => {
   console.log('filtered students ', filteredStudents);
   console.log('filtered student', filteredStudent);
 
-  return userContext.classroomId ? (
+  return (!userContext.classroomId ?
+    <p>Create or join a class before contributing to a discussion</p> :
+    userContext.enrollmentStatus !== 'enrolled' ?
+    <p>Your enrollment is pending</p> :
     <div className='settings-page'>
       <ProfileInfo
         user={filteredStudent}
@@ -99,8 +114,6 @@ const SettingsPage = () => {
         roleHandler={roleHandler}
       />
     </div>
-  ) : (
-    <p>Create or join a class before editing its settings</p>
   );
 };
 
