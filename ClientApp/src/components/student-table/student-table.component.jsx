@@ -1,11 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../../components/user-context/user-context';
+import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import './student-table.styles.scss';
 
-const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
-  const userContext = useContext(UserContext);
-  
+const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
   // prolly better as a helper (used in class nav icon)
   const enrollmentStatus = {
     pending: 0,
@@ -22,7 +19,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>pending</p>
           </td>
-          {userContext.isModerator &&
+          {isMod &&
           <td className='tableBtn'>
             <CustomButton
               className='enrollBtn'
@@ -42,7 +39,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>enrolled</p>
           </td>
-          {userContext.isModerator &&
+          {isMod &&
             <td className='tableBtn'>
               <CustomButton
                 className='enrollBtn'
@@ -67,7 +64,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>moderator</p>
           </td>
-          {userContext.isModerator &&
+          {isMod &&
             <td className='tableBtn'>
               <CustomButton
                 className='roleBtn'
@@ -86,7 +83,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <td>
             <p>student</p>
           </td>
-          {userContext.isModerator &&
+          {isMod &&
             <td className='tableBtn'>
               <CustomButton
                 className='roleBtn'
@@ -111,8 +108,8 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
           <tr>
           <th>Username</th>
           <th>Display Name</th>
-          <th colSpan={userContext.isModerator ? 2 : 1}>Enrollment Status</th>
-          <th colSpan={userContext.isModerator ? 2 : 1}>Role</th>
+          <th colSpan={isMod ? 2 : 1}>Enrollment Status</th>
+          <th colSpan={isMod ? 2 : 1}>Role</th>
           </tr>
         </thead>
         <tbody>

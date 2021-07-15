@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PostHeader from '../post-header/post-header.component';
+import React, { useState, useContext } from 'react';
 import PostingAs from '../posting-as/posting-as.component';
 import FormTextArea from '../form-text-area/form-text-area.component';
+import FileUpload from '../file-upload/file-upload.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { UserContext } from '../user-context/user-context';
 
@@ -10,6 +10,7 @@ import './new-post.styles.scss';
 const NewPost = ({isReplyPost = false, ...props }) => {
   const { token, userId, classroomId } = useContext(UserContext);
   const [userText, setUserText] = useState('');
+  const [file , setFile] = useState('');
 
   if (!props.type) {
     return null;
@@ -38,7 +39,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
       authorId: userId, // = context userId
       content: userText,
       time: new Date(),
-      file: null,
+      file: file,
     };
     const content = userText ? userText.trim() : ''
 
@@ -58,6 +59,13 @@ const NewPost = ({isReplyPost = false, ...props }) => {
     setUserText(e.target.value); // LOoke up react SpRiNg write this somewhere else
   };
 
+  const handleChooseFile = e => {
+    const f = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(f);
+    reader.onload = () => setFile(reader.result);
+  }
+
   return (
     <div className={`discussion-post ${props.postWidth}`}>
       <PostingAs
@@ -70,6 +78,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
         placeholder='Enter text here...'
         onChange={handleTextChange}
       />
+      <FileUpload postType={props.type} onChoose={handleChooseFile} />
       <CustomButton
         className='post-button'
         showbtn={props.showbtn}

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
-import FileUpload from '../file-upload/file-upload.component';
 import PostHeader from '../post-header/post-header.component';
 import Ratings from '../ratings/ratings.component';
 
@@ -63,10 +62,10 @@ const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, on
         />
         <p className='content'>{children}</p>
       </div>
-
       <div className='footer'>
         <Ratings postType={props.type} />
-        <FileUpload allowUpload={props.type} />
+        {console.log(props.file)}
+        <a href={props.file} download='attached_file'>attached file</a>
         <div className='btnContainer'>
           <CustomButton
             className='feed-item-btn'
