@@ -85,7 +85,7 @@ const SettingsPage = ({handleModChange, handleEnrollChange}) => {
 
   const roleHandler = ({ userId, newRole }) =>
     () => {
-      console.log('role is being handled');
+      
       const isMod = newRole === 'moderator';
       const studentUpdate = { isModerator: isMod };
       fetch(`users/${userId}/class/${userContext.classroomId}`, {
@@ -110,9 +110,7 @@ const SettingsPage = ({handleModChange, handleEnrollChange}) => {
   );
   const [filteredStudent] = students.filter(s => s.userId === userContext.userId);
   
-  console.log('students', students);
-  console.log('filtered students ', filteredStudents);
-  console.log('filtered student', filteredStudent);
+
 
   return (!userContext.classroomId ?
     <p>Create or join a class before contributing to a discussion</p> :

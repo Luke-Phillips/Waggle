@@ -1,5 +1,11 @@
-.reviews-column {
+.reply-feed {
   width: 100%;
   min-width: 40%;
-  
+  height: 100vh;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+::-webkit-scrollbar {
+  display: none;
 }

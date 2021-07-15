@@ -1,12 +1,33 @@
+$primary-color: black;
+$secondary-color: rgba(181, 146, 6, 0.612);
 .class-nav {
     width: 8%;
     height: 100%;
-    margin-bottom: 1000px;
+    margin: auto auto auto auto;
     justify-content: center;
-    border: solid 1px black;
+    
     float: left;   
   }
 
-input {
-  width: 95%;
+  .button-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addClass {
+
+  }
+
+  .joinHive {
+
+  }
+
+
+.btn {
+  width: 50%;
+  background-color: $secondary-color;
+  border-radius: 10px;
+  font-size: small;
+  margin: 0 auto 2ch 7%
+
 }

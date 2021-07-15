@@ -23,13 +23,11 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
 
   const infoSaveHandler = e => {
     e.preventDefault();
-    console.log('profilePic: ', profilePic);
-    console.log('name: ', name);
-    console.log('displayName: ', displayName);
+
     profileChangeHandler(profilePic, name, displayName);
   };
 
-  console.log('USER display name: ', user?.displayName);
+  
 
   return (
     <div className='profileInfo'>
@@ -44,6 +42,7 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
         <p>{user?.email}</p>
         <label>User Name
           <input
+            className='name'
             type='text'
             value={name}
             onChange={e => setName(e.target.value)}
@@ -51,6 +50,7 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
         </label>
         <label>Display Name
           <input
+            className='displayName'
             type='text'
             value={displayName}
             onChange={e => setDisplayName(e.target.value)}

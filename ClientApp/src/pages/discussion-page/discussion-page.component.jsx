@@ -38,13 +38,15 @@ const DiscussionPage = () => {
   };
 
   const handleFilterPostTypes = e => {
+    console.log('Checked')
     const postType = e.target.value;
     const isFiltered = e.target.checked;
-
+    
     const newFilteredPostTypes = isFiltered
       ? [postType, ...filteredPostTypes]
       : filteredPostTypes.filter(pt => pt !== postType);
     setFilteredPostTypes(newFilteredPostTypes);
+    console.log('Filtered Post Type: ', newFilteredPostTypes)
   };
 
   const handleSortBy = sortBy => {

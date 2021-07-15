@@ -1,3 +1,4 @@
+import './App.scss';
 import React, { useEffect , useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import Navbar from './components/navbar/navbar.component';
@@ -7,9 +8,7 @@ import ClassNav from './components/class-nav/class-nav.component';
 import DiscussionPage from './pages/discussion-page/discussion-page.component';
 import SettingsPage from './pages/settings-page/settings-page.component';
 import { UserContext } from './components/user-context/user-context';
-import 'normalize-scss'
 
-import './App.scss';
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -53,7 +52,7 @@ const App = () => {
       {
         console.log('token ', token),
         console.log('userId ', userId),
-        console.log('classId ', classroomId),
+        console.log('classroomId ', classroomId),
         console.log('className ', classroomName),
         console.log('isModerator ', isModerator),
         console.log('enrollmentStatus ', enrollmentStatus)

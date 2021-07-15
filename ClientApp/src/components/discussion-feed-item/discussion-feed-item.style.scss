@@ -13,7 +13,8 @@ $announcement-color: crimson;
   .content {
     margin: auto;
     height: auto;
-    max-height: 15ch;
+    max-height: 18ch;
+    min-height: 10ch;
     padding: 1ch;
     overflow: auto;
   }

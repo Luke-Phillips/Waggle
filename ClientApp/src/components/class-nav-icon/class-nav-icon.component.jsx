@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as Icon } from '../../assets/honey-jar.svg';
 import './class-nav-icon.styles.scss';
 
-const ClassNavIcon = ({ classroom, handleClassSelect }) => {
+const ClassNavIcon = ({ classroom, handleClassSelect, isFocused, handleFocusId }) => {
   const enrollmentStatus = ['pending', 'enrolled', 'unenrolled']; // make helper
 
   const onClickHandler = () => {
@@ -15,11 +15,15 @@ const ClassNavIcon = ({ classroom, handleClassSelect }) => {
   };
 
   return (
-    <div className='class-nav-icon' onClick={onClickHandler}>
-      <Icon className='icon' />
+    <div className='class-nav-icon' onClick={() => {
+      onClickHandler();
+      handleFocusId(classroom?.id)
+      }}>
+      <Icon className={`icon ${isFocused ? 'focused' : ''}`} />
       <p>{classroom.name}</p>
     </div>
   );
 };
 
 export default ClassNavIcon;
+

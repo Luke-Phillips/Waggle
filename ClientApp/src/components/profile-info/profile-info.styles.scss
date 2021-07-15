@@ -1,3 +1,7 @@
+@mixin inputStyles {
+  
+}
+
 .profileInfo {
   width: 30%;
   border: dotted 2px blueviolet;
@@ -16,10 +20,18 @@
     margin-top: 2ch;
   }
 
+  
   input {
     width: 80%;
     margin: 2ch auto 0 auto;
     
   }
+  .name {
+
+  }
   
+
+  .displayName {
+
+  }
 }

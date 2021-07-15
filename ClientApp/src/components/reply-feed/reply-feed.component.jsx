@@ -33,7 +33,7 @@ const ReplyFeed = ({ children, focusedPostId, showNewReply, ...props }) => {
   
   // console.log('replies type ', props.type);
   return (
-    <div className='reviews-column'>
+    <div className='reply-feed'>
     { showNewReply && 
       (<NewPost
         user='placeholder'

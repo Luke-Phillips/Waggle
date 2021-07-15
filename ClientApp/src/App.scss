@@ -1,6 +1,6 @@
 /* Provide sufficient contrast against white background */
-@import '../node_modules/normalize-scss/sass/normalize';
-@include normalize();
+@import '../node_modules/normalize-scss/sass/normalize/import-now';
+// @include normalize();
 a {
   color: black;
   text-decoration: none;
