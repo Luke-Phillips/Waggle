@@ -52,7 +52,8 @@ namespace Waggle.Controllers
                 Classroom = classroom,
                 IsModerator = true,
                 EnrollmentStatus = EnrollmentStatus.Enrolled,
-                DisplayName = owner.UserName
+                DisplayName = owner.UserName,
+                ProfilePicture = ""
             };
             await _context.ApplicationUserClassrooms.AddAsync(appUserClassroom);
 

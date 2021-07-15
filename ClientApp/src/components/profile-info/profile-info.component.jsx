@@ -1,18 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../../components/user-context/user-context'
+import React, { useEffect, useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 import './profile-info.styles.scss';
 
 const ProfileInfo = ({user, profileChangeHandler}) => {
-  const userContext = useContext(UserContext);
-  console.log('student name ', user.userName);
-  console.log('student display name ', user.displayName);
-  console.log('student email ', user.email);
-  const [profilePic , setProfilePic] = useState(user.profilePic || null);
-  const [name, setName] = useState(user.userName || '');
-  const [displayName, setDisplayName] = useState(user.displayName || user.userName || '');
-  //const [email, setEmail] = useState(user.email || '');
+  const [profilePic , setProfilePic] = useState('');
+  const [name, setName] = useState('');
+  const [displayName, setDisplayName] = useState('');
+
+  useEffect(() => {
+    setProfilePic(user?.profilePicture || '');
+    setName(user?.userName || '');
+    setDisplayName(user?.displayName || user?.userName || '');
+  }, [user])
 
   const handleChooseFile = e => {
     const file = e.target.files[0];
@@ -22,42 +22,45 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
   }
 
   const infoSaveHandler = e => {
-    console.log('HTTP PUT request w/ fetch');
+    e.preventDefault();
+    console.log('profilePic: ', profilePic);
+    console.log('name: ', name);
+    console.log('displayName: ', displayName);
+    profileChangeHandler(profilePic, name, displayName);
   };
-  console.log('USER: ', user);
+
+  console.log('USER display name: ', user?.displayName);
 
   return (
     <div className='profileInfo'>
       <form className='profile-form'>
-        {profilePic && <img src={profilePic}/>}
+        {profilePic && profilePic.length > 0 && <img src={profilePic}/>}
         <input
           className='upload'
           type='file'
           accept='image/png, image/jpeg'
           onChange={handleChooseFile}
           />
-        <p>{user.email}</p>
-        <FormInput
-          value={name}
-          label='Name'
-          handleChange={e => setName(e.target.value)}
-        />
-        <FormInput
-          value={displayName}
-          label='Display Name'
-          handleChange={e => setDisplayName(e.target.value)}
-        />
-        {/* <FormInput
-          value={email}
-          label='Email'
-          placeholder='Email'
-          handleChange={emailChangeHandler}
-        /> */}
+        <p>{user?.email}</p>
+        <label>User Name
+          <input
+            type='text'
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </label>
+        <label>Display Name
+          <input
+            type='text'
+            value={displayName}
+            onChange={e => setDisplayName(e.target.value)}
+          />
+        </label>
         <div className='btnBox'>
           <CustomButton onClick={infoSaveHandler}>
             Save
           </CustomButton>
-        </div>
+        </div> 
       </form>
     </div>
   );

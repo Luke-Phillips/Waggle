@@ -56,7 +56,8 @@ namespace Waggle.Controllers
                         EnrollmentStatus = u.EnrollmentStatus,
                         UserName = u.ApplicationUser.UserName,
                         DisplayName = u.DisplayName,
-                        Email = u.ApplicationUser.Email
+                        Email = u.ApplicationUser.Email,
+                        ProfilePicture = u.ProfilePicture
                     }
                 )
                 .ToListAsync();

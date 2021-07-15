@@ -37,6 +37,14 @@ const App = () => {
     setIsModerator(false);
     setEnrollmentStatus('pending');
   }
+
+  const handleModChange = (isModerator) => {
+    setIsModerator(isModerator);
+  }
+
+  const handleEnrollChange = (enrollmentStatus) => {
+    setEnrollmentStatus(enrollmentStatus);
+  }
   
   return (
     <div className='parent'>
@@ -76,7 +84,9 @@ const App = () => {
           }
         </Route>
         <Route path='/hive/discussion' component={DiscussionPage} />
-        <Route path='/hive/settings' component={SettingsPage} />
+        <Route path='/hive/settings'>
+          <SettingsPage handleModChange={handleModChange}/>
+        </Route>
       </UserContext.Provider>
     </div>
   );

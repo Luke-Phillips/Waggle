@@ -11,5 +11,6 @@ namespace Waggle.Models.DTOs.UserDtos
         public string UserName { get; set; }
         public string DisplayName { get; set; }
         public string Email { get; set; }
+        public string ProfilePicture { get; set; }
     }
 }
