@@ -10,6 +10,8 @@ const ClassNav = ({handleClassSelect}) => {
   const [classroomName, setClassroomName] = useState('');
   const [inviteCode, setInviteCode] = useState('');
 
+  const enrollmentStatus = ['pending', 'enrolled', 'unenrolled']; // make helper
+
   useEffect(() => {
     getClassrooms();
   }, [userContext.userId]);
@@ -28,7 +30,7 @@ const ClassNav = ({handleClassSelect}) => {
       setClassrooms(classes);
       if (classes.length > 0) {
         const classroom = classes[0];
-        handleClassSelect(classroom.id, classroom.name, classroom.isModerator, classroom.isEnrolled);
+        handleClassSelect(classroom.id, classroom.name, classroom.isModerator, enrollmentStatus[classroom.enrollmentStatus]);
       }
       return classes;
     });

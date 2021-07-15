@@ -3,8 +3,15 @@ import { ReactComponent as Icon } from '../../assets/honey-jar.svg';
 import './class-nav-icon.styles.scss';
 
 const ClassNavIcon = ({ classroom, handleClassSelect }) => {
+  const enrollmentStatus = ['pending', 'enrolled', 'unenrolled']; // make helper
+
   const onClickHandler = () => {
-    handleClassSelect(classroom.id, classroom.name, classroom.isModerator, classroom.IsEnrolled);
+    console.log('status: ', enrollmentStatus[classroom.enrollmentStatus]);
+    handleClassSelect(
+      classroom.id,
+      classroom.name,
+      classroom.isModerator,
+      enrollmentStatus[classroom.enrollmentStatus]);
   };
 
   return (

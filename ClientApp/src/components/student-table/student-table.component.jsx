@@ -43,7 +43,7 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   //       .sort(roleCompareFn(roleSortToggle))
   //       .sort(nameCompareFn(nameSortToggle));
 
-  // prolly better as a helper
+  // prolly better as a helper (used in class nav icon)
   const enrollmentStatus = {
     pending: 0,
     enrolled: 1,
