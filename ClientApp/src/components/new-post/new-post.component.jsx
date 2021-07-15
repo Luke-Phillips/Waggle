@@ -40,7 +40,10 @@ const NewPost = ({isReplyPost = false, ...props }) => {
       time: new Date(),
       file: null,
     };
-    const content = props.userText ? userText.trim() : ''
+    const content = userText ? userText.trim() : ''
+    console.log('UserText: ', userText)
+    console.log('Content: ', content)
+    console.log('Length: ', content.length)
     if(content.length > 0){
     fetch('posts', {
       method: 'POST',
