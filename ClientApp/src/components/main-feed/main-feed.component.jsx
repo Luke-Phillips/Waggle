@@ -118,6 +118,7 @@ const MainFeed = ({
             showReplies();
           }}
           time={feedItem.time}
+          file={feedItem.file}
         >
           {feedItem.content}
         </DiscussionFeedItem>
