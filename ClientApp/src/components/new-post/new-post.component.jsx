@@ -41,9 +41,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
       file: null,
     };
     const content = userText ? userText.trim() : ''
-    console.log('UserText: ', userText)
-    console.log('Content: ', content)
-    console.log('Length: ', content.length)
+
     if(content.length > 0){
     fetch('posts', {
       method: 'POST',

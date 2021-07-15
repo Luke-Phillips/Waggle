@@ -14,6 +14,7 @@ const CreatePost = props => {
         clickFuncs={props.postTypes}
         showbtn={props.showbtn}
         handleShowNewPost={props.handleShowNewPost}
+        isMod={props.isMod}
       />
     </div>
   );

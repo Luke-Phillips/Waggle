@@ -30,7 +30,6 @@ const MainFeed = ({
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const postsGetReq = () => {
-    console.log('Token in New Post', token);
     classroomId &&
       fetch(`posts/${classroomId}`, {
         method: 'GET',

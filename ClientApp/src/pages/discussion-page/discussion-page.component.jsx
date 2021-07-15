@@ -27,16 +27,15 @@ const DiscussionPage = () => {
   const [showRepliesFeed, setShowRepliesFeed] = useState(false);
   const [focusedPostId, setFocusedPostId] = useState(0);
   const [showNewPost, setShowNewPost] = useState(false);
-  const [showNewReply, setShowNewReply] = useState(false); 
+  const [showNewReply, setShowNewReply] = useState(false);
 
   const handleShowNewPost = newValue => {
-    setShowNewPost(newValue)
-  }
+    setShowNewPost(newValue);
+  };
 
   const handleShowNewReply = newValue => {
-    setShowNewReply(newValue)
-  }
-  
+    setShowNewReply(newValue);
+  };
 
   const handleFilterPostTypes = e => {
     const postType = e.target.value;
@@ -58,17 +57,16 @@ const DiscussionPage = () => {
   };
 
   const handleFocusId = newFocusId => {
-    setFocusedPostId(newFocusId)
-  }
+    setFocusedPostId(newFocusId);
+  };
 
   const normalPostWidth = () => {
-      setPostWidth('normal');
-    }
-  
+    setPostWidth('normal');
+  };
 
   const widePostWidth = () => {
     setPostWidth('wide');
-  }
+  };
 
   const handleReplyType = newReplyType => {
     setReplyType(newReplyType);
@@ -80,14 +78,13 @@ const DiscussionPage = () => {
   };
 
   const showReplies = () => {
-    setShowRepliesFeed(true)
-      // return hasReplies === null ? 0 : setShowRepliesFeed(!showRepliesFeed);
-    };
+    setShowRepliesFeed(true);
+    // return hasReplies === null ? 0 : setShowRepliesFeed(!showRepliesFeed);
+  };
 
-    const hideReplies = () => {
-      setShowRepliesFeed(false)
-        
-      };
+  const hideReplies = () => {
+    setShowRepliesFeed(false);
+  };
 
   const announcement = () => {
     setPostInfo({
@@ -115,12 +112,17 @@ const DiscussionPage = () => {
 
   const postTypes = [announcement, question, insight, feedback];
 
-  return ( userContext.classroomId ?
+  return userContext.classroomId ? (
     <div className='discussion-page'>
       <div className='discussion-board'>
         <div className='options'>
           <FilterPost handleCheckFilter={handleFilterPostTypes} />
-          <CreatePost postTypes={postTypes} showbtn={true} handleShowNewPost={handleShowNewPost} />
+          <CreatePost
+            isMod={userContext.isModerator}
+            postTypes={postTypes}
+            showbtn={true}
+            handleShowNewPost={handleShowNewPost}
+          />
         </div>
         <div className='post-feed'>
           <SortPosts setSortByValue={handleSortBy} showbtn={true} />
@@ -168,7 +170,7 @@ const DiscussionPage = () => {
         </div>
       </div>
     </div>
-    :
+  ) : (
     <p>Create or join a class before contributing to a discussion</p>
   );
 };
