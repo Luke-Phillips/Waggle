@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PostHeader from '../post-header/post-header.component';
+import React, { useState, useContext } from 'react';
 import PostingAs from '../posting-as/posting-as.component';
 import FormTextArea from '../form-text-area/form-text-area.component';
+import FileUpload from '../file-upload/file-upload.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { UserContext } from '../user-context/user-context';
 
@@ -70,6 +70,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
         placeholder='Enter text here...'
         onChange={handleTextChange}
       />
+      <FileUpload postType={props.type} />
       <CustomButton
         className='post-button'
         showbtn={props.showbtn}
