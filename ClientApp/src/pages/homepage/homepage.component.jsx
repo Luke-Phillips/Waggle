@@ -3,7 +3,7 @@ import './homepage.styles.scss'
 
 const HomePage = () => (
     <div className='homepage'>
-        <h1>Welcome to Waggle!!</h1>
+        <h1>Welcome to Waggle!</h1>
         <h5>Overview</h5>
         <p>
             Waggle is a peer tutoring platform for teachers and students that promotes an environment of peer
