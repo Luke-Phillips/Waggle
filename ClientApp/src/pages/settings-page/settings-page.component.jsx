@@ -4,7 +4,7 @@ import HiveManager from '../../components/hive-manager/hive-manager.component';
 import { UserContext } from '../../components/user-context/user-context';
 import './settings-page.styles.scss';
 
-const SettingsPage = () => {
+const SettingsPage = ({handleModChange, handleEnrollChange}) => {
   const userContext = useContext(UserContext);
   const [inviteCode, setInviteCode] = useState('');
   const [students, setStudents] = useState([]);
@@ -39,21 +39,29 @@ const SettingsPage = () => {
       });
   };
 
-   const profileChangeHandler = () => {}
-  //   const studentUpdate = {  };
-  //   fetch(`users/${userId}/class/${userContext.classroomId}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer ' + userContext.token,
-  //     },
-  //     body: JSON.stringify(studentUpdate),
-  //   })
-  //     .then(getStudents())
-  //     .catch(error => {
-  //       console.log(error.response.data);
-  //     });
-  // };
+  const profileChangeHandler = (profilePic, name, displayName) => {
+    const studentUpdate = {
+      userName: name,
+      displayName: displayName,
+      profilePicture: profilePic
+    };
+    console.log('username is ', studentUpdate.userName);
+    console.log('display name is ', studentUpdate.displayName);
+    console.log('profile pic is ', studentUpdate.profilePicture);
+
+    fetch(`users/${userContext.userId}/class/${userContext.classroomId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userContext.token,
+      },
+      body: JSON.stringify(studentUpdate),
+    })
+      .then(getStudents)
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   const enrollmentHandler = ({ userId, newStatus }) =>
     () => {
@@ -66,15 +74,20 @@ const SettingsPage = () => {
         },
         body: JSON.stringify(studentUpdate),
       })
-        .then(getStudents())
+        .then(() => {
+          getStudents();
+          handleEnrollChange(newStatus);
+        })
         .catch(error => {
-          console.log(error.response.data);
+          console.log(error);
         });
     };
 
   const roleHandler = ({ userId, newRole }) =>
     () => {
-      const studentUpdate = { isModerator: newRole === 'moderator' };
+      console.log('role is being handled');
+      const isMod = newRole === 'moderator';
+      const studentUpdate = { isModerator: isMod };
       fetch(`users/${userId}/class/${userContext.classroomId}`, {
         method: 'PUT',
         headers: {
@@ -83,16 +96,19 @@ const SettingsPage = () => {
         },
         body: JSON.stringify(studentUpdate),
       })
-        .then(getStudents())
+        .then(() => {
+          getStudents();
+          handleModChange(isMod);
+        })
         .catch(error => {
-          console.log(error.response.data);
+          console.log(error);
         });
     };
 
   const filteredStudents = students.filter(
     s => s.UserId !== userContext.userId
   );
-  const filteredStudent = students.filter(s => s.userId === userContext.userId);
+  const [filteredStudent] = students.filter(s => s.userId === userContext.userId);
   
   console.log('students', students);
   console.log('filtered students ', filteredStudents);

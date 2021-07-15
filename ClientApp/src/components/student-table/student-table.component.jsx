@@ -5,44 +5,7 @@ import './student-table.styles.scss';
 
 const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
   const userContext = useContext(UserContext);
-  // const [nameSortToggle, setNameSortToggle] = useState(1); // 1 = sort ascending
-  // const [roleSortToggle, setRoleSortToggle] = useState(-1); // -1 = sort descending
-  // const [nameSortFirst, setNameSortFirst] = useState(true);
-
-  // const nameSortClickHandler = e => {
-  //   setNameSortToggle(() => -+nameSortToggle);
-  //   setNameSortFirst(false);
-  // };
-
-  // const roleSortClickHandler = e => {
-  //   setRoleSortToggle(() => -+roleSortToggle);
-  //   setNameSortFirst(true);
-  // };
-
-  // const nameCompareFn = isAscending => {
-  //   return (student1, student2) => {
-  //     if (student1.name > student2.name) return isAscending;
-  //     if (student1.name < student2.name) return -+isAscending;
-  //     return 0;
-  //   };
-  // };
-
-  // const roleCompareFn = isAscending => {
-  //   return (student1, student2) => {
-  //     if (student1.role === student2.role) return 0;
-  //     if (student1.role === 'moderator') return isAscending;
-  //     return -+isAscending;
-  //   };
-  // };
-
-  // const sortedStudents = nameSortFirst
-  //   ? students
-  //       .sort(nameCompareFn(nameSortToggle))
-  //       .sort(roleCompareFn(roleSortToggle))
-  //   : students
-  //       .sort(roleCompareFn(roleSortToggle))
-  //       .sort(nameCompareFn(nameSortToggle));
-
+  
   // prolly better as a helper (used in class nav icon)
   const enrollmentStatus = {
     pending: 0,
@@ -172,3 +135,41 @@ const StudentTable = ({ students, enrollmentHandler, roleHandler }) => {
 };
 
 export default StudentTable;
+
+// const [nameSortToggle, setNameSortToggle] = useState(1); // 1 = sort ascending
+  // const [roleSortToggle, setRoleSortToggle] = useState(-1); // -1 = sort descending
+  // const [nameSortFirst, setNameSortFirst] = useState(true);
+
+  // const nameSortClickHandler = e => {
+  //   setNameSortToggle(() => -+nameSortToggle);
+  //   setNameSortFirst(false);
+  // };
+
+  // const roleSortClickHandler = e => {
+  //   setRoleSortToggle(() => -+roleSortToggle);
+  //   setNameSortFirst(true);
+  // };
+
+  // const nameCompareFn = isAscending => {
+  //   return (student1, student2) => {
+  //     if (student1.name > student2.name) return isAscending;
+  //     if (student1.name < student2.name) return -+isAscending;
+  //     return 0;
+  //   };
+  // };
+
+  // const roleCompareFn = isAscending => {
+  //   return (student1, student2) => {
+  //     if (student1.role === student2.role) return 0;
+  //     if (student1.role === 'moderator') return isAscending;
+  //     return -+isAscending;
+  //   };
+  // };
+
+  // const sortedStudents = nameSortFirst
+  //   ? students
+  //       .sort(nameCompareFn(nameSortToggle))
+  //       .sort(roleCompareFn(roleSortToggle))
+  //   : students
+  //       .sort(roleCompareFn(roleSortToggle))
+  //       .sort(nameCompareFn(nameSortToggle));
