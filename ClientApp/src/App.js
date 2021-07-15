@@ -7,7 +7,9 @@ import ClassNav from './components/class-nav/class-nav.component';
 import DiscussionPage from './pages/discussion-page/discussion-page.component';
 import SettingsPage from './pages/settings-page/settings-page.component';
 import { UserContext } from './components/user-context/user-context';
-import './custom.css';
+import 'normalize-scss'
+
+import './App.scss';
 
 const App = () => {
   const [token, setToken] = useState(null);

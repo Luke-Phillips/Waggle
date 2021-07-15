@@ -78,8 +78,7 @@ const DiscussionPage = () => {
   };
 
   const showReplies = () => {
-    setShowRepliesFeed(true);
-    // return hasReplies === null ? 0 : setShowRepliesFeed(!showRepliesFeed);
+    setShowRepliesFeed(true)
   };
 
   const hideReplies = () => {
