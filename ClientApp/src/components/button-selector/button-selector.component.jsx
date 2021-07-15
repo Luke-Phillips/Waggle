@@ -3,7 +3,7 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './button-selector.styles.scss';
 
-const ButtonSelector = ({ clickFuncs = [], ...props }) => {
+const ButtonSelector = ({ clickFuncs = [], handleShowNewPost = () => {}, ...props }) => {
   return (
     <>
       {props.labels.map((label, index) => {
@@ -15,7 +15,7 @@ const ButtonSelector = ({ clickFuncs = [], ...props }) => {
           showbtn={props.showbtn}
           onClick={() => {
             clickFunc();
-            props.handleShowNewPost(true);
+            handleShowNewPost(true);
           }}
         >
           {label}

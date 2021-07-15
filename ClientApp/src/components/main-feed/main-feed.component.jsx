@@ -30,16 +30,17 @@ const MainFeed = ({
   const timeSortIsFirst = sortPostsBy === 'least' || sortPostsBy === 'most';
 
   const postsGetReq = () => {
-    console.log('Token in New Post', token)
+    console.log('Token in New Post', token);
     classroomId &&
-    fetch(`posts/${classroomId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }})
-      .then(res => res.json())
-      .then(res => setPosts(res));
+      fetch(`posts/${classroomId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      })
+        .then(res => res.json())
+        .then(res => setPosts(res));
   };
 
   useEffect(() => {
@@ -56,11 +57,9 @@ const MainFeed = ({
 
   const popularityCompare = isAscending => {
     return (post1, post2) => {
-      const postOneLength =
-        post1.replyPosts === null ? 0 : post1.replyPosts.length;
+      const postOneLength = post1.replyPosts === null ? 0 : post1.numReplies;
 
-      const postTwoLength =
-        post2.replyPosts === null ? 0 : post2.replyPosts.length;
+      const postTwoLength = post2.replyPosts === null ? 0 : post2.numReplies;
 
       if (postOneLength > postTwoLength) return isAscending ? 1 : -1;
       if (postOneLength < postTwoLength) return -(isAscending ? 1 : -1);
@@ -74,11 +73,13 @@ const MainFeed = ({
       : posts.slice().filter(post => filteredPostTypes.includes(post.postType));
 
   const sortedPosts = timeSortIsFirst
-    ? filteredPosts.slice().sort(timeCompare(timeAscending))
-    : //.sort(popularityCompare(popularityAscending))
-      filteredPosts
+    ? filteredPosts
         .slice()
-        //.sort(popularityCompare(popularityAscending))
+        .sort(timeCompare(timeAscending))
+        .sort(popularityCompare(popularityAscending))
+    : filteredPosts
+        .slice()
+        .sort(popularityCompare(popularityAscending))
         .sort(timeCompare(timeAscending));
 
   return (
@@ -116,7 +117,6 @@ const MainFeed = ({
             handleShowNewReply(true);
             handleReplyClick();
             showReplies();
-            
           }}
           time={feedItem.time}
         >
