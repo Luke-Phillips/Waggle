@@ -10,6 +10,7 @@ import './new-post.styles.scss';
 const NewPost = ({isReplyPost = false, ...props }) => {
   const { token, userId, classroomId } = useContext(UserContext);
   const [userText, setUserText] = useState('');
+  const [file , setFile] = useState('');
 
   if (!props.type) {
     return null;
@@ -38,7 +39,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
       authorId: userId, // = context userId
       content: userText,
       time: new Date(),
-      file: null,
+      file: file,
     };
     const content = userText ? userText.trim() : ''
 
@@ -58,6 +59,13 @@ const NewPost = ({isReplyPost = false, ...props }) => {
     setUserText(e.target.value); // LOoke up react SpRiNg write this somewhere else
   };
 
+  const handleChooseFile = e => {
+    const f = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(f);
+    reader.onload = () => setFile(reader.result);
+  }
+
   return (
     <div className={`discussion-post ${props.postWidth}`}>
       <PostingAs
@@ -70,7 +78,7 @@ const NewPost = ({isReplyPost = false, ...props }) => {
         placeholder='Enter text here...'
         onChange={handleTextChange}
       />
-      <FileUpload postType={props.type} />
+      <FileUpload postType={props.type} onChoose={handleChooseFile} />
       <CustomButton
         className='post-button'
         showbtn={props.showbtn}
