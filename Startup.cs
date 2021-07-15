@@ -16,7 +16,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Waggle.Models;
-// final senior project meeting 7/15 8:30
+
 namespace Waggle
 {
     public class Startup
