@@ -64,7 +64,6 @@ const DiscussionFeedItem = ({ populateReplies = () => {}, btnFunc = () => {}, on
       </div>
       <div className='footer'>
         <Ratings postType={props.type} />
-        {console.log(props.file)}
         <a href={props.file} download='attached_file'>attached file</a>
         <div className='btnContainer'>
           <CustomButton

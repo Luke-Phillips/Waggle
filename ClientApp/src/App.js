@@ -49,14 +49,14 @@ const App = () => {
   
   return (
     <div className='parent'>
-      {
+      {/* {
         console.log('token ', token),
         console.log('userId ', userId),
         console.log('classroomId ', classroomId),
         console.log('className ', classroomName),
         console.log('isModerator ', isModerator),
         console.log('enrollmentStatus ', enrollmentStatus)
-      }
+      } */}
       <UserContext.Provider value={{
         token: token,
         userId: userId,

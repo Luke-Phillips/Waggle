@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../components/user-context/user-context';
+import React from 'react';
 import StudentTable from '../student-table/student-table.component';
 import './hive-manager.styles.scss';
 

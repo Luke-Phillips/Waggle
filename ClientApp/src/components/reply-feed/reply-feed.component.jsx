@@ -9,7 +9,6 @@ const ReplyFeed = ({ children, focusedPostId, showNewReply, ...props }) => {
   const [replyPosts, setReplyPosts] = useState([]);
   
   const replyGetReq = parentPostId => {
-    console.log('reply feed get posts');
     classroomId &&
       parentPostId &&
       fetch(`posts/${classroomId}/${parentPostId}`, {
