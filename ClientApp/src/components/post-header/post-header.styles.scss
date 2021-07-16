@@ -1,5 +1,5 @@
 $question-color: darkgoldenrod;
-$fbrequest-color: blue;
+$feedback-color: rgba(0, 0, 255, 0.781);
 $comment-color: black;
 $insight-color: darkcyan;
 $announcement-color: crimson;
@@ -49,7 +49,7 @@ $answer-color: #00203FFF;
 }
 
 .fbrequest {
-  border-color: $fbrequest-color;
+  border-color: $feedback-color;
 }
 
 .comment {
@@ -67,13 +67,16 @@ $answer-color: #00203FFF;
 .answer {
   border-color: $answer-color;
 }
+.response {
+  border-color: green;
+}
 
 #question {
  background-color: $question-color;
 }
 
-#fbrequest {
-  background-color: $fbrequest-color;
+#feedback {
+  background-color: $feedback-color;
 }
 
 #comment {
@@ -90,4 +93,7 @@ $answer-color: #00203FFF;
 
 #answer {
   background-color: $answer-color;
+}
+#response {
+  background-color: green;
 }

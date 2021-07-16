@@ -1,7 +1,7 @@
-$primaryTableColor: rgb(174, 174, 174);
-$secondaryTableColor: rgb(1, 63, 63);
+$primaryTableColor: white;
+$secondaryTableColor: #eec04b;
 $btnHoverColor: rgba(101, 101, 101, 0.81);
-$rowHoverColor: cadetblue;
+$rowHoverColor: #d48c14;
 
 
 @mixin btns($bgColor, $txtColor) {
@@ -64,7 +64,7 @@ tbody {
   }
 
   tr:hover{
-    background-color: cadetblue;
+    background-color: $rowHoverColor;
   }
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
+import Hexagon from '../../assets/pngegg.png'
 import './homepage.styles.scss';
 
 const HomePage = () => (
-  <div className='homepage'>
+  <div className='homepage' style={{'background-image': Hexagon}}>
+    {/* <img src={Hexagon} className='image'></img> */}
     <div className='banner'>Welcome to Waggle!</div>
 
     <div className='overview'>

@@ -5,8 +5,10 @@
 }
 
 .homepage {
-    background-image: linear-gradient(to top left, rgb(253, 224, 55), white);
-    height: 100vh;
+    background-image: linear-gradient(to top left, #eec04b, white);
+    height: 100vw;
+   
+
 
     .banner {
         text-align: center;
@@ -36,6 +38,12 @@
     p {
         margin: 0 auto 2ch 5%;
         font-size: 18px;
+    }
+
+    .image {
+        position: relative;
+        z-index: 0;
+        display: inline;
     }
 }
 
