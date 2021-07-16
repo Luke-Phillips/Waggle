@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../components/user-context/user-context';
 import CustomButton from '../custom-button/custom-button.component';
 import './student-table.styles.scss';
 
 const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
+  const userContext = useContext(UserContext);
+
   // prolly better as a helper (used in class nav icon)
   const enrollmentStatus = {
     pending: 0,
@@ -16,7 +19,7 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
       <td>{student.displayName}</td>
       {student.enrollmentStatus === enrollmentStatus.pending && (
         <>
-          <td>
+          <td colSpan={2}>
             <p>pending</p>
           </td>
           {isMod &&
@@ -36,10 +39,10 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
       )}
       {student.enrollmentStatus === enrollmentStatus.enrolled && (
         <>
-          <td>
+          <td colSpan={student.userId === userContext.userId ? 1 : 2}>
             <p>enrolled</p>
           </td>
-          {isMod &&
+          {(isMod || student.userId === userContext.userId) &&
             <td className='tableBtn'>
               <CustomButton
                 className='enrollBtn'
@@ -55,7 +58,7 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
         </>
       )}
       {student.enrollmentStatus === enrollmentStatus.unenrolled && (
-        <td colspan={2}>
+        <td>
           <p>unenrolled</p>
         </td>
       )}
@@ -108,7 +111,7 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
           <tr>
           <th>Username</th>
           <th>Display Name</th>
-          <th colSpan={isMod ? 2 : 1}>Enrollment Status</th>
+          <th colSpan={2}>Enrollment Status</th>
           <th colSpan={isMod ? 2 : 1}>Role</th>
           </tr>
         </thead>
