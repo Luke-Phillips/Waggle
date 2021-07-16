@@ -72,7 +72,7 @@ namespace Waggle
                 configuration.RootPath = "ClientApp/build";
             });
 
-            string mySqlConnectionStr = Configuration.GetConnectionString("LocalConnection"); // RdsConnection or LocalConnection
+            string mySqlConnectionStr = Configuration.GetConnectionString("RdsConnection"); // RdsConnection or LocalConnection
             services.AddDbContext<WaggleContext>(options =>
                     options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
