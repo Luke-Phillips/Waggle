@@ -12,9 +12,9 @@ const NewPost = ({isReplyPost = false, ...props }) => {
   const [userText, setUserText] = useState('');
   const [file , setFile] = useState('');
 
-  if (!props.type) {
-    return null;
-  }
+  // if (!props.type) {
+  //   return null;
+  // }
 
   const handleFeebackType = type => {
     if (type === 'feedback') {
@@ -32,11 +32,12 @@ const NewPost = ({isReplyPost = false, ...props }) => {
   const sendPost = () => {
     const replyToPostId = handleIsReplyPost(isReplyPost, props.currPostId);
     console.log('send post type: ', props.type)
+    const type = props.type === 'response' ? 'feedback' : props.type
     let postData = {
-      classroomId: classroomId, // context ClassId
+      classroomId: classroomId, 
       replyToPostId: replyToPostId,
-      postType: props.type,
-      authorId: userId, // = context userId
+      postType: type,
+      authorId: userId, 
       content: userText,
       time: new Date(),
       file: file,

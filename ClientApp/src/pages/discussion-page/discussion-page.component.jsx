@@ -105,13 +105,19 @@ const DiscussionPage = () => {
     });
   };
 
+  const comment = () => {
+    setPostInfo({
+      postType: 'comment',
+    });
+  };
+
   const feedback = () => {
     setPostInfo({
       postType: 'feedback',
     });
   };
 
-  const postTypes = [announcement, question, insight, feedback];
+  const postTypes = [announcement, question, insight, comment, feedback];
 
   return ( !userContext.classroomId ?
     <p>Create or join a class before contributing to a discussion</p> :
