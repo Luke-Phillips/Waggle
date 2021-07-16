@@ -68,7 +68,7 @@ $primary-color: rgba(0, 100, 0, 0.338);
   }
 
   .upload {
-    border: solid 1px red;
+    
     display: none;
     width: 100%;
   }
@@ -77,5 +77,6 @@ $primary-color: rgba(0, 100, 0, 0.338);
     max-width: 100%;
     height: auto;
     overflow: hidden;
+    border-radius: 15px;
   }
 }

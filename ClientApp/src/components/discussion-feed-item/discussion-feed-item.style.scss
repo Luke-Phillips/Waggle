@@ -27,6 +27,7 @@ $response-color: green;
     display: flex;
     flex-direction: column;
     border-top: solid 1px black;
+    min-height: 1.5ch;
 
     .btnContainer {
       display: flex;
@@ -47,6 +48,7 @@ $response-color: green;
       border-radius: 10px;
       background-color: black;
       color: white;
+      padding: 0.5ch 0 0.5ch 0;
     }
   }
 }
@@ -85,5 +87,5 @@ $response-color: green;
   border-color: $announcement-color;
 }
 .response {
-
+  border-color: $response-color;
 }
