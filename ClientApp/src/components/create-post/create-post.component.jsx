@@ -4,7 +4,7 @@ import './create-post.styles.scss';
 
 const CreatePost = props => {
 
-  const labels = ['Announcement', 'Question', 'Insight', 'Feedback Request'];
+  const labels = ['Announcement', 'Question', 'Insight', 'Comment' ,'Feedback Request'];
   
   return (
     <div className='create-post'>

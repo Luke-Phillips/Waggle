@@ -1,16 +1,52 @@
+$primary-color: rgba(0, 100, 0, 0.338);
+
 @mixin inputStyles {
-  
+  width: 90%;
+  margin: 0 auto 0 auto;
+  padding: 1.5rem 2ch 0 2ch;
+  border: none;
+  border-bottom: solid 2px black;
+  font-size: 18px;
+}
+
+@mixin labelStyles {
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  margin-left: 8%;
+  font-size: 14px;
 }
 
 .profileInfo {
   width: 30%;
-  border: dotted 2px blueviolet;
   margin: 0 auto 0 10%;
 
   .profile-form {
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    .email {
+      font-size: large;
+      margin-left: 8%;
+    }
+
+    .username {
+      @include labelStyles();
+    }
+
+    .displayNameLabel {
+      @include labelStyles();
+      
+    }
+  }
+
+  .name {
+    @include inputStyles();
+  }
+
+  .displayName {
+    @include inputStyles();
   }
 
   .btnBox {
@@ -20,18 +56,26 @@
     margin-top: 2ch;
   }
 
-  
-  input {
-    width: 80%;
-    margin: 2ch auto 0 auto;
-    
+  .uploadContainer {
+    border-radius: 10px;
+    background-color: $primary-color;
+    overflow: hidden;
+    text-align: center;
+    width: 70%;
+    margin: 2ch auto 2ch auto;
+    padding-top: 1ch;
+    padding-bottom: 1ch;
   }
-  .name {
 
+  .upload {
+    border: solid 1px red;
+    display: none;
+    width: 100%;
   }
-  
 
-  .displayName {
-
+  img {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
   }
 }

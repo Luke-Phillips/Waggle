@@ -33,14 +33,18 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
     <div className='profileInfo'>
       <form className='profile-form'>
         {profilePic && profilePic.length > 0 && <img src={profilePic}/>}
+        <label className='uploadContainer'> Upload Profile Image
+        
         <input
           className='upload'
           type='file'
           accept='image/png, image/jpeg'
           onChange={handleChooseFile}
           />
-        <p>{user?.email}</p>
-        <label>User Name
+        </label>
+        
+        <p className='email'>{user?.email}</p>
+        <label className='username'>User Name:
           <input
             className='name'
             type='text'
@@ -48,7 +52,7 @@ const ProfileInfo = ({user, profileChangeHandler}) => {
             onChange={e => setName(e.target.value)}
           />
         </label>
-        <label>Display Name
+        <label className='displayNameLabel'>Display Name:
           <input
             className='displayName'
             type='text'

@@ -3,6 +3,8 @@ $fbrequest-color: blue;
 $comment-color: black;
 $insight-color: darkcyan;
 $announcement-color: crimson;
+$response-color: green;
+
 
 .discussion-feed-item {
   // width: 60%;
@@ -67,7 +69,7 @@ $announcement-color: crimson;
   border-color: $question-color;
 }
 
-.fbrequest {
+.feedback {
   border-color: $fbrequest-color;
 }
 
@@ -81,4 +83,7 @@ $announcement-color: crimson;
 
 .announcement {
   border-color: $announcement-color;
+}
+.response {
+
 }
