@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../components/user-context/user-context';
+import { ReactComponent as DownArrow } from '../../assets/down-arrow.svg';
+import { ReactComponent as UpArrow } from '../../assets/up-arrow.svg'
 import CustomButton from '../custom-button/custom-button.component';
 import './student-table.styles.scss';
 
@@ -13,6 +15,11 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
     unenrolled: 2,
   };
 
+  const iconStyles = {
+    width: '35px',
+    height: '35px'
+  }
+
   const studentTableData = students.map(student => (
     <tr key={student.userId}>
       <td>{student.userName}</td>
@@ -23,36 +30,35 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
             <p>pending</p>
           </td>
           {isMod &&
-          <td className='tableBtn'>
-            <CustomButton
-              className='enrollBtn'
+          <td className='tableBtn'
+            
+              
               onClick={enrollmentHandler({
                 userId: student.userId,
                 newStatus: enrollmentStatus.enrolled,
               })}
             >
               +
-            </CustomButton>
+            
           </td>
           }
         </>
       )}
       {student.enrollmentStatus === enrollmentStatus.enrolled && (
         <>
-          <td colSpan={student.userId === userContext.userId ? 1 : 2}>
+          <td colSpan={2}>
             <p>enrolled</p>
           </td>
           {(isMod || student.userId === userContext.userId) &&
-            <td className='tableBtn'>
-              <CustomButton
-                className='enrollBtn'
+            <td className='tableBtn'
+                
                 onClick={enrollmentHandler({
                   userId: student.userId,
                   newStatus: enrollmentStatus.unenrolled,
                 })}
               >
                 -
-              </CustomButton>
+              
             </td>
           }
         </>
@@ -68,16 +74,17 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
             <p>moderator</p>
           </td>
           {isMod &&
-            <td className='tableBtn'>
-              <CustomButton
-                className='roleBtn'
+            <td className='tableBtn'
+              
+                //className='roleBtn'
                 onClick={roleHandler({
                   userId: student.userId,
                   newRole: 'student',
                 })}
               >
-                ⬇️
-              </CustomButton>
+                {/* ⬇️ */}
+                <DownArrow style={{width: 30 , height: 30}}/>
+              
             </td>
           }
         </>
@@ -87,16 +94,17 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
             <p>student</p>
           </td>
           {isMod &&
-            <td className='tableBtn'>
-              <CustomButton
-                className='roleBtn'
+            <td className='tableBtn'
+              
+                //className='roleBtn'
                 onClick={roleHandler({
                   userId: student.userId,
                   newRole: 'moderator',
                 })}
               >
-                ⬆️
-              </CustomButton>
+                {/* ⬆️ */}
+                <UpArrow style={{width: 30 , height: 30}}/>
+              
             </td>
           }
         </>
@@ -112,7 +120,7 @@ const StudentTable = ({ isMod, students, enrollmentHandler, roleHandler }) => {
           <th>Username</th>
           <th>Display Name</th>
           <th colSpan={2}>Enrollment Status</th>
-          <th colSpan={isMod ? 2 : 1}>Role</th>
+          <th colSpan={2}>Role</th>
           </tr>
         </thead>
         <tbody>

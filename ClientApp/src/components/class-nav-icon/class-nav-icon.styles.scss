@@ -1,4 +1,4 @@
-$shadow-color: #ffd500e0;
+$shadow-color: #FAC600;
 .class-nav-icon {
   margin: auto;
   width: 80%;
@@ -13,7 +13,7 @@ $shadow-color: #ffd500e0;
     
   }
   .focused{
-    filter: drop-shadow(0 0 10px $shadow-color);
+    filter: drop-shadow(0 -1mm 15px $shadow-color);
   }
 
   p {

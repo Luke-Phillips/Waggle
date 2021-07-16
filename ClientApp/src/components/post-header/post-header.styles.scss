@@ -1,9 +1,10 @@
-$question-color: darkgoldenrod;
-$feedback-color: rgba(0, 0, 255, 0.781);
-$comment-color: black;
-$insight-color: darkcyan;
-$announcement-color: crimson;
-$answer-color: #00203FFF;
+$question-color: #022b3a;
+$feedback-color: #FAC600;
+$comment-color: #2e1f27;
+$insight-color: #9e7b9b;
+$announcement-color: #b02e0c;
+$answer-color: #1c3a13;
+$response-color: #385f71;
 
 @mixin postColor () {
   
@@ -68,7 +69,7 @@ $answer-color: #00203FFF;
   border-color: $answer-color;
 }
 .response {
-  border-color: green;
+  border-color: $response-color;
 }
 
 #question {
@@ -95,5 +96,5 @@ $answer-color: #00203FFF;
   background-color: $answer-color;
 }
 #response {
-  background-color: green;
+  background-color: $response-color;
 }

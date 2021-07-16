@@ -1,19 +1,23 @@
 @mixin mainStyles {
     width: 60%;
     margin: auto;
-
+    
 }
 
 .homepage {
-    background-image: linear-gradient(to top left, #eec04b, white);
-    height: 100vw;
-   
+    background-image: url('../../assets/pngegg.png');
+    background-repeat: no-repeat;
+    // background-color: #eec04bb2;
+    padding-top: 2%;
 
-
+    
     .banner {
         text-align: center;
         font-size: 48px;
         letter-spacing: 0.1ch;
+        width: 60%;
+        margin: 1rem auto 1rem auto;
+        
     }
 
     .overview {
@@ -40,11 +44,21 @@
         font-size: 18px;
     }
 
-    .image {
-        position: relative;
-        z-index: 0;
-        display: inline;
-    }
 }
 
+.textContent {
+    //background-image: linear-gradient(to bottom right, #eec04b, white);
+    background-color: #ffffffc7;
+    width: 60%;
+    margin: 2% auto 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 20px;
+ 
+}
+
+.bgColor {
+    background-image: radial-gradient(
+        circle at top left, #FAC600, rgba(255, 255, 255, 0) 50%);
+}
 

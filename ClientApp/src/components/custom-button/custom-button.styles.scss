@@ -1,5 +1,6 @@
-$primary-color: black;
+$primary-color: rgba(0, 0, 0, 0.900);
 $secondary-color: white;
+
 
 @mixin styles ($primeColor, $secondColor) {
   min-width: 15%;
@@ -9,7 +10,7 @@ $secondary-color: white;
   min-height: 4ch;
   letter-spacing: 0.5px;
   line-height: 150%;
-  padding: 0 10% 0 10%;
+  padding: 0 2ch 0 2ch;
   font-size: 15px;
   background-color: $primary-color;
   color: $secondary-color;

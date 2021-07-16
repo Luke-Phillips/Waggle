@@ -1,4 +1,5 @@
-$primary-color: #eec04bc9;
+$primary-color: #FAC600;
+$background-color: #f3f3f3;
 
 @mixin inputStyles {
   width: 90%;
@@ -7,6 +8,7 @@ $primary-color: #eec04bc9;
   border: none;
   border-bottom: solid 2px black;
   font-size: 18px;
+  background-color: $background-color;
 }
 
 @mixin labelStyles {

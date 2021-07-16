@@ -1,17 +1,12 @@
 /* Provide sufficient contrast against white background */
 @import '../node_modules/normalize-scss/sass/normalize/import-now';
 // @include normalize();
+$background-color: #f3f3f3;
 a {
   color: black;
   text-decoration: none;
 }
 
-code {
-  color: #E01A76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.parent {
+  background-color: $background-color;
 }

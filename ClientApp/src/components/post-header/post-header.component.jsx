@@ -47,16 +47,25 @@ const PostHeader = props => {
   
     return 'less than a minute';
   }
+
+  const upperCaseFirstLetter = word => {
+    return word === undefined ? '' : word[0].toUpperCase() + word.slice(1);
+  }
+
+  const handleHeaderPostType = postType => {
+    const header = postType === 'feedback' ? 'Feedback Request' : postType;
+    return upperCaseFirstLetter(header)
+  }
   
   const handleNullUser = authorId => {
     return authorId === null ? 'No User Name O:' : authorId
   }
-  // console.log('PostHeader props.type: ', props.type)
+  
   return(
   <div className='post-header'>
 
     <div className='header-info'>
-      <p>{`Posted by ${handleNullUser(props.user)} ${timeElapsedSincePosted(
+      <p>{`${handleHeaderPostType(props.type)} posted by ${handleNullUser(props.user)} ${timeElapsedSincePosted(
         datePosted
       )} ago`}</p>
       <p>{`${datePosted.toLocaleString(navigator.language, {

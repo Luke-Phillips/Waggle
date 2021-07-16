@@ -1,21 +1,17 @@
-$primaryTableColor: white;
-$secondaryTableColor: #eec04b;
-$btnHoverColor: rgba(101, 101, 101, 0.81);
+$primaryTableColor: #f3f3f3;
+$secondaryTableColor: #FAC600;
+$btnColor: #19180A;
+$btnHoverColor: #fae281cc;
 $rowHoverColor: #d48c14;
 
 
 @mixin btns($bgColor, $txtColor) {
-  background-color: $bgColor;
-  color: $txtColor;
-  height: 4ch;
-  width: 100%;
+  border: solid 1px $bgColor;
   margin: 0 auto 0 auto;
-  padding-left: 0;
-  font-size: 2em;
+  padding: 0 1ch 0 1ch;
+  font-size: 32px;
+  text-align: center;
   box-shadow: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .tableContainer {
@@ -29,27 +25,20 @@ $rowHoverColor: #d48c14;
   
 }
 
-.enrollment {
-  
+.tableBtn {
+  @include btns($btnColor, $primaryTableColor )
 }
 
-.roleBtn {
-  @include btns($primaryTableColor, $secondaryTableColor)
-}
 
-.roleBtn:hover{
+
+.tableBtn:hover{
   background-color: $btnHoverColor;
+  color: $btnColor;
 }
 
-.enrollBtn{
-  @include btns($primaryTableColor, $secondaryTableColor)
-}
-
-.enrollBtn:hover{
-  background-color: $btnHoverColor;
-}
 
 table {
+
   
   
 }
@@ -60,7 +49,7 @@ tbody {
 
   tr:nth-child(odd) {
     background-color: $secondaryTableColor;
-    color: $primaryTableColor;
+    color: black;
   }
 
   tr:hover{
@@ -69,11 +58,14 @@ tbody {
 }
 
 th {
-  
+  text-align: left;
+  height: 4ch;
+  border-collapse: collapse;
+  padding-left: 2ch;
+  border-radius: 15px;
 }
  
 tr {
-
   width: 100%;
 }
 
@@ -82,6 +74,7 @@ td {
   height: 4ch;
   border-collapse: collapse;
   padding-left: 2ch;
+  
 }
 
 .studentTable > th, td {

@@ -113,9 +113,9 @@ const SettingsPage = ({handleModChange, handleEnrollChange}) => {
 
 
   return (!userContext.classroomId ?
-    <p>Create or join a class before contributing to a discussion</p> :
+    <div className='settings-page'>Create or join a class before contributing to a discussion </div> :
     userContext.enrollmentStatus !== 'enrolled' ?
-    <p>Your enrollment is pending</p> :
+    <div className='settings-page'>Your enrollment is pending</div> :
     <div className='settings-page'>
       <ProfileInfo
         user={filteredStudent}

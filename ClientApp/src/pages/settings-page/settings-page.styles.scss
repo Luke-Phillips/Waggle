@@ -1,8 +1,17 @@
+$background-color: #f3f3f3;
 .settings-page {
   display: flex;
   flex-direction: row;
   width: 80%;
   margin: auto;
-  
-  
+  height:100vw;
+  background-color: $background-color;
+}
+
+.initialMessage {
+  background-color: $background-color;
+  font-size: 32px;
+  width: 85%;
+  margin: auto;
+  height: 100vw;
 }

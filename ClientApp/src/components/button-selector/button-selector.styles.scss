@@ -1,7 +1,13 @@
+$btn-color: #19180A;
+$text-color: white;
+
 .button {
-  margin:auto;
+  margin: auto;
+  width: fit-content;
   border-radius: 20px;
   padding: 1ch 3ch 1ch 3ch;
-  background-color: #655e59 ;
+  background-color: $btn-color;// #655e59 ;
   color:white;
+  font-size: 13px;
+  text-align: center;
 }

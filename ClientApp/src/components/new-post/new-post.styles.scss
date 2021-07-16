@@ -1,7 +1,11 @@
+$btnColor: #FAC600;
+$border-color: #19180A;
+$text-color: #19180A;
+$background-color: #f3f3f3;
 .discussion-post {
   // width: 60%;
-  margin: auto;
-  border: solid 2px black;
+  margin: 2ch auto 2ch auto;
+  border: solid 2px $border-color;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -16,16 +20,18 @@
     overflow: auto;
     outline: none;
     resize: none;
+    background-color: $background-color;
 
   }
 
   .post-button {
-    background-color: aquamarine;
+    background-color: $btnColor;
     width: 15%;
     align-self: flex-end;
-    margin-left: 75%;
-    margin-right: auto;
+    margin: 0 auto 2ch 75%;
     border-radius: 10px;
+    padding: 1ch 0 1ch 0;
+    border: solid 1px $border-color ;
   }
 }
 

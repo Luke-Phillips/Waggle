@@ -1,6 +1,7 @@
 $primary-color: #eec04b;
-$secondary-color: #714825ad;
-$hover-color: rgba(196, 157, 0, 0.8);
+$secondary-color: #f3f3f3;
+$hover-bgcolor:#19180a;
+$hover-color: #f3f3f3;
  
 .filter {
   display: flex;
@@ -31,7 +32,8 @@ $hover-color: rgba(196, 157, 0, 0.8);
   }
 
   .checkbox:hover {
-    background-color: $hover-color;
+    background-color: $hover-bgcolor;
+    color:$hover-color;
   }
   .checked {
     background-color: $primary-color;
