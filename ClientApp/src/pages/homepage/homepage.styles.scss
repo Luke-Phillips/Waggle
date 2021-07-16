@@ -1,5 +1,42 @@
+@mixin mainStyles {
+    width: 60%;
+    margin: auto;
+
+}
+
 .homepage {
     background-image: linear-gradient(to top left, rgb(253, 224, 55), white);
-    height: 100vw;
+    height: 100vh;
+
+    .banner {
+        text-align: center;
+        font-size: 48px;
+        letter-spacing: 0.1ch;
+    }
+
+    .overview {
+        @include mainStyles();
+    }
+    
+    .whyWaggle {
+        @include mainStyles();
+        
+    }
+    
+    .background{
+        @include mainStyles();
+        
+    }
+    
+    .comingSoon {
+        @include mainStyles();
+
+    }
+    
+    p {
+        margin: 0 auto 2ch 5%;
+        font-size: 18px;
+    }
 }
+
 

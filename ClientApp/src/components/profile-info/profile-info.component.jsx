@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
-import FormInput from '../form-input/form-input.component';
 import './profile-info.styles.scss';
 
 const ProfileInfo = ({user, profileChangeHandler}) => {
